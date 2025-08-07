@@ -37,7 +37,7 @@ class _SpScreeState extends State<SpScreen> {
     Get.find<AppController>();
     //ResponsiveSize.init(context);
     //NavigationIndex.init(0);
-    Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     // finish(context);
     getloginstatus();
   }
