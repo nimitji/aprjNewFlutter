@@ -14,409 +14,564 @@ class Category extends StatelessWidget {
   final TextEditingController _name = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    ProfileController _profile=Get.find();
+    ProfileController _profile = Get.find();
     return Container(
       color: kshade5,
       //height: ResponsiveSize.screenHeight*0.46,
       child: Column(
         children: [
-          _profile.showcat.value?SizedBox(height: ResponsiveSize.screenHeight*0.11,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categoryList.length,
-              //padding: EdgeInsets.only(left: 10),
-              itemBuilder: (ctx, index) {
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: CategoryItem(
-                      widthSize: getScreeWidth(100),
-                      item: categoryList[index],
-                    ),
+          _profile.showcat.value
+              ? SizedBox(
+                height: ResponsiveSize.screenHeight * 0.11,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categoryList.length,
+                  //padding: EdgeInsets.only(left: 10),
+                  itemBuilder: (ctx, index) {
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5.0),
+                        child: CategoryItem(
+                          widthSize: getScreeWidth(100),
+                          item: categoryList[index],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+              : Container(),
+          Container(
+            color: Colors.white,
+            //height:500,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("नाम (Name)", style: TextStyle(fontSize: 12)),
+                      Container(
+                        width: 220,
+
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          textCapitalization: TextCapitalization.characters,
+                          controller: _name,
+                          onChanged: (value) {
+                            print(value);
+                            _profile.getfilterbyname(
+                              value,
+                              _profile.nameselected,
+                            );
+                          },
+                          decoration: InputDecoration(
+                            labelText: "नाम (Name)",
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-            ),
-          ):Container(),
-          Container(color: Colors.white,
-              //height:500,
-              child:Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: 10,),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("नाम (Name)",style:
-                        TextStyle(fontSize: 12),),
-                        Container(width: 220,
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("शहर (City)", style: TextStyle(fontSize: 12)),
+                      Container(
+                        width: 220,
 
-                          decoration: BoxDecoration(color:Colors.white,
-                              border:Border.all(color: kPrimaryColor) ),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: kPrimaryColor),
+                        ),
 
-                          child:TextFormField(
-                            keyboardType:TextInputType.text,
-                            textCapitalization: TextCapitalization.characters,
-                            controller: _name,
-                            onChanged: (value){
-                              print(value);
-                              _profile.getfilterbyname(value,_profile.nameselected);
-
-
-                            },
-                            decoration: InputDecoration(
-                                labelText: "नाम (Name)",
-                                labelStyle:
-                                TextStyle(color: Colors.black, fontSize: 14)),
-                          ),),
-                      ],
-                    ),
-                    SizedBox(height: 10,),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("शहर (City)",style:
-                        TextStyle(fontSize: 12),),
-                        Container(width: 220,
-
-                          decoration: BoxDecoration(color:Colors.white,
-                              border:Border.all(color: kPrimaryColor) ),
-
-                          child:DropdownButton<String>(
-                            isExpanded: true,
-                            hint: Text("City",style: TextStyle(fontSize: 12),),
-                            // icon: Icon(Icons.arrow_downward),
-                            iconSize: 24,
-                            elevation: 20,
-                            onChanged: (String? newValue){
-                            _profile.expandedfiter.value=false;
-                              if(newValue!="NA") {
-                                print(newValue);
-                                _profile.Nselected.value =
-                                    _profile.selected.where((profile) =>
-                                    profile.WorkCity!.toLowerCase().startsWith(newValue!.toLowerCase()) ||
-                                        profile.BirthPlace!
-                                            .toLowerCase()
-                                            .startsWith(newValue.toLowerCase())||
-                                        profile.ContactInfoobj!.VillageLocality!.toLowerCase()
-                                            .startsWith(newValue.toLowerCase())||
-                                        profile.ContactInfoobj!.City!.toLowerCase()
-                                            .startsWith(newValue.toLowerCase())
-                                    ).toList();
-                              }
-                              else{
-                                _profile.Nselected.value =_profile.selected.value;
-                              }
-                              /*setState(() {
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          hint: Text("City", style: TextStyle(fontSize: 12)),
+                          // icon: Icon(Icons.arrow_downward),
+                          iconSize: 24,
+                          elevation: 20,
+                          onChanged: (String? newValue) {
+                            _profile.expandedfiter.value = false;
+                            if (newValue != "NA") {
+                              print(newValue);
+                              _profile.Nselected.value =
+                                  _profile.selected
+                                      .where(
+                                        (profile) =>
+                                            profile.WorkCity!
+                                                .toLowerCase()
+                                                .startsWith(
+                                                  newValue!.toLowerCase(),
+                                                ) ||
+                                            profile.BirthPlace!
+                                                .toLowerCase()
+                                                .startsWith(
+                                                  newValue.toLowerCase(),
+                                                ) ||
+                                            profile
+                                                .ContactInfoobj!
+                                                .VillageLocality!
+                                                .toLowerCase()
+                                                .startsWith(
+                                                  newValue.toLowerCase(),
+                                                ) ||
+                                            profile.ContactInfoobj!.City!
+                                                .toLowerCase()
+                                                .startsWith(
+                                                  newValue.toLowerCase(),
+                                                ),
+                                      )
+                                      .toList();
+                            } else {
+                              _profile.Nselected.value =
+                                  _profile.selected.value;
+                            }
+                            /*setState(() {
                                       city = newValue;
                                       issearching=true;
                                       _filtername(newValue, 16);
 
                                     });*/
+                          },
+                          items:
+                              <String>[
+                                "NA",
+                                "AHMEDABAD",
+                                "SURAT",
+                                "ASHOK NAGAR",
+                                "AGRA",
+                                "AMBAH",
+                                "AJMER",
+                                "BHOPAL",
+                                "BANDEL",
+                                "DHOLPUR",
+                                "DABRA",
+                                "DELHI",
+                                "ISAGARH",
+                                "FIROZABAD",
+                                "GUNA",
+                                "INDORE",
+                                "UJJAIN",
+                                "JHANSI",
+                                "KOTA",
+                                "JAIPUR",
+                                "KASBA THANA",
+                                "KARERA",
+                                "KOLARAS",
+                                "KANKROLI",
+                                "KOLKATA",
+                                "MORENA",
+                                "MANIYA",
+                                "MAKRANA",
+                                "MUMBAI",
+                                "MORAR",
+                                "GWALIOR",
+                                "GOHAD",
+                                "POHARI",
+                                "NARWAR",
+                                "RAJAKHEDA",
+                                "SHIVPURI",
+                                "VADODARA",
+                                "BANGLORE",
+                                "PUNE",
+                                "GURUGRAM",
+                                "GHAZIABAD",
+                                "HYDERABAD",
+                                "PRAYAGRAJ",
+                                "SHAMSHABAD",
+                                "FARIDABAD",
+                                "SHEOPUR",
+                                "OUT OF INDIA",
+                                "NOIDA",
+                                "Other(टाइप करे)",
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "शिक्षा (Qualification)",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      Container(
+                        width: 220,
 
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: kPrimaryColor),
+                        ),
 
-                            },
-                            items:<String>["NA",
-                              "AHMEDABAD","SURAT","ASHOK NAGAR","AGRA","AMBAH","AJMER","BHOPAL","BANDEL","DHOLPUR","DABRA","DELHI","ISAGARH",
-                              "FIROZABAD","GUNA","INDORE","UJJAIN","JHANSI","KOTA","JAIPUR","KASBA THANA","KARERA","KOLARAS","KANKROLI",
-                              "KOLKATA","MORENA","MANIYA","MAKRANA","MUMBAI","MORAR","GWALIOR","GOHAD","POHARI",
-                              "NARWAR","RAJAKHEDA","SHIVPURI","VADODARA","BANGLORE","PUNE","GURUGRAM","GHAZIABAD","HYDERABAD","PRAYAGRAJ",
-                              "SHAMSHABAD","FARIDABAD","SHEOPUR","OUT OF INDIA","NOIDA","Other(टाइप करे)"
-                            ]
-                                .map<DropdownMenuItem<String>>((String value){
-                              return DropdownMenuItem<String>(
-                                value:value,
-                                child:Text(value),
-                              );
-                            }).toList(),
-                          ),),
-                      ],
-                    ),
-                    SizedBox(height: 10,),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          hint: Text(
+                            "Qualification",
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          // icon: Icon(Icons.arrow_downward),
+                          iconSize: 24,
+                          elevation: 20,
+                          onChanged: (String? newValue) {
+                            print(newValue);
+                            _profile.expandedfiter.value = false;
+                            if (newValue != "NA") {
+                              _profile.Nselected.value =
+                                  _profile.selected
+                                      .where(
+                                        (profile) => profile.Qualification!
+                                            .toLowerCase()
+                                            .contains(newValue!.toLowerCase()),
+                                      )
+                                      .toList();
+                              print(_profile.Nselected.length);
+                            } else {
+                              _profile.Nselected.value =
+                                  _profile.selected.value;
+                            }
+                          },
+                          items:
+                              <String>[
+                                "NA",
+                                "M.A",
+                                "Intermediate",
+                                "MBA",
+                                "B.TECH",
+                                "B.COM",
+                                "M.COM",
+                                "B.E",
+                                "HIGHER SEC",
+                                "B.A",
+                                "MBBS",
+                                "B.SC",
+                                "MIDDLE",
+                                "BCA",
+                                "BBA",
+                                "MCA",
+                                "GRADUATION",
+                                "POST GRADUATION",
+                                "CA",
+                                "LLB",
+                                "DIPLOMA",
+                                "M.TECH",
+                                "BAMS",
+                                "M.PHARMA",
+                                "B.PHARMA",
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "व्यवसाय (Profession)",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      Container(
+                        width: 220,
+
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: kPrimaryColor),
+                        ),
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          hint: Text(
+                            "Profession",
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          // icon: Icon(Icons.arrow_downward),
+                          iconSize: 24,
+                          elevation: 20,
+                          onChanged: (String? newValue) {
+                            _profile.expandedfiter.value = false;
+                            if (newValue != "NA") {
+                              _profile.Nselected.value =
+                                  _profile.selected
+                                      .where(
+                                        (profile) => profile.Profession!
+                                            .toLowerCase()
+                                            .startsWith(
+                                              newValue!.toLowerCase(),
+                                            ),
+                                      )
+                                      .toList();
+                            } else {
+                              _profile.Nselected.value =
+                                  _profile.selected.value;
+                            }
+                          },
+                          items:
+                              <String>[
+                                "NA",
+                                "BUSINESS",
+                                "SOFTWARE ENGINNER",
+                                "SUPERVISOR",
+                                "CONSULTANT",
+                                "ASSISTANT MANAGER",
+                                "CONTRACTOR",
+                                "BANK MANAGER",
+                                "INCHARGE",
+                                "TEACHER",
+                                "DISTRIBUTOR",
+                                "MANAGER",
+                                "ENTREPRENEUR",
+                                "ACCOUNTANT",
+                                "ACCOUNT OFFICER",
+                                "HEAD",
+                                "TEAM LEADER",
+                                "AGENT",
+                                "DEALER",
+                                "INTERN",
+                                "PROFESSOR",
+                                "ENGINEER",
+                                "DESIGNER",
+                                "OPERATOR",
+                                "BROKER",
+                                "LIEUTENANT",
+                                "ADVOCATE",
+                                "ANALYST",
+                                "PLANNER",
+                                "DEVELOPER",
+                                "OBSERVER",
+                                "OFFICER",
+                                "SCIENTIST",
+                                "STENO",
+                                "SURVEYOR",
+                                "DIRECTOR",
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("शिक्षा (Qualification)",style:
-                        TextStyle(fontSize: 12),),
-                        Container(width: 220,
+                        Text("आयु से", style: TextStyle(fontSize: 12)),
+                        SizedBox(width: 20),
+                        Container(
+                          width: 70,
 
-                          decoration: BoxDecoration(color:Colors.white,
-                              border:Border.all(color: kPrimaryColor) ),
-
-                          child:DropdownButton<String>(
-                            isExpanded: true,
-                            hint: Text("Qualification",style: TextStyle(fontSize: 12),),
-                            // icon: Icon(Icons.arrow_downward),
-                            iconSize: 24,
-                            elevation: 20,
-                            onChanged: (String? newValue){
-                              print(newValue);
-                              _profile.expandedfiter.value=false;
-                              if(newValue!="NA") {
-                                _profile.Nselected.value =_profile.selected.where((profile)=>profile.Qualification!.toLowerCase().contains(newValue!.toLowerCase())).toList();
-                                print(_profile.Nselected.length);
-                              }
-                              else{
-                                _profile.Nselected.value =_profile.selected.value;
-                              }
-
-
-                            },
-                            items:<String>[
-                              "NA",
-                              "M.A",
-                              "Intermediate",
-                              "MBA",
-                              "B.TECH",
-                              "B.COM",
-                              "M.COM",
-                              "B.E",
-                              "HIGHER SEC",
-                              "B.A",
-                              "MBBS",
-                              "B.SC",
-                              "MIDDLE",
-                              "BCA",
-                              "BBA",
-                              "MCA",
-                              "GRADUATION",
-                              "POST GRADUATION",
-                              "CA",
-                              "LLB",
-                              "DIPLOMA",
-                              "M.TECH",
-                              "BAMS",
-                              "M.PHARMA",
-                              "B.PHARMA"
-
-
-                            ]
-                                .map<DropdownMenuItem<String>>((String value){
-                              return DropdownMenuItem<String>(
-                                value:value,
-                                child:Text(value),
-                              );
-                            }).toList(),
-                          ),),
-                      ],),
-                    SizedBox(height: 10,),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("व्यवसाय (Profession)",style:
-                        TextStyle(fontSize: 12),),
-                        Container(width: 220,
-
-                          decoration: BoxDecoration(color:Colors.white,
-                              border:Border.all(color: kPrimaryColor)
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: kPrimaryColor),
                           ),
 
-                          child:DropdownButton<String>(
-                            isExpanded: true,
-                            hint: Text("Profession",style: TextStyle(fontSize: 12),),
+                          child: DropdownButton<String>(
+                            value: _profile.fage.value,
+
+                            //hint: Text("Age greater",style: TextStyle(fontSize: 25),),
                             // icon: Icon(Icons.arrow_downward),
                             iconSize: 24,
                             elevation: 20,
-                            onChanged: (String? newValue){
-                              _profile.expandedfiter.value=false;
-                              if(newValue!="NA") {
-                                _profile.Nselected.value =_profile.selected.where((profile)=>profile.Profession!.toLowerCase().startsWith(newValue!.toLowerCase())).toList();
-                              }
-                              else{
-                                _profile.Nselected.value =_profile.selected.value;
+                            onChanged: (String? newValue) {
+                              print(newValue);
+                              _profile.fage.value = newValue!;
+                              _profile.expandedfiter.value = false;
+                              if (newValue != "0") {
+                                _profile.Nselected.value =
+                                    _profile.selected
+                                        .where(
+                                          (profiles) =>
+                                              int.parse(profiles.Age!) >=
+                                                  int.parse(
+                                                    _profile.fage.value,
+                                                  ) &&
+                                              int.parse(profiles.Age!) <=
+                                                  int.parse(
+                                                    _profile.tage.value,
+                                                  ),
+                                        )
+                                        .toList();
+                                print(int.parse(_profile.fage.value));
+
+                                print(_profile.Nselected.length);
+                              } else {
+                                _profile.Nselected.value =
+                                    _profile.selected.value;
                               }
                             },
-                            items:<String>[
-                              "NA",
-                              "BUSINESS",
-                              "SOFTWARE ENGINNER",
-                              "SUPERVISOR",
-                              "CONSULTANT",
-                              "ASSISTANT MANAGER",
-                              "CONTRACTOR",
-                              "BANK MANAGER",
-                              "INCHARGE",
-                              "TEACHER",
-                              "DISTRIBUTOR",
-                              "MANAGER",
-                              "ENTREPRENEUR",
-                              "ACCOUNTANT",
-                              "ACCOUNT OFFICER",
-                              "HEAD",
-                              "TEAM LEADER",
-                              "AGENT",
-                              "DEALER",
-                              "INTERN",
-                              "PROFESSOR",
-                              "ENGINEER",
-                              "DESIGNER",
-                              "OPERATOR",
-                              "BROKER",
-                              "LIEUTENANT",
-                              "ADVOCATE",
-                              "ANALYST",
-                              "PLANNER",
-                              "DEVELOPER",
-                              "OBSERVER",
-                              "OFFICER",
-                              "SCIENTIST",
-                              "STENO",
-                              "SURVEYOR",
-                              "DIRECTOR"
+                            items:
+                                <String>[
+                                  "0",
+                                  "18",
+                                  "19",
+                                  "20",
+                                  "21",
+                                  "22",
+                                  "23",
+                                  "24",
+                                  "25",
+                                  "26",
+                                  "27",
+                                  "28",
+                                  "29",
+                                  "30",
+                                  "31",
+                                  "32",
+                                  "33",
+                                  "34",
+                                  "35",
+                                  "36",
+                                  "37",
+                                  "38",
+                                  "39",
+                                  "40",
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Text("आयु तक", style: TextStyle(fontSize: 12)),
+                        SizedBox(width: 20),
+                        Container(
+                          width: 70,
 
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: kPrimaryColor),
+                          ),
 
-                            ]
-                                .map<DropdownMenuItem<String>>((String value){
-                              return DropdownMenuItem<String>(
-                                value:value,
-                                child:Text(value),
-                              );
-                            }).toList(),
-                          ),),
-                      ],),
-                    SizedBox(height: 10,),
-                    Obx(()=>
-                       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text("आयु से",style:
-                          TextStyle(fontSize: 12),),
-                          SizedBox(width:20),
-                          Container(width: 70,
+                          child: DropdownButton<String>(
+                            //hint: Text("Age greater",style: TextStyle(fontSize: 25),),
+                            // icon: Icon(Icons.arrow_downward),
+                            value: _profile.tage.value,
+                            iconSize: 24,
+                            elevation: 20,
+                            onChanged: (String? newValue) {
+                              _profile.tage.value = newValue!;
+                              _profile.expandedfiter.value = false;
+                              if (newValue != "0") {
+                                _profile.Nselected.value =
+                                    _profile.selected
+                                        .where(
+                                          (profiles) =>
+                                              int.parse(profiles.Age!) >=
+                                                  int.parse(
+                                                    _profile.fage.value,
+                                                  ) &&
+                                              int.parse(profiles.Age!) <=
+                                                  int.parse(
+                                                    _profile.tage.value,
+                                                  ),
+                                        )
+                                        .toList();
+                              } else {
+                                _profile.Nselected.value =
+                                    _profile.selected.value;
+                              }
+                            },
+                            items:
+                                <String>[
+                                  "0",
+                                  "18",
+                                  "19",
+                                  "20",
+                                  "21",
+                                  "22",
+                                  "23",
+                                  "24",
+                                  "25",
+                                  "26",
+                                  "27",
+                                  "28",
+                                  "29",
+                                  "30",
+                                  "31",
+                                  "32",
+                                  "33",
+                                  "34",
+                                  "35",
+                                  "36",
+                                  "37",
+                                  "38",
+                                  "39",
+                                  "40",
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    child: ElevatedButton(
+                      onPressed: () {},
 
-                            decoration: BoxDecoration(color:Colors.white,
-                                border:Border.all(color: kPrimaryColor)),
-
-                            child:DropdownButton<String>(
-                              value: _profile.fage.value,
-
-                              //hint: Text("Age greater",style: TextStyle(fontSize: 25),),
-                              // icon: Icon(Icons.arrow_downward),
-                              iconSize: 24,
-                              elevation: 20,
-                              onChanged: (String? newValue){
-                                print(newValue);
-                                _profile.fage.value =newValue!;
-                                _profile.expandedfiter.value=false;
-                                if(newValue!="0") {
-                                  _profile.Nselected.value=_profile.selected.where((profiles)=>int.parse(profiles.Age!)>=int.parse(_profile.fage.value)
-                                      && int.parse(profiles.Age!)<=int.parse(_profile.tage.value)
-                                  ).toList();
-                                  print(int.parse(_profile.fage.value));
-
-                                  print(_profile.Nselected.length);
-
-                                }
-
-                                else{
-                                  _profile.Nselected.value =_profile.selected.value;
-                                }
-                              },
-                              items:<String>[
-                                "0","18","19","20","21","22","23","24","25","26","27",
-                                "28","29","30","31","32","33","34","35","36","37","38",
-                                "39","40"
-
-
-
-                              ]
-                                  .map<DropdownMenuItem<String>>((String value){
-                                return DropdownMenuItem<String>(
-                                  value:value,
-                                  child:Text(value),
-                                );
-                              }).toList(),
-                            ),),
-                          SizedBox(width:20),
-                          Text("आयु तक",style:
-                          TextStyle(fontSize: 12),),
-                          SizedBox(width:20),
-                          Container(width: 70,
-
-                            decoration: BoxDecoration(color:Colors.white,
-                                border:Border.all(color: kPrimaryColor) ),
-
-                            child:DropdownButton<String>(
-                                                          //hint: Text("Age greater",style: TextStyle(fontSize: 25),),
-                              // icon: Icon(Icons.arrow_downward),
-                              value: _profile.tage.value,
-                              iconSize: 24,
-                              elevation: 20,
-                              onChanged: (String? newValue){
-                                _profile.tage.value =newValue!;
-                                _profile.expandedfiter.value=false;
-                                if(newValue!="0") {
-                                  _profile.Nselected.value=_profile.selected.where((profiles)=>int.parse(profiles.Age!)>=int.parse(_profile.fage.value)
-                                      && int.parse(profiles.Age!)<=int.parse(_profile.tage.value)
-                                  ).toList();
-                                }
-                                else{
-                                  _profile.Nselected.value =_profile.selected.value;
-                                }
-                              },
-                              items:<String>[
-                                "0","18","19","20","21","22","23","24","25","26","27",
-                                "28","29","30","31","32","33","34","35","36","37","38",
-                                "39","40"
-
-
-
-                              ]
-                                  .map<DropdownMenuItem<String>>((String value){
-                                return DropdownMenuItem<String>(
-                                  value:value,
-                                  child:Text(value),
-                                );
-                              }).toList(),
-                            ),)
-                        ],
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.green,
+                        ),
+                      ), // background
+                      child: Text(
+                        "Apply",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),
-                    SizedBox(height: 10,),
-                    Container
-                      (
-                        child: ElevatedButton
-                          (
-                            onPressed: () {
-
-
-                            },
-
-                            style: ButtonStyle
-                              (
-                                backgroundColor: MaterialStateProperty.all<
-                                    Color>(Colors.green))
-                            , // background
-                            child: Text
-                              ("Apply",
-                              style: TextStyle
-                                (
-                                  color: Colors.white, fontSize: 15),))
-                    ),
-
-
-                  ],
-                ),
-              )
-
-
-
+                  ),
+                ],
+              ),
+            ),
           ),
-          ],
+        ],
       ),
     );
   }
-
-
 }
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({
-    Key? key,
-    this.item,
-    this.widthSize,
-    this.isCat = false,
-  }) : super(key: key);
+  const CategoryItem({Key? key, this.item, this.widthSize, this.isCat = false})
+    : super(key: key);
   final CategoryModel? item;
   final double? widthSize;
   final bool? isCat;
-/*Positioned(
+  /*Positioned(
             left: 15,
             top: 20,
             child: Column(
@@ -468,20 +623,20 @@ class CategoryItem extends StatelessWidget {
           ),*/
   @override
   Widget build(BuildContext context) {
-    ProfileController _profile=Get.find();
+    ProfileController _profile = Get.find();
     return InkWell(
-      onTap:(){
+      onTap: () {
         _profile.getfilteredforinside(item!.title!);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ProfileList()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileList()),
+        );
       },
       child: SizedBox(
-
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-           /* SizedBox(height: getScreenHeight(50) ,
+            /* SizedBox(height: getScreenHeight(50) ,
               width: getScreeWidth(100),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
@@ -494,16 +649,19 @@ class CategoryItem extends StatelessWidget {
             ),*/
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: SizedBox(height: getScreenHeight(30) ,
-                  width: getScreeWidth(70),
-                  child: Image.asset(item!.imgUrl!),
-            ),),
+              child: SizedBox(
+                height: getScreenHeight(30),
+                width: getScreeWidth(70),
+                child: Image.asset(item!.imgUrl!),
+              ),
+            ),
             getVerticalSpace(3),
             SizedBox(
               width: getScreeWidth(60),
-              child:Text(item!.title!.length>13?
-                "${item!.title}".substring(0,13)+"..":
-              "${item!.title}",
+              child: Text(
+                item!.title!.length > 13
+                    ? "${item!.title}".substring(0, 13) + ".."
+                    : "${item!.title}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: kPrimaryColor,
@@ -511,8 +669,7 @@ class CategoryItem extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-            )
-
+            ),
           ],
         ),
       ),
@@ -520,78 +677,107 @@ class CategoryItem extends StatelessWidget {
   }
 
   void getfiltered(String s) {
-    ProfileController _profile=Get.find();
+    ProfileController _profile = Get.find();
 
-    switch(s){
+    switch (s) {
       case 'Engineer':
-        _profile.title.value="Engineers";
-       // _profile.showcat.value=false;
+        _profile.title.value = "Engineers";
+        // _profile.showcat.value=false;
         //_profile.selected.clear();
-        _profile.selected.value=_profile.selected.where((profile)=>profile.Profession!.toLowerCase().contains("engineer")||
-            profile.Qualification!.toLowerCase().contains("engineer")||
-            profile.Qualification!.toLowerCase().endsWith("tech")).toList();
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Profession!.toLowerCase().contains("engineer") ||
+                      profile.Qualification!.toLowerCase().contains(
+                        "engineer",
+                      ) ||
+                      profile.Qualification!.toLowerCase().endsWith("tech"),
+                )
+                .toList();
         break;
       case 'Business':
         //_profile.selected.clear();
-        _profile.title.value="Business";
+        _profile.title.value = "Business";
         //_profile.showcat.value=false;
-        _profile.selected.value=_profile.selected.where((profile)=>profile.Profession!.toLowerCase().contains("business")).toList();
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Profession!.toLowerCase().contains("business"),
+                )
+                .toList();
         break;
       case 'Doctor':
         //_profile.selected.clear();
-        _profile.title.value="Doctor";
-       // _profile.showcat.value=false;
-        _profile.selected.value=_profile.selected.where((profile)=>profile.Profession!.toLowerCase().contains("doctor")||
-            profile.Profession!.toLowerCase().contains("medical")||
-            profile.Designation!.toLowerCase().contains("doctor")||
-            profile.Designation!.toLowerCase().contains("medical")||
-            profile.Designation!.toLowerCase().contains("md")||
-            profile.Designation!.toLowerCase().contains("dentist")||
-            profile.Qualification!.toLowerCase().contains("mbbs")||
-            profile.Qualification!.toLowerCase().contains("pharma")||
-            profile.Qualification!.toLowerCase().contains("bhms")||
-            profile.Qualification!.toLowerCase().contains("bds")).toList();;
+        _profile.title.value = "Doctor";
+        // _profile.showcat.value=false;
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Profession!.toLowerCase().contains("doctor") ||
+                      profile.Profession!.toLowerCase().contains("medical") ||
+                      profile.Designation!.toLowerCase().contains("doctor") ||
+                      profile.Designation!.toLowerCase().contains("medical") ||
+                      profile.Designation!.toLowerCase().contains("md") ||
+                      profile.Designation!.toLowerCase().contains("dentist") ||
+                      profile.Qualification!.toLowerCase().contains("mbbs") ||
+                      profile.Qualification!.toLowerCase().contains("pharma") ||
+                      profile.Qualification!.toLowerCase().contains("bhms") ||
+                      profile.Qualification!.toLowerCase().contains("bds"),
+                )
+                .toList();
+        ;
         break;
       case 'CA':
-        _profile.title.value="CA";
+        _profile.title.value = "CA";
         //_profile.showcat.value=false;
-       // _profile.selected.clear();
-        _profile.selected.value=_profile.selected.where((profile)=>
-        profile.Qualification!.toLowerCase().startsWith("ca")||
-            profile.Qualification!.toLowerCase().startsWith("cs")||
-            profile.Designation!.toLowerCase().startsWith("ca")||
-            profile.Designation!.toLowerCase().startsWith("cs")||
-            profile.Profession!.toLowerCase().startsWith("ca")||
-            profile.Profession!.toLowerCase().startsWith("cs")).toList();;
+        // _profile.selected.clear();
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Qualification!.toLowerCase().startsWith("ca") ||
+                      profile.Qualification!.toLowerCase().startsWith("cs") ||
+                      profile.Designation!.toLowerCase().startsWith("ca") ||
+                      profile.Designation!.toLowerCase().startsWith("cs") ||
+                      profile.Profession!.toLowerCase().startsWith("ca") ||
+                      profile.Profession!.toLowerCase().startsWith("cs"),
+                )
+                .toList();
+        ;
         break;
       case 'Teacher':
-        _profile.title.value="Teacher";
+        _profile.title.value = "Teacher";
         //_profile.showcat.value=false;
         //_profile.selected.clear();
-        _profile.selected.value=_profile.selected.where((profile)=>
-        profile.Designation!.toLowerCase().contains("teacher")||
-            profile.Designation!.toLowerCase().contains("lecturer")||
-            profile.Designation!.toLowerCase().contains("professor")||
-            profile.Designation!.toLowerCase().contains("tution")||
-            profile.Designation!.toLowerCase().contains("coaching")||
-            profile.Designation!.toLowerCase().contains("instructor")||
-            profile.Qualification!.toLowerCase().endsWith("ed")||
-            profile.Profession!.toLowerCase().contains("teacher")||
-            profile.Profession!.toLowerCase().contains("lecturer")||
-            profile.Profession!.toLowerCase().contains("tution")||
-            profile.Profession!.toLowerCase().contains("coaching")).toList();
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Designation!.toLowerCase().contains("teacher") ||
+                      profile.Designation!.toLowerCase().contains("lecturer") ||
+                      profile.Designation!.toLowerCase().contains(
+                        "professor",
+                      ) ||
+                      profile.Designation!.toLowerCase().contains("tution") ||
+                      profile.Designation!.toLowerCase().contains("coaching") ||
+                      profile.Designation!.toLowerCase().contains(
+                        "instructor",
+                      ) ||
+                      profile.Qualification!.toLowerCase().endsWith("ed") ||
+                      profile.Profession!.toLowerCase().contains("teacher") ||
+                      profile.Profession!.toLowerCase().contains("lecturer") ||
+                      profile.Profession!.toLowerCase().contains("tution") ||
+                      profile.Profession!.toLowerCase().contains("coaching"),
+                )
+                .toList();
         break;
-
-
-
-
     }
-
-
-
   }
 
- /* getcatbuttonfunction(String title) {
+  /* getcatbuttonfunction(String title) {
 
     switch(title){
       case "Mobiles":
@@ -646,7 +832,7 @@ class CityClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: kshade5,
-      height: ResponsiveSize.screenHeight*0.11,
+      height: ResponsiveSize.screenHeight * 0.11,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categoryList.length,
@@ -668,16 +854,12 @@ class CityClass extends StatelessWidget {
 }
 
 class CityItem extends StatelessWidget {
-  const CityItem({
-    Key? key,
-    this.item,
-    this.widthSize,
-    this.isCat = false,
-  }) : super(key: key);
+  const CityItem({Key? key, this.item, this.widthSize, this.isCat = false})
+    : super(key: key);
   final CategoryModel? item;
   final double? widthSize;
   final bool? isCat;
-/*Positioned(
+  /*Positioned(
             left: 15,
             top: 20,
             child: Column(
@@ -730,14 +912,14 @@ class CityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:(){
+      onTap: () {
         getfiltered(item!.title!);
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => ProfileList()));
-      } ,
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileList()),
+        );
+      },
       child: SizedBox(
-
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -761,9 +943,10 @@ class CityItem extends StatelessWidget {
             getVerticalSpace(3),*/
             SizedBox(
               width: getScreeWidth(60),
-              child:Text(item!.title!.length>13?
-              "${item!.title}".substring(0,13)+"..":
-              "${item!.title}",
+              child: Text(
+                item!.title!.length > 13
+                    ? "${item!.title}".substring(0, 13) + ".."
+                    : "${item!.title}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: kPrimaryColor,
@@ -771,8 +954,7 @@ class CityItem extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-            )
-
+            ),
           ],
         ),
       ),
@@ -780,112 +962,148 @@ class CityItem extends StatelessWidget {
   }
 
   void getfiltered(String s) {
-    ProfileController _profile=Get.find();
+    ProfileController _profile = Get.find();
 
-    switch(s){
+    switch (s) {
       case 'Engineer':
-        _profile.title.value="Engineers";
-        _profile.showcat.value=false;
+        _profile.title.value = "Engineers";
+        _profile.showcat.value = false;
         //_profile.selected.clear();
-        _profile.selected.value=_profile.selected.where((profile)=>profile.Profession!.toLowerCase().contains("engineer")||
-            profile.Qualification!.toLowerCase().contains("engineer")||
-            profile.Qualification!.toLowerCase().endsWith("tech")).toList();
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Profession!.toLowerCase().contains("engineer") ||
+                      profile.Qualification!.toLowerCase().contains(
+                        "engineer",
+                      ) ||
+                      profile.Qualification!.toLowerCase().endsWith("tech"),
+                )
+                .toList();
         break;
       case 'Business':
-      //_profile.selected.clear();
-        _profile.title.value="Business";
-        _profile.showcat.value=false;
-        _profile.selected.value=_profile.selected.where((profile)=>profile.Profession!.toLowerCase().contains("business")).toList();
+        //_profile.selected.clear();
+        _profile.title.value = "Business";
+        _profile.showcat.value = false;
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Profession!.toLowerCase().contains("business"),
+                )
+                .toList();
         break;
       case 'Doctor':
-      //_profile.selected.clear();
-        _profile.title.value="Doctor";
-        _profile.showcat.value=false;
-        _profile.selected.value=_profile.selected.where((profile)=>profile.Profession!.toLowerCase().contains("doctor")||
-            profile.Profession!.toLowerCase().contains("medical")||
-            profile.Designation!.toLowerCase().contains("doctor")||
-            profile.Designation!.toLowerCase().contains("medical")||
-            profile.Designation!.toLowerCase().contains("md")||
-            profile.Designation!.toLowerCase().contains("dentist")||
-            profile.Qualification!.toLowerCase().contains("mbbs")||
-            profile.Qualification!.toLowerCase().contains("pharma")||
-            profile.Qualification!.toLowerCase().contains("bhms")||
-            profile.Qualification!.toLowerCase().contains("bds")).toList();;
+        //_profile.selected.clear();
+        _profile.title.value = "Doctor";
+        _profile.showcat.value = false;
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Profession!.toLowerCase().contains("doctor") ||
+                      profile.Profession!.toLowerCase().contains("medical") ||
+                      profile.Designation!.toLowerCase().contains("doctor") ||
+                      profile.Designation!.toLowerCase().contains("medical") ||
+                      profile.Designation!.toLowerCase().contains("md") ||
+                      profile.Designation!.toLowerCase().contains("dentist") ||
+                      profile.Qualification!.toLowerCase().contains("mbbs") ||
+                      profile.Qualification!.toLowerCase().contains("pharma") ||
+                      profile.Qualification!.toLowerCase().contains("bhms") ||
+                      profile.Qualification!.toLowerCase().contains("bds"),
+                )
+                .toList();
+        ;
         break;
       case 'CA':
-        _profile.title.value="CA";
-        _profile.showcat.value=false;
+        _profile.title.value = "CA";
+        _profile.showcat.value = false;
         // _profile.selected.clear();
-        _profile.selected.value=_profile.selected.where((profile)=>
-        profile.Qualification!.toLowerCase().startsWith("ca")||
-            profile.Qualification!.toLowerCase().startsWith("cs")||
-            profile.Designation!.toLowerCase().startsWith("ca")||
-            profile.Designation!.toLowerCase().startsWith("cs")||
-            profile.Profession!.toLowerCase().startsWith("ca")||
-            profile.Profession!.toLowerCase().startsWith("cs")).toList();;
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Qualification!.toLowerCase().startsWith("ca") ||
+                      profile.Qualification!.toLowerCase().startsWith("cs") ||
+                      profile.Designation!.toLowerCase().startsWith("ca") ||
+                      profile.Designation!.toLowerCase().startsWith("cs") ||
+                      profile.Profession!.toLowerCase().startsWith("ca") ||
+                      profile.Profession!.toLowerCase().startsWith("cs"),
+                )
+                .toList();
+        ;
         break;
       case 'Teacher':
-        _profile.title.value="Teacher";
-        _profile.showcat.value=false;
+        _profile.title.value = "Teacher";
+        _profile.showcat.value = false;
         //_profile.selected.clear();
-        _profile.selected.value=_profile.selected.where((profile)=>
-        profile.Designation!.toLowerCase().contains("teacher")||
-            profile.Designation!.toLowerCase().contains("lecturer")||
-            profile.Designation!.toLowerCase().contains("professor")||
-            profile.Designation!.toLowerCase().contains("tution")||
-            profile.Designation!.toLowerCase().contains("coaching")||
-            profile.Designation!.toLowerCase().contains("instructor")||
-            profile.Qualification!.toLowerCase().endsWith("ed")||
-            profile.Profession!.toLowerCase().contains("teacher")||
-            profile.Profession!.toLowerCase().contains("lecturer")||
-            profile.Profession!.toLowerCase().contains("tution")||
-            profile.Profession!.toLowerCase().contains("coaching")).toList();
+        _profile.selected.value =
+            _profile.selected
+                .where(
+                  (profile) =>
+                      profile.Designation!.toLowerCase().contains("teacher") ||
+                      profile.Designation!.toLowerCase().contains("lecturer") ||
+                      profile.Designation!.toLowerCase().contains(
+                        "professor",
+                      ) ||
+                      profile.Designation!.toLowerCase().contains("tution") ||
+                      profile.Designation!.toLowerCase().contains("coaching") ||
+                      profile.Designation!.toLowerCase().contains(
+                        "instructor",
+                      ) ||
+                      profile.Qualification!.toLowerCase().endsWith("ed") ||
+                      profile.Profession!.toLowerCase().contains("teacher") ||
+                      profile.Profession!.toLowerCase().contains("lecturer") ||
+                      profile.Profession!.toLowerCase().contains("tution") ||
+                      profile.Profession!.toLowerCase().contains("coaching"),
+                )
+                .toList();
         break;
-
-
-
-
     }
-
-
-
   }
-
 }
 
 class CategoryItemforhomescreen extends StatelessWidget {
-  const CategoryItemforhomescreen({Key? key, this.item, this.widthSize, this.isCat}) : super(key: key);
+  const CategoryItemforhomescreen({
+    Key? key,
+    this.item,
+    this.widthSize,
+    this.isCat,
+  }) : super(key: key);
   final CategoryModel? item;
   final double? widthSize;
   final bool? isCat;
 
   @override
   Widget build(BuildContext context) {
-    ProfileController _profile=Get.find();
+    ProfileController _profile = Get.find();
     return InkWell(
-      onTap:(){
+      onTap: () {
         _profile.getfiltered(item!.title!);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ProfileList()));
-      } ,
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileList()),
+        );
+      },
       child: SizedBox(
-
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: SizedBox(height: getScreenHeight(30) ,
+              child: SizedBox(
+                height: getScreenHeight(30),
                 width: getScreeWidth(70),
                 child: Image.asset(item!.imgUrl!),
-              ),),
+              ),
+            ),
             getVerticalSpace(3),
             SizedBox(
               width: getScreeWidth(60),
-              child:Text(item!.title!.length>13?
-              "${item!.title}".substring(0,13)+"..":
-              "${item!.title}",
+              child: Text(
+                item!.title!.length > 13
+                    ? "${item!.title}".substring(0, 13) + ".."
+                    : "${item!.title}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: kPrimaryColor,
@@ -893,12 +1111,10 @@ class CategoryItemforhomescreen extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-            )
-
+            ),
           ],
         ),
       ),
     );
   }
-
 }

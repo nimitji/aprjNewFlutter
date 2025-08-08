@@ -29,7 +29,7 @@ class HomeContent extends StatelessWidget {
     final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
     return RefreshIndicator(
-      onRefresh:()=> _profile.getprofiles(),
+      onRefresh: () => _profile.getprofiles(),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,65 +37,75 @@ class HomeContent extends StatelessWidget {
             _appBar(),
             MainBannerPanel(),
             getVerticalSpace(10),
-            Obx(() => _profile.isLoading.value
-                ? SizedBox(
-                    height: 100,
-                    //width: ResponsiveSize.screenWidth,
-                    child: ShimmerLoader(height: 80, width: 80))
-                : SizedBox(
-                    height: ResponsiveSize.screenHeight * 0.11,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categoryList.length,
-                      //padding: EdgeInsets.only(left: 10),
-                      itemBuilder: (ctx, index) {
-                        return Card(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 5.0),
-                            child: CategoryItemforhomescreen(
-                              widthSize: getScreeWidth(100),
-                              item: categoryList[index],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  )),
+            Obx(
+              () =>
+                  _profile.isLoading.value
+                      ? SizedBox(
+                        height: 100,
+                        //width: ResponsiveSize.screenWidth,
+                        child: ShimmerLoader(height: 80, width: 80),
+                      )
+                      : SizedBox(
+                        height: ResponsiveSize.screenHeight * 0.11,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: categoryList.length,
+                          //padding: EdgeInsets.only(left: 10),
+                          itemBuilder: (ctx, index) {
+                            return Card(
+                              color: const Color.fromARGB(255, 190, 199, 246),
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 5.0),
+                                child: CategoryItemforhomescreen(
+                                  widthSize: getScreeWidth(100),
+                                  item: categoryList[index],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+            ),
             getVerticalSpace(10),
             Obx(
-              () => _profile.isLoading.value
-                  ? SizedBox(
-                      height: 300,
-                      width: ResponsiveSize.screenWidth,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 1,
-                        itemBuilder: (ctx, index) {
-                          return const ListTile(
-                            contentPadding: EdgeInsets.all(10),
-                            leading: ShimmerLoader(height: 80, width: 80),
-                            title: ShimmerLoader(height: 20),
-                            subtitle: ShimmerLoader(height: 10, width: 50),
-                          );
-                        },
-                      ),
-                    )
-                  : Container(
-                      color: Colors.white,
-                      child: ExpansionTile(
-                        leading: Icon(Icons.photo_album),
-                        title: Text(
-                          "वधु (Bride)",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+              () =>
+                  _profile.isLoading.value
+                      ? SizedBox(
+                        height: 300,
+                        width: ResponsiveSize.screenWidth,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 1,
+                          itemBuilder: (ctx, index) {
+                            return const ListTile(
+                              contentPadding: EdgeInsets.all(10),
+                              leading: ShimmerLoader(height: 80, width: 80),
+                              title: ShimmerLoader(height: 20),
+                              subtitle: ShimmerLoader(height: 10, width: 50),
+                            );
+                          },
                         ),
-                        children: [
-                          ListTile(
+                      )
+                      : Container(
+                        color: const Color.fromARGB(255, 230, 234, 183),
+                        child: ExpansionTile(
+                          leading: Icon(Icons.photo_album),
+                          title: Text(
+                            "वधु (Bride)",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          children: [
+                            ListTile(
                               title: Text(
                                 "मांगलिक (Manglik)",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
                               onTap: () {
                                 _profile.title.value =
@@ -109,72 +119,84 @@ class HomeContent extends StatelessWidget {
                                 _profile.nameselected.value =
                                     _profile.manglikfemaleprofiles;
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ProfileList()));
-                              }),
-                          Divider(
-                            thickness: 1.5,
-                          ),
-                          ListTile(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfileList(),
+                                  ),
+                                );
+                              },
+                            ),
+                            Divider(thickness: 1.5),
+                            ListTile(
                               title: Text(
                                 "नॉन मांगलिक (Non-Manglik)",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
                               onTap: () {
                                 _profile.title.value =
                                     "नॉन मांगलिक वधु (Non Manglik Brides)";
                                 _profile.showcat.value = true;
                                 // _profile.selected.clear();
-                                _profile.selected.value = _profile.femaleprofiles;
+                                _profile.selected.value =
+                                    _profile.femaleprofiles;
                                 _profile.Nselected.value =
                                     _profile.femaleprofiles;
                                 _profile.nameselected.value =
                                     _profile.femaleprofiles;
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ProfileList()));
-                              }),
-                        ],
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfileList(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
             ),
             Obx(
-              () => _profile.isLoading.value
-                  ? SizedBox(
-                      height: 300,
-                      width: ResponsiveSize.screenWidth,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 1,
-                        itemBuilder: (ctx, index) {
-                          return const ListTile(
-                            contentPadding: EdgeInsets.all(10),
-                            leading: ShimmerLoader(height: 80, width: 80),
-                            title: ShimmerLoader(height: 20),
-                            subtitle: ShimmerLoader(height: 10, width: 50),
-                          );
-                        },
-                      ),
-                    )
-                  : Container(
-                      color: Colors.white,
-                      child: ExpansionTile(
-                        leading: Icon(Icons.photo_album),
-                        title: Text(
-                          "वर (Grooms)",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+              () =>
+                  _profile.isLoading.value
+                      ? SizedBox(
+                        height: 300,
+                        width: ResponsiveSize.screenWidth,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 1,
+                          itemBuilder: (ctx, index) {
+                            return const ListTile(
+                              contentPadding: EdgeInsets.all(10),
+                              leading: ShimmerLoader(height: 80, width: 80),
+                              title: ShimmerLoader(height: 20),
+                              subtitle: ShimmerLoader(height: 10, width: 50),
+                            );
+                          },
                         ),
-                        children: [
-                          ListTile(
+                      )
+                      : Container(
+                        color: const Color.fromARGB(255, 230, 234, 183),
+                        child: ExpansionTile(
+                          leading: Icon(Icons.photo_album),
+                          title: Text(
+                            "वर (Grooms)",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          children: [
+                            ListTile(
                               title: Text(
                                 "मांगलिक (Manglik)",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
                               onTap: () {
                                 _profile.title.value =
@@ -188,18 +210,21 @@ class HomeContent extends StatelessWidget {
                                 _profile.nameselected.value =
                                     _profile.manglikmaleprofiles;
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ProfileList()));
-                              }),
-                          Divider(
-                            thickness: 1.5,
-                          ),
-                          ListTile(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfileList(),
+                                  ),
+                                );
+                              },
+                            ),
+                            Divider(thickness: 1.5),
+                            ListTile(
                               title: Text(
                                 "नॉन मांगलिक (Non-Manglik)",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
                               onTap: () {
                                 _profile.title.value =
@@ -207,17 +232,21 @@ class HomeContent extends StatelessWidget {
                                 _profile.showcat.value = true;
                                 //_profile.selected.clear();
                                 _profile.selected.value = _profile.maleprofiles;
-                                _profile.Nselected.value = _profile.maleprofiles;
+                                _profile.Nselected.value =
+                                    _profile.maleprofiles;
                                 _profile.nameselected.value =
                                     _profile.maleprofiles;
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ProfileList()));
-                              }),
-                        ],
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfileList(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
             ),
             /*  Obx(()=>_profile.isLoading.value?
             SizedBox(
@@ -554,151 +583,175 @@ class HomeContent extends StatelessWidget {
               "चयनित प्रोफाइल (Selected Profiles)",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            Obx(() => _profile.isLoading.value
-                ? SizedBox(
-                    height: 300,
-                    width: ResponsiveSize.screenWidth,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 1,
-                      itemBuilder: (ctx, index) {
-                        return const ListTile(
-                          contentPadding: EdgeInsets.all(10),
-                          leading: ShimmerLoader(height: 80, width: 80),
-                          title: ShimmerLoader(height: 20),
-                          subtitle: ShimmerLoader(height: 10, width: 50),
-                        );
-                      },
-                    ),
-                  )
-                : HotProducts(_profile.specialProfiles.length, "special")),
+            Obx(
+              () =>
+                  _profile.isLoading.value
+                      ? SizedBox(
+                        height: 300,
+                        width: ResponsiveSize.screenWidth,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 1,
+                          itemBuilder: (ctx, index) {
+                            return const ListTile(
+                              contentPadding: EdgeInsets.all(10),
+                              leading: ShimmerLoader(height: 80, width: 80),
+                              title: ShimmerLoader(height: 20),
+                              subtitle: ShimmerLoader(height: 10, width: 50),
+                            );
+                          },
+                        ),
+                      )
+                      : HotProducts(_profile.specialProfiles.length, "special"),
+            ),
             Text(
               "नये प्रोफाइल - वर (Latest Profiles Groom)",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            Obx(() => _profile.isLoading.value
-                ? SizedBox(
-                    height: 300,
-                    width: ResponsiveSize.screenWidth,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 2,
-                      itemBuilder: (ctx, index) {
-                        return const ListTile(
-                          contentPadding: EdgeInsets.all(10),
-                          leading: ShimmerLoader(height: 80, width: 80),
-                          title: ShimmerLoader(height: 20),
-                          subtitle: ShimmerLoader(height: 10, width: 50),
-                        );
-                      },
-                    ),
-                  )
-                : HotProducts(5, "male")),
+            Obx(
+              () =>
+                  _profile.isLoading.value
+                      ? SizedBox(
+                        height: 300,
+                        width: ResponsiveSize.screenWidth,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 2,
+                          itemBuilder: (ctx, index) {
+                            return const ListTile(
+                              contentPadding: EdgeInsets.all(10),
+                              leading: ShimmerLoader(height: 80, width: 80),
+                              title: ShimmerLoader(height: 20),
+                              subtitle: ShimmerLoader(height: 10, width: 50),
+                            );
+                          },
+                        ),
+                      )
+                      : HotProducts(5, "male"),
+            ),
             Text(
               "नये प्रोफाइल वधु (Latest Profile Bride)",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            Obx(() => _profile.isLoading.value
-                ? SizedBox(
-                    height: 300,
-                    width: ResponsiveSize.screenWidth,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 2,
-                      itemBuilder: (ctx, index) {
-                        return const ListTile(
-                          contentPadding: EdgeInsets.all(10),
-                          leading: ShimmerLoader(height: 80, width: 80),
-                          title: ShimmerLoader(height: 20),
-                          subtitle: ShimmerLoader(height: 10, width: 50),
-                        );
-                      },
-                    ),
-                  )
-                : HotProducts(5, "female")),
-            getVerticalSpace(20),
-            Container(
-                height: 60,
-                width: 400,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddProfileUserScreen()));
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.purple)), // background
-                    child: Text(
-                      "नई प्रोफाइल जोड़ने के लिए यहाँ क्लिक करे\n(Click here to Add New Profile)",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ))),
-            SizedBox(
-              height: 20,
+            Obx(
+              () =>
+                  _profile.isLoading.value
+                      ? SizedBox(
+                        height: 300,
+                        width: ResponsiveSize.screenWidth,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 2,
+                          itemBuilder: (ctx, index) {
+                            return const ListTile(
+                              contentPadding: EdgeInsets.all(10),
+                              leading: ShimmerLoader(height: 80, width: 80),
+                              title: ShimmerLoader(height: 20),
+                              subtitle: ShimmerLoader(height: 10, width: 50),
+                            );
+                          },
+                        ),
+                      )
+                      : HotProducts(5, "female"),
             ),
-            Container(
-                height: 60,
-                width: 400,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FeedbackScreen()));
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.redAccent)), // background
-                    child: Text(
-                      "फीडबैक,सुझाव या सराहना के लिए यहाँ क्लिक करे\n (Feedback,Suggestion or appraisals)",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ))),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-                height: 60,
-                width: 400,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UpdateScreen()));
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.blue)), // background
-                    child: Text(
-                      "स्वयं की प्रोफाइल में परिवर्तन या अपडेट सूचित करे\n Request for change/updates in your profile ",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ))),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-                height: 60,
-                width: 400,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SearchwithID()));
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.green)), // background
-                    child: Text(
-                      "ID द्वारा प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile using ID)",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ))),
-            getVerticalSpace(20),
+
             BannerPanel(),
+            getVerticalSpace(20),
+            Container(
+              height: 60,
+              width: 400,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddProfileUserScreen(),
+                    ),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 167, 100, 178),
+                  ),
+                ), // background
+                child: Text(
+                  "नई प्रोफाइल जोड़ने के लिए यहाँ क्लिक करे\n(Click here to Add New Profile)",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              height: 60,
+              width: 400,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FeedbackScreen()),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 165, 93, 93),
+                  ),
+                ), // background
+                child: Text(
+                  "फीडबैक,सुझाव या सराहना के लिए यहाँ क्लिक करे\n (Feedback,Suggestion or appraisals)",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              height: 60,
+              width: 400,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UpdateScreen()),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 78, 109, 134),
+                  ),
+                ), // background
+                child: Text(
+                  "स्वयं की प्रोफाइल में परिवर्तन या अपडेट सूचित करे\n Request for change/updates in your profile ",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              height: 60,
+              width: 400,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SearchwithID()),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 63, 105, 65),
+                  ),
+                ), // background
+                child: Text(
+                  "ID द्वारा प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile using ID)",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ),
+            ),
+            getVerticalSpace(20),
+
+            AdBannerPanel(),
             getVerticalSpace(20),
           ],
         ),
@@ -754,10 +807,7 @@ class HomeContent extends StatelessWidget {
       builder: (BuildContext context) {
         return IconButton(
           iconSize: 0,
-          icon: SvgPicture.asset(
-            menuIcon,
-            color: Colors.red,
-          ),
+          icon: SvgPicture.asset(menuIcon, color: kPrimaryColor),
           onPressed: () => Scaffold.of(context).openDrawer(),
         );
       },
