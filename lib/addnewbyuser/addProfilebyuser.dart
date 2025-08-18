@@ -518,7 +518,7 @@ class _AddprofileState extends State<AddProfileByUser> {
 
                               setState(() {
                                 _birthTime.text = formattedTime;
-                                ampm = ampm;
+                                ampm = DateFormat('a').format(dt);
                               });
                             }
                           },

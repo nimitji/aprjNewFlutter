@@ -1,7 +1,7 @@
 import 'package:aprjnew/classes/APPS.dart';
 import 'package:aprjnew/utilities/services.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 
 import '../utilities/Helpers/dialog_helper.dart';
 
@@ -9,16 +9,29 @@ class AppsList extends StatelessWidget {
   final List<Apps> appsprofiles;
   AppsList(this.appsprofiles);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      body:ListView(
+      body: ListView(
         children: [
-          SizedBox(height: 10,),
-          Container(child:Center(child:Text("अविवाहित प्रतिभाएँ प्रस्तुति समूह",style: TextStyle(fontSize: 20,color: Colors.red,fontWeight: FontWeight.bold),))),
-          Container(padding:EdgeInsets.all(10),child:Text("""
+          SizedBox(height: 10),
+          Container(
+            child: Center(
+              child: Text(
+                "अविवाहित प्रतिभाएँ प्रस्तुति समूह",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text(
+              """
 एक संक्षिप्त परिचय
 
 अ० भा० उपरोंचिया जैसवाल जैन समाज में जब  अविवाहित बच्चों की जानकारी का अभाव समाज को महसूस हो रहा था , तब वर्ष 2016 में अविवाहित प्रतिभाएँ प्रस्तुति ग्रुप बनाकर देश की समस्त शैलियों के उन बच्चों के परिचय वाट्सएप के माध्यम से प्रस्तुत किये जो देश के दूर दराज महानगरों में अपनी सेवायें दे रहे, तथा व्यापार जगत में भी ऊचाईयाँ छू रहे  अविवाहित  बच्चों के परिचय प्रस्तुत किये ।
@@ -46,7 +59,11 @@ class AppsList extends StatelessWidget {
 अविवाहित प्रतिभाएँ प्रस्तुति समूह
     
     
-    """,style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,)),
+    """,
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.justify,
+            ),
+          ),
           /*Container(padding:EdgeInsets.all(5),child:
           Text("""
 उपरोंचिया दिगम्बर जैसवाल जैन समाज के 44 गोत्र
@@ -97,101 +114,106 @@ class AppsList extends StatelessWidget {
 44. साहुला
     
     """,style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,)),*/
-          Container(child:Center(child:Text("अविवाहित प्रतिभाएँ प्रस्तुति समूह",style: TextStyle(fontSize: 20,color: Colors.red,fontWeight: FontWeight.bold),))),
+          Container(
+            child: Center(
+              child: Text(
+                "अविवाहित प्रतिभाएँ प्रस्तुति समूह",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
           getlist(),
         ],
-      )
-
+      ),
     );
   }
 
-
   getlist() {
-
-       return ListView.builder(
-           shrinkWrap: true,
-         physics: NeverScrollableScrollPhysics(),
-        itemCount: appsprofiles.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Container(
-                  child: InkWell(
-                          child: Container(
-                          height: 150,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
-                          ),
-                          child: Card(
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: appsprofiles.length,
+      itemBuilder: (context, index) {
+        return Column(
+          children: [
+            Container(
+              child: InkWell(
+                child: Container(
+                  height: 150,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 20.0,
+                  ),
+                  child: Card(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 5.0,
+                                horizontal: 5.0,
+                              ),
+                              height: 70,
+                              width: 70,
+                              child: Image(
+                                image: NetworkImage(
+                                  fetchImage(appsprofiles[index].Photolink),
+                                ),
+                                //height: 150,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            SizedBox(width: 18),
+                            Container(
                               child: Column(
                                 children: [
-
-                                  Row(mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 5.0, horizontal: 5.0),
-                                          height: 70,
-                                          width: 70,
-                                          child: Image(
-                                            image: NetworkImage(fetchImage(
-                                                appsprofiles[index]
-                                                    .Photolink)),
-                                            //height: 150,
-                                            fit:BoxFit.fill,
-
-                                          )),
-                                      SizedBox(
-                                        width: 18,
+                                  SizedBox(height: 20),
+                                  Center(
+                                    child: Text(
+                                      formatname(appsprofiles[index].Name!),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red,
+                                        fontSize: 18,
                                       ),
-                                      Container(
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Center(
-                                                child: Text(
-                                                  formatname(
-                                                      appsprofiles[index].Name!),
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.red,
-                                                      fontSize: 18),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(
-                                                appsprofiles[index].City! ,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 17),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-
-
-                                            ],
-                                          ))
-                                    ],
-                                  )
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    appsprofiles[index].City!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
                                 ],
-                              ))))),
-            ],
-          );
-        });
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   fetchImage(String? photoLink1) {
     if (photoLink1 == "NA") {
       return "https://nprservices.in/catalogue/APRJ/notavail.png";
-    }
-    else
+    } else
       return photoLink1;
   }
 
@@ -199,12 +221,10 @@ class AppsList extends StatelessWidget {
     if (designation != "NA") {
       if (designation!.length < 17) {
         return designation;
-      }
-      else {
+      } else {
         return designation.substring(0, 17);
       }
-    }
-    else {
+    } else {
       return "Not Available";
     }
   }
@@ -212,59 +232,44 @@ class AppsList extends StatelessWidget {
   String formatname(String name) {
     if (name.length < 17) {
       return name;
-    }
-    else {
-      return name.substring(0, 17) +'\n'+name.substring(17,name.length);
+    } else {
+      return name.substring(0, 17) + '\n' + name.substring(17, name.length);
     }
   }
-
-
-
 }
 
-
 class Appslist extends StatefulWidget {
-
   @override
   _AppslisrState createState() => _AppslisrState();
 }
 
 class _AppslisrState extends State<Appslist> {
-
-
   @override
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("अविवाहित प्रतिभाएं प्रस्तुति समूह ",
-          style: TextStyle(color: Colors.white), ),),
-      body: FutureBuilder(
-          future: fetchapps(http.Client()),
-          builder: (context, snapshot) {
-            if (snapshot.hasError)
-              print(snapshot.error);
-            return snapshot.hasData
-                ? _setpstate(snapshot.data,)
-                : Center(child: CircularProgressIndicator(),);
-          }
-
+        title: Text(
+          "अविवाहित प्रतिभाएं प्रस्तुति समूह ",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
-
-
+      body: FutureBuilder(
+        future: fetchapps(http.Client()),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) print(snapshot.error);
+          return snapshot.hasData
+              ? _setpstate(snapshot.data)
+              : Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 
-_setpstate(data){
+  _setpstate(data) {
     return AppsList(data);
+  }
 }
-
-}
-
-
 
 class AdminList extends StatefulWidget {
   const AdminList({Key? key}) : super(key: key);
@@ -274,257 +279,216 @@ class AdminList extends StatefulWidget {
 }
 
 class _AdminListState extends State<AdminList> {
-
   getlist() {
     return Column(
-            children: [
-              Container(
-                  child: InkWell(
-                      child: Container(
-                          height: 150,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
+      children: [
+        Container(
+          child: InkWell(
+            child: Container(
+              height: 150,
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: Card(
+                child: Column(
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Center(
+                            child: Text(
+                              "1. रूपेश जैन",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                fontSize: 18,
+                              ),
+                            ),
                           ),
-                          child: Card(
-                              child: Column(
-                                children: [
-                                      Container(
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Center(
-                                                child: Text(
-                                                  "1. रूपेश जैन",
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.red,
-                                                      fontSize: 18),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(
-                                                "उत्तम नगर, दिल्ली" ,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 17),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(
-                                                "99999-77-294" ,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 17),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-
-
-                                            ],
-                                          ))
-                                    ],
-
-
-                              ))))),
-              Container(
-                  child: InkWell(
-                      child: Container(
-                          height: 150,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
+                          SizedBox(height: 10),
+                          Text(
+                            "उत्तम नगर, दिल्ली",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
                           ),
-                          child: Card(
-                              child: Column(
-                                children: [
-                                  Container(
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Center(
-                                            child: Text(
-                                              "2. श्री अजय जैन",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.red,
-                                                  fontSize: 18),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "शिवपुरी" ,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "94257-64033" ,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-
-
-                                        ],
-                                      ))
-                                ],
-
-
-                              ))))),
-              Container(
-                  child: InkWell(
-                      child: Container(
-                          height: 150,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
+                          SizedBox(height: 10),
+                          Text(
+                            "99999-77-294",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
                           ),
-                          child: Card(
-                              child: Column(
-                                children: [
-                                  Container(
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Center(
-                                            child: Text(
-                                              "3. श्री रविन्द्र जी जैन 'जमूसर वाले'",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.red,
-                                                  fontSize: 18),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "भोपाल" ,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "98263-65877" ,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-
-
-                                        ],
-                                      ))
-                                ],
-
-
-                              ))))),
-              Container(
-                  child: InkWell(
-                      child: Container(
-                          height: 150,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
-                          ),
-                          child: Card(
-                              child: Column(
-                                children: [
-                                  Container(
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Center(
-                                            child: Text(
-                                              "4. श्री अनिल जी जैन",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.red,
-                                                  fontSize: 18),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "मकराना" ,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "94130-37563" ,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-
-
-                                        ],
-                                      ))
-                                ],
-
-
-                              ))))),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextButton(
-                    child: const Text('Delete My Account'),
-                    onPressed: () async {
-                      DialogHelper.instance.accountdeleteconfirm(context);
-
-                    }
-
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-
-
-            ],
-          );
-
+            ),
+          ),
+        ),
+        Container(
+          child: InkWell(
+            child: Container(
+              height: 150,
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: Card(
+                child: Column(
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Center(
+                            child: Text(
+                              "2. श्री अजय जैन",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "शिवपुरी",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "94257-64033",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          child: InkWell(
+            child: Container(
+              height: 150,
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: Card(
+                child: Column(
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Center(
+                            child: Text(
+                              "3. श्री रविन्द्र जी जैन 'जमूसर वाले'",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "भोपाल",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "98263-65877",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          child: InkWell(
+            child: Container(
+              height: 150,
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: Card(
+                child: Column(
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Text(
+                            "मकराना",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "94130-37563",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton(
+            child: const Text('Delete My Account'),
+            onPressed: () async {
+              DialogHelper.instance.accountdeleteconfirm(context);
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( appBar: AppBar(
-      title: Text("एडमिन्स की जानकारियाँ",
-        style: TextStyle(color: Colors.white), ),),
-      body: getlist(),);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "एडमिन्स की जानकारियाँ",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: getlist(),
+    );
   }
 }
-
 
 class MarriageInfo extends StatefulWidget {
   const MarriageInfo({Key? key}) : super(key: key);
@@ -537,10 +501,12 @@ class _MarriageInfoState extends State<MarriageInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(title:Text("वैवाहिक कार्यक्रम-आवश्यकताएं")),
+      appBar: AppBar(title: Text("वैवाहिक कार्यक्रम-आवश्यकताएं")),
       body: ListView(
-        children:[ Container(child:
-          Text("""
+        children: [
+          Container(
+            child: Text(
+              """
 श्री दिगम्बर जैसवाल जैन "उपरोंचिया" समाज की परम्परा के अनुसार
 
 मांगलिक वैवाहिक कार्यक्रम-आवश्यकताएं
@@ -742,26 +708,32 @@ __________
 38.धोती-दुपट्टा
 39.थाल
 40.पथापरा
-          """,style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,),
-        )],
-      ));
+          """,
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.justify,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
-
 
 class Intro extends StatelessWidget {
   const Intro({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(title: Text("जैसवाल एक परिचय"),),
+    return Scaffold(
+      appBar: AppBar(title: Text("जैसवाल एक परिचय")),
 
-        body:ListView(
-          children: [
-            SizedBox(height: 10,),
-            Container(padding:EdgeInsets.all(5),child:
-            Text("""
+      body: ListView(
+        children: [
+          SizedBox(height: 10),
+          Container(
+            padding: EdgeInsets.all(5),
+            child: Text(
+              """
 उपरोंचिया दिगम्बर जैसवाल जैन समाज के 44 गोत्र
 
 1. अगरैया
@@ -809,11 +781,13 @@ class Intro extends StatelessWidget {
 43. संडा
 44. साहुला
     
-    """,style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,)),
-
-          ],
-        )
-
+    """,
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.justify,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

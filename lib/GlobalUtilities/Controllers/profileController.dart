@@ -31,6 +31,8 @@ class ProfileController extends GetxController with BaseController {
   RxList<PersonalProfilewithc> nameselected = <PersonalProfilewithc>[].obs;
   var individual = PersonalProfilewithc().obs;
   var searchedprofile = PersonalProfilewithc().obs;
+  var filterOption = ["शहर (City)", "a"];
+  var selectedfilterstring = "".obs;
 
   @override
   void onInit() {

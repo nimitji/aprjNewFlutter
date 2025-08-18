@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../Constants/app_color.dart';
 import '../../Constants/assets_path.dart';
 import '../../Constants/size.dart';
@@ -599,7 +600,7 @@ class CategoryItem extends StatelessWidget {
                   height: isCat! ? getScreenHeight(30) : getScreenHeight(25),
                   width: isCat! ? getScreeWidth(90) : getScreeWidth(80),
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: kMainColor),
+                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
                     onPressed: () {
                       print("clicked");
                       getcatbuttonfunction(item!.title!);
@@ -887,7 +888,7 @@ class CityItem extends StatelessWidget {
                   height: isCat! ? getScreenHeight(30) : getScreenHeight(25),
                   width: isCat! ? getScreeWidth(90) : getScreeWidth(80),
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: kMainColor),
+                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
                     onPressed: () {
                       print("clicked");
                       getcatbuttonfunction(item!.title!);
@@ -1116,5 +1117,495 @@ class CategoryItemforhomescreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class FilterModalContent extends StatefulWidget {
+  const FilterModalContent({super.key});
+
+  @override
+  State<FilterModalContent> createState() => _FilterModalContentState();
+
+  static Future<Map<String, bool>?> open(BuildContext context) {
+    return showModalBottomSheet<Map<String, bool>>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => const FilterModalContent(),
+    );
+  }
+}
+
+class _FilterModalContentState extends State<FilterModalContent> {
+  String selectedCategory = 'शहर (City)';
+  var selectedFilters = [];
+  ProfileController _profile = Get.find();
+
+  final Map<String, List<String>> filterData = {
+    'शहर (City)': [
+      "NA",
+      "AHMEDABAD",
+      "SURAT",
+      "ASHOK NAGAR",
+      "AGRA",
+      "AMBAH",
+      "AJMER",
+      "BHOPAL",
+      "BANDEL",
+      "DHOLPUR",
+      "DABRA",
+      "DELHI",
+      "ISAGARH",
+      "FIROZABAD",
+      "GUNA",
+      "INDORE",
+      "UJJAIN",
+      "JHANSI",
+      "KOTA",
+      "JAIPUR",
+      "KASBA THANA",
+      "KARERA",
+      "KOLARAS",
+      "KANKROLI",
+      "KOLKATA",
+      "MORENA",
+      "MANIYA",
+      "MAKRANA",
+      "MUMBAI",
+      "MORAR",
+      "GWALIOR",
+      "GOHAD",
+      "POHARI",
+      "NARWAR",
+      "RAJAKHEDA",
+      "SHIVPURI",
+      "VADODARA",
+      "BANGLORE",
+      "PUNE",
+      "GURUGRAM",
+      "GHAZIABAD",
+      "HYDERABAD",
+      "PRAYAGRAJ",
+      "SHAMSHABAD",
+      "FARIDABAD",
+      "SHEOPUR",
+      "OUT OF INDIA",
+      "NOIDA",
+      "Other(टाइप करे)",
+    ],
+    'Qualification': [
+      "NA",
+      "M.A",
+      "Intermediate",
+      "MBA",
+      "B.TECH",
+      "B.COM",
+      "M.COM",
+      "B.E",
+      "HIGHER SEC",
+      "B.A",
+      "MBBS",
+      "B.SC",
+      "MIDDLE",
+      "BCA",
+      "BBA",
+      "MCA",
+      "GRADUATION",
+      "POST GRADUATION",
+      "CA",
+      "LLB",
+      "DIPLOMA",
+      "M.TECH",
+      "BAMS",
+      "M.PHARMA",
+      "B.PHARMA",
+    ],
+    'Profession': [
+      "NA",
+      "BUSINESS",
+      "SOFTWARE ENGINNER",
+      "SUPERVISOR",
+      "CONSULTANT",
+      "ASSISTANT MANAGER",
+      "CONTRACTOR",
+      "BANK MANAGER",
+      "INCHARGE",
+      "TEACHER",
+      "DISTRIBUTOR",
+      "MANAGER",
+      "ENTREPRENEUR",
+      "ACCOUNTANT",
+      "ACCOUNT OFFICER",
+      "HEAD",
+      "TEAM LEADER",
+      "AGENT",
+      "DEALER",
+      "INTERN",
+      "PROFESSOR",
+      "ENGINEER",
+      "DESIGNER",
+      "OPERATOR",
+      "BROKER",
+      "LIEUTENANT",
+      "ADVOCATE",
+      "ANALYST",
+      "PLANNER",
+      "DEVELOPER",
+      "OBSERVER",
+      "OFFICER",
+      "SCIENTIST",
+      "STENO",
+      "SURVEYOR",
+      "DIRECTOR",
+    ],
+    'Age': [],
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.60,
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Filters',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+          const Divider(),
+          const SizedBox(height: 8.0),
+
+          // Category + Options
+          Expanded(
+            child: Row(
+              children: [
+                // Categories
+                Expanded(
+                  flex: 3,
+                  child: ListView(
+                    children:
+                        filterData.keys.map((cat) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: filterCategoryItem(cat),
+                          );
+                        }).toList(),
+                  ),
+                ),
+
+                const VerticalDivider(width: 30),
+
+                Expanded(
+                  flex: 5,
+                  child:
+                      selectedCategory == "Age"
+                          ? Obx(
+                            () => Column(
+                              children: [
+                                Text("आयु से", style: TextStyle(fontSize: 12)),
+                                SizedBox(height: 20),
+                                Container(
+                                  width: 90,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: kPrimaryColor),
+                                  ),
+
+                                  child: DropdownButton<String>(
+                                    value: _profile.fage.value,
+                                    iconSize: 24,
+                                    elevation: 20,
+                                    onChanged: (String? newValue) {
+                                      print(newValue);
+                                      _profile.fage.value = newValue!;
+                                      _profile.expandedfiter.value = false;
+                                      if (newValue != "0") {
+                                        _profile.Nselected.value =
+                                            _profile.selected
+                                                .where(
+                                                  (profiles) =>
+                                                      int.parse(
+                                                            profiles.Age!,
+                                                          ) >=
+                                                          int.parse(
+                                                            _profile.fage.value,
+                                                          ) &&
+                                                      int.parse(
+                                                            profiles.Age!,
+                                                          ) <=
+                                                          int.parse(
+                                                            _profile.tage.value,
+                                                          ),
+                                                )
+                                                .toList();
+                                        print(int.parse(_profile.fage.value));
+
+                                        print(_profile.Nselected.length);
+                                      } else {
+                                        _profile.Nselected.value =
+                                            _profile.selected.value;
+                                      }
+                                    },
+                                    items:
+                                        <String>[
+                                          "0",
+                                          "18",
+                                          "19",
+                                          "20",
+                                          "21",
+                                          "22",
+                                          "23",
+                                          "24",
+                                          "25",
+                                          "26",
+                                          "27",
+                                          "28",
+                                          "29",
+                                          "30",
+                                          "31",
+                                          "32",
+                                          "33",
+                                          "34",
+                                          "35",
+                                          "36",
+                                          "37",
+                                          "38",
+                                          "39",
+                                          "40",
+                                        ].map<DropdownMenuItem<String>>((
+                                          String value,
+                                        ) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Text("आयु तक", style: TextStyle(fontSize: 12)),
+                                SizedBox(height: 20),
+                                Container(
+                                  width: 90,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: kPrimaryColor),
+                                  ),
+
+                                  child: DropdownButton<String>(
+                                    value: _profile.tage.value,
+                                    iconSize: 24,
+                                    elevation: 20,
+                                    onChanged: (String? newValue) {
+                                      _profile.tage.value = newValue!;
+                                      _profile.expandedfiter.value = false;
+                                      if (newValue != "0") {
+                                        _profile.Nselected.value =
+                                            _profile.selected
+                                                .where(
+                                                  (profiles) =>
+                                                      int.parse(
+                                                            profiles.Age!,
+                                                          ) >=
+                                                          int.parse(
+                                                            _profile.fage.value,
+                                                          ) &&
+                                                      int.parse(
+                                                            profiles.Age!,
+                                                          ) <=
+                                                          int.parse(
+                                                            _profile.tage.value,
+                                                          ),
+                                                )
+                                                .toList();
+                                      } else {
+                                        _profile.Nselected.value =
+                                            _profile.selected.value;
+                                      }
+                                    },
+                                    items:
+                                        <String>[
+                                          "0",
+                                          "18",
+                                          "19",
+                                          "20",
+                                          "21",
+                                          "22",
+                                          "23",
+                                          "24",
+                                          "25",
+                                          "26",
+                                          "27",
+                                          "28",
+                                          "29",
+                                          "30",
+                                          "31",
+                                          "32",
+                                          "33",
+                                          "34",
+                                          "35",
+                                          "36",
+                                          "37",
+                                          "38",
+                                          "39",
+                                          "40",
+                                        ].map<DropdownMenuItem<String>>((
+                                          String value,
+                                        ) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                          : ListView(
+                            children: createFilterList(
+                              selectedCategory,
+                              filterData[selectedCategory] ?? [],
+                            ),
+                          ),
+                ),
+              ],
+            ),
+          ),
+
+          const Divider(color: Colors.black),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 150,
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() => selectedFilters.clear());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[300],
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text('Clear All'),
+                ),
+              ),
+              SizedBox(
+                width: 150,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, selectedFilters);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text('Apply'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget filterCategoryItem(String category) {
+    return GestureDetector(
+      onTap: () {
+        selectedFilters = [];
+        setState(() => selectedCategory = category);
+      },
+      child: Container(
+        height: 46,
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: selectedCategory == category ? Colors.blue : Colors.white,
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Center(
+          child: Text(
+            category,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: selectedCategory == category ? Colors.white : Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> createFilterList(String category, List<String> options) {
+    return options.map((option) {
+      return CheckboxListTile(
+        value: selectedFilters.contains(option),
+        onChanged: (value) {
+          setState(() {
+            if (selectedFilters.length == 0) {
+              selectedFilters.add(option);
+            } else {
+              selectedFilters = [];
+              selectedFilters.add(option);
+            }
+          });
+          if (selectedFilters.length > 0) {
+            if (category == 'शहर (City)') {
+              _profile.Nselected.value =
+                  _profile.profiles.where((user) {
+                    print(user.BirthPlace);
+                    return selectedFilters.contains(
+                      (user.BirthPlace ?? "").toUpperCase(),
+                    );
+                  }).toList();
+            } else if (category == 'Qualification') {
+              _profile.Nselected.value =
+                  _profile.profiles
+                      .where(
+                        (user) => selectedFilters.contains(user.Qualification),
+                      )
+                      .toList();
+            } else {
+              _profile.title.value = option;
+              _profile.Nselected.value =
+                  _profile.profiles
+                      .where(
+                        (user) => selectedFilters.contains(user.Profession),
+                      )
+                      .toList();
+            }
+          } else {
+            _profile.Nselected.value = _profile.profiles;
+          }
+        },
+        title: Text(
+          option,
+          style: const TextStyle(fontWeight: FontWeight.w500),
+        ),
+      );
+    }).toList();
   }
 }
