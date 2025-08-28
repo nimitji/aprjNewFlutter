@@ -6,13 +6,13 @@ import '../../Constants/assets_path.dart';
 import '../../Constants/size.dart';
 import '../custom_button.dart';
 
-
 class UnderConstruction extends StatelessWidget {
   const UnderConstruction({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(height: 700,
+    return Container(
+      height: 700,
       child: Center(
         child: Column(
           children: [
@@ -30,7 +30,9 @@ class UnderConstruction extends StatelessWidget {
             Text(
               "This Section is Under Construction",
               style: TextStyle(
-                  fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                fontSize: getTextSize(17),
+                fontWeight: FontWeight.w700,
+              ),
             ),
             getVerticalSpace(15),
             /*     Expanded(
@@ -45,7 +47,6 @@ class UnderConstruction extends StatelessWidget {
             getVerticalSpace(20),
             CustomButton(
               widthValue: getScreeWidth(335),
-              color: kPrimaryColor,
               text: "Back To Previous",
               press: () => Get.back(),
             ),

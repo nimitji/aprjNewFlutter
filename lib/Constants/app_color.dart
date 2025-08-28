@@ -1,14 +1,40 @@
+import 'package:aprjnew/Constants/hexcolor.dart';
 import 'package:flutter/material.dart';
 
-const Color kPrimaryColor = Color.fromARGB(255, 0, 28, 167);
-const Color kshade1 = Color.fromARGB(255, 0, 28, 213);
-const Color kshade2 = Color.fromARGB(255, 97, 82, 255);
-const Color kshade3 = Color.fromARGB(255, 61, 30, 234);
-const Color kshade4 = Color.fromARGB(255, 57, 44, 244);
-const Color kshade5 = Color.fromARGB(255, 219, 225, 255);
+Color kPrimaryColor = HexColor("#066633"); // primary
+Color kshade1 = HexColor("#066633");
+Color kshade3 = HexColor("#43e891");
+Color kshade4 = HexColor("#33bd74"); // option bar
+Color kshade2 = HexColor("#99f2c3"); // card
+Color kshade5 = HexColor("#ffffff"); // background
 
-const Color kdark1 = Color.fromARGB(255, 23, 12, 140);
-const Color kdark2 = Color.fromARGB(255, 157, 157, 38);
-const Color kdark3 = Color(0xFF75211f);
+Color kdark1 = HexColor("#066633");
+Color kdark2 = HexColor("#066633");
+Color kdark3 = HexColor("#066633");
+
+// Orange and blue
+
+// Color kPrimaryColor = HexColor("#033462"); // primary
+// Color kshade1 = HexColor("#066633");
+// Color kshade3 = HexColor("#43e891");
+// Color kshade4 = HexColor("#FA7D07"); // option bar
+// Color kshade2 = HexColor("#f7ac65"); // card
+// Color kshade5 = HexColor("#ffffff"); // background
+
+// Color kdark1 = HexColor("#033462");
+// Color kdark2 = HexColor("#033462");
+// Color kdark3 = HexColor("#033462");
 
 const Color kdarktext = Color(0xFF000000);
+
+
+
+
+
+
+
+
+
+// Green Code #066633
+// Blue Code #033462
+// Orange Code #FA7D07

@@ -21,6 +21,7 @@ class HotProducts extends StatelessWidget {
 
     return Container(
       width: double.infinity,
+
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: GridView.builder(
         shrinkWrap: true,
@@ -96,9 +97,9 @@ class HotItem extends StatelessWidget {
               child: Container(
                 width: safeWidth,
                 height: safeHeight,
-                decoration: const BoxDecoration(color: kshade5),
+                decoration: BoxDecoration(color: kshade5),
                 child: Card(
-                  color: const Color.fromARGB(255, 190, 199, 246),
+                  color: kshade2,
                   margin: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

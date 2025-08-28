@@ -1,3 +1,4 @@
+import 'package:aprjnew/Constants/app_color.dart';
 import 'package:aprjnew/GlobalUtilities/Controllers/profileController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -234,7 +235,10 @@ class IndividualProfile extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: ElevatedButton.icon(
-                          icon: const Icon(Icons.info_outline_rounded),
+                          icon: Icon(
+                            Icons.info_outline_rounded,
+                            color: kPrimaryColor,
+                          ),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size.fromHeight(48),
                             shape: RoundedRectangleBorder(
@@ -329,9 +333,10 @@ class IndividualProfile extends StatelessWidget {
                               },
                             );
                           },
-                          label: const Text(
+                          label: Text(
                             "इस प्रोफाइल के संपर्क सूत्र की जानकारी प्राप्त करने के लिए यहाँ दबाएं",
                             textAlign: TextAlign.center,
+                            style: TextStyle(color: kPrimaryColor),
                           ),
                         ),
                       ),
@@ -341,25 +346,32 @@ class IndividualProfile extends StatelessWidget {
                     Column(
                       children: [
                         TextButton.icon(
-                          icon: const Icon(Icons.flag_outlined),
+                          icon: Icon(Icons.flag_outlined, color: kPrimaryColor),
                           onPressed: () {
                             DialogHelper.instance.reportflagconfirm(
                               context,
                               _profile.individual.value.Sno!,
                             );
                           },
-                          label: const Text("Report this profile/user"),
+                          label: Text(
+                            "Report this profile/user",
+                            style: TextStyle(color: kPrimaryColor),
+                          ),
                         ),
                         const SizedBox(width: 8),
                         TextButton.icon(
-                          icon: const Icon(Icons.block),
+                          icon: Icon(Icons.block, color: kPrimaryColor),
                           onPressed: () {
                             DialogHelper.instance.blockconfirm(
                               context,
                               _profile.individual.value.Sno!,
                             );
                           },
-                          label: const Text("Block this profile/user"),
+
+                          label: Text(
+                            "Block this profile/user",
+                            style: TextStyle(color: kPrimaryColor),
+                          ),
                         ),
                       ],
                     ),
@@ -402,20 +414,20 @@ class _Pill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: color.primary.withOpacity(0.08),
+        color: kshade2,
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: color.primary.withOpacity(0.2)),
+        border: Border.all(color: kPrimaryColor),
       ),
       child: Row(
         children: [
-          Icon(icon, size: 14, color: color.primary),
+          Icon(icon, size: 14, color: kPrimaryColor),
           const SizedBox(width: 6),
           Text(
             label,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: color.primary,
+              color: kPrimaryColor,
             ),
           ),
         ],

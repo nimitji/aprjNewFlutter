@@ -47,7 +47,7 @@ class HomeContent extends StatelessWidget {
                           //padding: EdgeInsets.only(left: 10),
                           itemBuilder: (ctx, index) {
                             return Card(
-                              color: const Color.fromARGB(255, 190, 199, 246),
+                              color: kshade2,
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 5.0),
                                 child: CategoryItemforhomescreen(
