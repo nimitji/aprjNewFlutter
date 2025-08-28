@@ -27,7 +27,7 @@ class ProfileList extends StatelessWidget {
     ProfileController _profile = Get.find();
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text(_profile.title.value)),
+        appBar: AppBar(title: Obx(() => Text(_profile.title.value))),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -55,8 +55,7 @@ class ProfileList extends StatelessWidget {
                                         image:
                                             _profile
                                                 .Nselected[index]
-                                                .PhotoLink1 ??
-                                            "",
+                                                .PhotoLink1!,
                                         fit: BoxFit.fitHeight,
                                         placeholder: kTransparentImage,
                                         imageErrorBuilder: (
@@ -70,19 +69,25 @@ class ProfileList extends StatelessWidget {
                                           );
                                         },
                                       ),
+
+                                      //  FadeInImage.memoryNetwork(
+                                      //   image:
+                                      //       ,
+                                      //   fit: BoxFit.fitHeight,
+                                      //   placeholder: kTransparentImage,
+                                      //   imageErrorBuilder: (
+                                      //     context,
+                                      //     error,
+                                      //     stackTrace,
+                                      //   ) {
+                                      //     return Image.asset(
+                                      //       'image/na.jpg',
+                                      //       fit: BoxFit.fitHeight,
+                                      //     );
+                                      //   },
+                                      // ),
                                     ),
-                                    // _profile.Nselected[index].PhotoLink1 !=
-                                    //         "NA"
-                                    //     ? Image(
-                                    //       image: NetworkImage(
-                                    //         _profile
-                                    //             .Nselected[index]
-                                    //             .PhotoLink1!,
-                                    //       ),
-                                    //     )
-                                    //     : Image(
-                                    //       image: AssetImage("image/na.jpg"),
-                                    //     ),
+
                                     title: getageondate(
                                       _profile.Nselected[index],
                                     ),
@@ -156,26 +161,42 @@ class ProfileList extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Obx(
-                    () => ExpansionTile(
-                      initiallyExpanded: _profile.expandedfiter.value,
-                      title: Text(
-                        "फ़िल्टर द्वारा ढूंढ़ने के लिए यहाँ दबाएं ",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      onChanged: (v) {
+                        _profile.Nselected.value =
+                            _profile.profiles
+                                .where(
+                                  (user) => (user.Name ?? "").contains(
+                                    v.toUpperCase(),
+                                  ),
+                                )
+                                .toList();
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Search...",
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.filter_list_rounded),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(8),
+                                ),
+                              ),
+                              builder: (context) {
+                                return FilterModalContent();
+                              },
+                            );
+                          },
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      leading: Icon(Icons.filter_alt),
-                      trailing: Icon(
-                        Icons.arrow_drop_down_circle,
-                        size: 40,
-                        color: Colors.grey,
-                      ),
-                      collapsedBackgroundColor: kshade5,
-                      expandedAlignment: Alignment.center,
-                      key: GlobalKey(),
-                      children: [Category()],
                     ),
                   ),
 

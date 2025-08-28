@@ -221,63 +221,6 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                          child: InkWell(
-                            child: Container(
-                              height: 160,
-                              padding: EdgeInsets.symmetric(
-                                vertical: 10.0,
-                                horizontal: 20.0,
-                              ),
-                              child: Card(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      child: Column(
-                                        children: [
-                                          SizedBox(height: 20),
-                                          Center(
-                                            child: Text(
-                                              "4. श्री अनिल जी जैन",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: kPrimaryColor,
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(height: 10),
-                                          Text(
-                                            "मकराना",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                          SizedBox(height: 10),
-                                          InkWell(
-                                            onTap: () {
-                                              _makingPhoneCall("+919413037563");
-                                            },
-                                            child: Text(
-                                              "94130-37563",
-                                              style: TextStyle(
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(height: 10),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                 ],

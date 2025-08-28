@@ -8,13 +8,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../Constants/app_color.dart';
 import '../../Constants/assets_path.dart';
-import '../../Constants/routedart.dart';
 import '../../Constants/size.dart';
-import '../../Constants/textStyles.dart';
-import '../../addnewbyuser/addProfilebyuser.dart';
 import '../../addnewbyuser/addprofilebyuserscreen.dart';
-import '../../contact/feedback.dart';
-import '../../contact/updatenote.dart';
 import '../../profiles/Profiles.dart';
 import '../../profiles/hot_products.dart';
 import '../../search/Search.dart';
@@ -32,38 +27,10 @@ class HomeContent extends StatelessWidget {
       onRefresh: () => _profile.getprofiles(),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _appBar(),
             MainBannerPanel(),
-            getVerticalSpace(10),
-            Text(
-              "आपके द्वारा जोड़ी गई प्रोफाइल (Your Added Profiles)",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            Obx(
-                  () =>
-              _profile.isLoading.value
-                  ? SizedBox(
-                height: 300,
-                width: ResponsiveSize.screenWidth,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 1,
-                  itemBuilder: (ctx, index) {
-                    return const ListTile(
-                      contentPadding: EdgeInsets.all(10),
-                      leading: ShimmerLoader(height: 80, width: 80),
-                      title: ShimmerLoader(height: 20),
-                      subtitle: ShimmerLoader(height: 10, width: 50),
-                    );
-                  },
-                ),
-              )
-                  : HotProducts(_profile.specialProfiles.length, "special"),
-            ),
-            getVerticalSpace(10),
             Obx(
               () =>
                   _profile.isLoading.value
@@ -93,7 +60,7 @@ class HomeContent extends StatelessWidget {
                         ),
                       ),
             ),
-            getVerticalSpace(10),
+            getVerticalSpace(20),
             Obx(
               () =>
                   _profile.isLoading.value
@@ -606,10 +573,15 @@ class HomeContent extends StatelessWidget {
               ),
             ),*/
             getVerticalSpace(10),
-            Text(
-              "चयनित प्रोफाइल (Selected Profiles)",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "चयनित प्रोफाइल (Selected Profiles)",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
+            Divider(),
             Obx(
               () =>
                   _profile.isLoading.value
@@ -632,10 +604,15 @@ class HomeContent extends StatelessWidget {
                       )
                       : HotProducts(_profile.specialProfiles.length, "special"),
             ),
-            Text(
-              "नये प्रोफाइल - वर (Latest Profiles Groom)",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "नये प्रोफाइल - वर (Latest Profiles Groom)",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
+            Divider(),
             Obx(
               () =>
                   _profile.isLoading.value
@@ -658,10 +635,15 @@ class HomeContent extends StatelessWidget {
                       )
                       : HotProducts(5, "male"),
             ),
-            Text(
-              "नये प्रोफाइल वधु (Latest Profile Bride)",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "नये प्रोफाइल वधु (Latest Profile Bride)",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
+            Divider(),
             Obx(
               () =>
                   _profile.isLoading.value
@@ -685,11 +667,13 @@ class HomeContent extends StatelessWidget {
                       : HotProducts(5, "female"),
             ),
 
+            getVerticalSpace(20),
             BannerPanel(),
             getVerticalSpace(20),
             Container(
               height: 60,
-              width: 400,
+              width: MediaQuery.of(context).size.width * 0.95,
+              margin: const EdgeInsets.symmetric(horizontal: 12),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -705,76 +689,89 @@ class HomeContent extends StatelessWidget {
                   ),
                 ), // background
                 child: Text(
-                  "नई प्रोफाइल जोड़ने के लिए यहाँ क्लिक करे\n(Click here to Add New Profile)",
+                  "नई प्रोफाइल\n(Add New Profile)",
+                  textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ),
             ),
             SizedBox(height: 20),
-            Container(
-              height: 60,
-              width: 400,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FeedbackScreen()),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 165, 93, 93),
+            Column(
+              children: [
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FeedbackScreen(),
+                        ),
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 165, 93, 93),
+                      ),
+                    ), // background
+                    child: Text(
+                      "फीडबैक,सुझाव या सराहना के लिए यहाँ क्लिक करे\n (Feedback,Suggestion or appraisals)",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
                   ),
-                ), // background
-                child: Text(
-                  "फीडबैक,सुझाव या सराहना के लिए यहाँ क्लिक करे\n (Feedback,Suggestion or appraisals)",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              height: 60,
-              width: 400,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UpdateScreen()),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 78, 109, 134),
+                SizedBox(height: 20),
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UpdateScreen()),
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 78, 109, 134),
+                      ),
+                    ), // background
+                    child: Text(
+                      "स्वयं की प्रोफाइल में परिवर्तन या अपडेट सूचित करे\n Request for change/updates in your profile ",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
                   ),
-                ), // background
-                child: Text(
-                  "स्वयं की प्रोफाइल में परिवर्तन या अपडेट सूचित करे\n Request for change/updates in your profile ",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              height: 60,
-              width: 400,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SearchwithID()),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 63, 105, 65),
+                SizedBox(height: 20),
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SearchwithID()),
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 63, 105, 65),
+                      ),
+                    ), // background
+                    child: Text(
+                      "ID द्वारा प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile using ID)",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
                   ),
-                ), // background
-                child: Text(
-                  "ID द्वारा प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile using ID)",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
-              ),
+              ],
             ),
             getVerticalSpace(20),
 

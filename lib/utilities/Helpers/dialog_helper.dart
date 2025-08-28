@@ -13,8 +13,10 @@ class DialogHelper {
 
   static DialogHelper get instance => _instance;
 
-  void showErrorDialog(
-      {String? title = 'Error', String? description = 'Something went wrong'}) {
+  void showErrorDialog({
+    String? title = 'Error',
+    String? description = 'Something went wrong',
+  }) {
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -23,12 +25,14 @@ class DialogHelper {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                title!,
-                style: Get.textTheme.bodyMedium,
+              Text(title!, style: Get.textTheme.bodyMedium),
+              Center(
+                child: Text(
+                  description!,
+                  style: Get.textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
               ),
-              Center(child: Text(description!, style: Get.textTheme.bodyMedium,
-                textAlign: TextAlign.center,)),
               getVerticalSpace(10),
               ElevatedButton(
                 onPressed: () {
@@ -68,7 +72,6 @@ class DialogHelper {
     if (Get.isDialogOpen!) Get.back();
   }
 
-
   void showConfirmDialog() {
     Get.dialog(
       Dialog(
@@ -85,8 +88,11 @@ class DialogHelper {
               alignment: Alignment.center,
               child: Text(
                 "Do you want to exit?",
-                style: Get.textTheme.bodyMedium!.copyWith(color: Colors.white,
-                    fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: Colors.white,
+                  fontSize: getTextSize(17),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -96,21 +102,25 @@ class DialogHelper {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   OutlinedButton(
-                      onPressed: () => Get.back(), child: Text("NO")),
+                    onPressed: () => Get.back(),
+                    child: Text("NO"),
+                  ),
                   getHorizontalSpace(20),
                   OutlinedButton(
-                      onPressed: () => SystemNavigator.pop(),
-                      child: Text("YES")),
+                    onPressed: () => SystemNavigator.pop(),
+                    child: Text("YES"),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
+
   void accountdeleteconfirm(BuildContext context) {
-    ProfileController _newpart=Get.put(ProfileController());
+    ProfileController _newpart = Get.put(ProfileController());
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
@@ -120,14 +130,17 @@ class DialogHelper {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              color:kPrimaryColor,
+              color: kPrimaryColor,
               height: getScreenHeight(60),
               width: double.infinity,
               alignment: Alignment.center,
               child: Text(
                 "Alert!!",
-                style: Get.textTheme.bodyMedium!.copyWith(color: Colors.white,
-                    fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: Colors.white,
+                  fontSize: getTextSize(17),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -137,8 +150,11 @@ class DialogHelper {
               alignment: Alignment.center,
               child: Text(
                 "Do you want to delete all your data with us, this will remove all your engagements with Jaiswal Jain Parinay?",
-                style: Get.textTheme.bodyMedium!.copyWith(color: kPrimaryColor,
-                    fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: kPrimaryColor,
+                  fontSize: getTextSize(17),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -148,28 +164,32 @@ class DialogHelper {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                      onPressed: () => Get.back(), child: const Text("No")),
+                    onPressed: () => Get.back(),
+                    child: const Text("No"),
+                  ),
                   getHorizontalSpace(20),
                   TextButton(
-                      onPressed: ()async {
+                    onPressed: () async {
+                      DeleteRequestClass newreq = DeleteRequestClass(
+                        deleterequest:
+                            "I confirm that I want my account deleted from the JJP Cloud and remove all my engagement with Jaiswal Jain Parinay",
+                      );
 
-                        DeleteRequestClass newreq=DeleteRequestClass(
-                            deleterequest: "I confirm that I want my account deleted from the JJP Cloud and remove all my engagement with Jaiswal Jain Parinay"
-                        );
-
-                        _newpart.newdeleterequest(newreq: newreq);
-                      },
-                      child: const Text("Yes")),
+                      _newpart.newdeleterequest(newreq: newreq);
+                    },
+                    child: const Text("Yes"),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-  void reportflagconfirm(BuildContext context,String id) {
-    ProfileController _newpart=Get.put(ProfileController());
+
+  void reportflagconfirm(BuildContext context, String id) {
+    ProfileController _newpart = Get.put(ProfileController());
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
@@ -179,25 +199,31 @@ class DialogHelper {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              color:kPrimaryColor,
+              color: kPrimaryColor,
               height: getScreenHeight(60),
               width: double.infinity,
               alignment: Alignment.center,
               child: Text(
                 "Alert!!",
-                style: Get.textTheme.bodyMedium!.copyWith(color: Colors.white,
-                    fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: Colors.white,
+                  fontSize: getTextSize(17),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(height: 10),
             Container(
-              height: getScreenHeight(60),
+              height: getScreenHeight(120),
               width: double.infinity,
               alignment: Alignment.center,
               child: Text(
                 "Do you want to mark this profile as objectionable, this profile will be removed/edited as per the policy?",
-                style: Get.textTheme.bodyMedium!.copyWith(color: kPrimaryColor,
-                    fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: kPrimaryColor,
+                  fontSize: getTextSize(17),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -207,28 +233,32 @@ class DialogHelper {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                      onPressed: () => Get.back(), child: const Text("No")),
+                    onPressed: () => Get.back(),
+                    child: const Text("No"),
+                  ),
                   getHorizontalSpace(20),
                   TextButton(
-                      onPressed: ()async {
+                    onPressed: () async {
+                      DeleteRequestClass newreq = DeleteRequestClass(
+                        deleterequest:
+                            "the profile id $id is in-appropriate and objectionable please remove this profile ",
+                      );
 
-                        DeleteRequestClass newreq=DeleteRequestClass(
-                            deleterequest: "the profile id $id is in-appropriate and objectionable please remove this profile "
-                        );
-
-                        _newpart.newreportflag(newreq: newreq);
-                      },
-                      child: const Text("Yes")),
+                      _newpart.newreportflag(newreq: newreq);
+                    },
+                    child: const Text("Yes"),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-  void blockconfirm(BuildContext context,String id) {
-    ProfileController _newpart=Get.put(ProfileController());
+
+  void blockconfirm(BuildContext context, String id) {
+    ProfileController _newpart = Get.put(ProfileController());
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
@@ -238,14 +268,17 @@ class DialogHelper {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              color:kPrimaryColor,
+              color: kPrimaryColor,
               height: getScreenHeight(60),
               width: double.infinity,
               alignment: Alignment.center,
               child: Text(
                 "Alert!!",
-                style: Get.textTheme.bodyMedium!.copyWith(color: Colors.white,
-                    fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: Colors.white,
+                  fontSize: getTextSize(17),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -255,8 +288,11 @@ class DialogHelper {
               alignment: Alignment.center,
               child: Text(
                 "Do you want to block this user?",
-                style: Get.textTheme.bodyMedium!.copyWith(color: kPrimaryColor,
-                    fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: kPrimaryColor,
+                  fontSize: getTextSize(17),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -266,31 +302,32 @@ class DialogHelper {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                      onPressed: () => Get.back(), child: const Text("No")),
+                    onPressed: () => Get.back(),
+                    child: const Text("No"),
+                  ),
                   getHorizontalSpace(20),
                   TextButton(
-                      onPressed: ()async {
+                    onPressed: () async {
+                      DeleteRequestClass newreq = DeleteRequestClass(
+                        deleterequest:
+                            "the profile id $id is in-appropriate and objectionable please block this user ",
+                      );
 
-                        DeleteRequestClass newreq=DeleteRequestClass(
-                            deleterequest: "the profile id $id is in-appropriate and objectionable please block this user "
-                        );
-
-                        _newpart.newreportflag(newreq: newreq);
-                      },
-                      child: const Text("Yes")),
+                      _newpart.newreportflag(newreq: newreq);
+                    },
+                    child: const Text("Yes"),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
-
 }
 
-  //show exit dialog
+//show exit dialog
 
 /*
   void orderPlacedDialog() {
