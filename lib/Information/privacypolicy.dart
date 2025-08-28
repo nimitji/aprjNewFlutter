@@ -6,7 +6,6 @@ import '../Constants/assets_path.dart';
 import '../Constants/size.dart';
 import '../GlobalUtilities/custom_button.dart';
 
-
 class PrivacyPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,9 @@ class PrivacyPolicy extends StatelessWidget {
                   Text(
                     "Privacy Policy & Terms And Conditions",
                     style: TextStyle(
-                        fontSize: getTextSize(17), fontWeight: FontWeight.w700),
+                      fontSize: getTextSize(17),
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   getVerticalSpace(15),
                   Text(
@@ -47,15 +48,12 @@ class PrivacyPolicy extends StatelessWidget {
                       height: 1.5,
                     ),
                   ),
-
-
                 ],
               ),
             ),
             getVerticalSpace(20),
             CustomButton(
               widthValue: getScreeWidth(335),
-              color: kPrimaryColor,
               text: "Back To Previous",
               press: () => Get.back(),
             ),
