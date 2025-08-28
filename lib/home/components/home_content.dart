@@ -31,7 +31,6 @@ class HomeContent extends StatelessWidget {
           children: [
             _appBar(),
             MainBannerPanel(),
-            getVerticalSpace(20),
             Obx(
               () =>
                   _profile.isLoading.value
