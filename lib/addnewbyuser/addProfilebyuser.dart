@@ -1404,7 +1404,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                   ContactInfoobj: newcontact,
                   Verified: 0,
                   Married: '0',
-                  Income: int.parse(_income.text),
+                  Income: int.parse(_income.text == "" ? "0" : _income.text),
                   Special: 0,
                   Quality: gettextvalue(_special.text),
                 );
@@ -1690,7 +1690,10 @@ class _AddprofileState extends State<AddProfileByUser> {
       return calculateAge(outputDate);
     } catch (err) {
       print(err);
-      DialogHelper.instance.showErrorDialog();
+      DialogHelper.instance.showErrorDialog(
+        title: "Date Error",
+        description: "Select vaild date...",
+      );
     }
   }
 
