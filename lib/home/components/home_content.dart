@@ -31,36 +31,101 @@ class HomeContent extends StatelessWidget {
           children: [
             _appBar(),
             MainBannerPanel(),
+
+            getVerticalSpace(20),
             Obx(
-              () =>
-                  _profile.isLoading.value
-                      ? SizedBox(
-                        height: 100,
-                        //width: ResponsiveSize.screenWidth,
-                        child: ShimmerLoader(height: 80, width: 80),
-                      )
-                      : SizedBox(
-                        height: ResponsiveSize.screenHeight * 0.11,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: categoryList.length,
-                          //padding: EdgeInsets.only(left: 10),
-                          itemBuilder: (ctx, index) {
-                            return Card(
-                              color: kshade2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
-                                child: CategoryItemforhomescreen(
-                                  widthSize: getScreeWidth(100),
-                                  item: categoryList[index],
-                                ),
-                              ),
-                            );
-                          },
+                  () =>
+              _profile.isLoading.value
+                  ? SizedBox(
+                height: 300,
+                width: ResponsiveSize.screenWidth,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (ctx, index) {
+                    return const ListTile(
+                      contentPadding: EdgeInsets.all(10),
+                      leading: ShimmerLoader(height: 80, width: 80),
+                      title: ShimmerLoader(height: 20),
+                      subtitle: ShimmerLoader(height: 10, width: 50),
+                    );
+                  },
+                ),
+              )
+                  : Container(
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 230, 234, 183),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 6,
+                      offset: const Offset(2, 4),
+                    ),
+                  ],
+                ),
+                child: ExpansionTile(
+                  leading: const Icon(Icons.photo_album),
+                  title: const Text(
+                    "वर (Grooms)",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  children: [
+                    ListTile(
+                      title: const Text(
+                        "मांगलिक (Manglik)",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
                         ),
                       ),
+                      onTap: () {
+                        _profile.title.value = "मांगलिक वर(Manglik Grooms)";
+                        _profile.showcat.value = true;
+                        _profile.selected.value = _profile.manglikmaleprofiles;
+                        _profile.Nselected.value = _profile.manglikmaleprofiles;
+                        _profile.nameselected.value = _profile.manglikmaleprofiles;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfileList(),
+                          ),
+                        );
+                      },
+                    ),
+                    const Divider(thickness: 1.5),
+                    ListTile(
+                      title: const Text(
+                        "नॉन मांगलिक (Non-Manglik)",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      onTap: () {
+                        _profile.title.value = "नॉन मांगलिक वर (Non Manglik Grooms)";
+                        _profile.showcat.value = true;
+                        _profile.selected.value = _profile.maleprofiles;
+                        _profile.Nselected.value = _profile.maleprofiles;
+                        _profile.nameselected.value = _profile.maleprofiles;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfileList(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+
             ),
-            getVerticalSpace(20),
             Obx(
               () =>
                   _profile.isLoading.value
@@ -82,7 +147,18 @@ class HomeContent extends StatelessWidget {
                         ),
                       )
                       : Container(
-                        color: const Color.fromARGB(255, 230, 234, 183),
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 230, 234, 183),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 6,
+                          offset: const Offset(2, 4),
+                        ),
+                      ],
+                    ),
                         child: ExpansionTile(
                           leading: Icon(Icons.photo_album),
                           title: Text(
@@ -152,96 +228,7 @@ class HomeContent extends StatelessWidget {
                         ),
                       ),
             ),
-            Obx(
-              () =>
-                  _profile.isLoading.value
-                      ? SizedBox(
-                        height: 300,
-                        width: ResponsiveSize.screenWidth,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: 1,
-                          itemBuilder: (ctx, index) {
-                            return const ListTile(
-                              contentPadding: EdgeInsets.all(10),
-                              leading: ShimmerLoader(height: 80, width: 80),
-                              title: ShimmerLoader(height: 20),
-                              subtitle: ShimmerLoader(height: 10, width: 50),
-                            );
-                          },
-                        ),
-                      )
-                      : Container(
-                        color: const Color.fromARGB(255, 230, 234, 183),
-                        child: ExpansionTile(
-                          leading: Icon(Icons.photo_album),
-                          title: Text(
-                            "वर (Grooms)",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          children: [
-                            ListTile(
-                              title: Text(
-                                "मांगलिक (Manglik)",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              onTap: () {
-                                _profile.title.value =
-                                    "मांगलिक वर(Manglik Grooms)";
-                                _profile.showcat.value = true;
-                                //_profile.selected.clear();
-                                _profile.selected.value =
-                                    _profile.manglikmaleprofiles;
-                                _profile.Nselected.value =
-                                    _profile.manglikmaleprofiles;
-                                _profile.nameselected.value =
-                                    _profile.manglikmaleprofiles;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProfileList(),
-                                  ),
-                                );
-                              },
-                            ),
-                            Divider(thickness: 1.5),
-                            ListTile(
-                              title: Text(
-                                "नॉन मांगलिक (Non-Manglik)",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              onTap: () {
-                                _profile.title.value =
-                                    "नॉन मांगलिक वर (Non Manglik Grooms)";
-                                _profile.showcat.value = true;
-                                //_profile.selected.clear();
-                                _profile.selected.value = _profile.maleprofiles;
-                                _profile.Nselected.value =
-                                    _profile.maleprofiles;
-                                _profile.nameselected.value =
-                                    _profile.maleprofiles;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProfileList(),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-            ),
+
             /*  Obx(()=>_profile.isLoading.value?
             SizedBox(
               height: 300,
@@ -670,8 +657,49 @@ class HomeContent extends StatelessWidget {
             getVerticalSpace(20),
             BannerPanel(),
             getVerticalSpace(20),
+            Obx(
+                  () =>
+              _profile.isLoading.value
+                  ? SizedBox(
+                height: 100,
+                //width: ResponsiveSize.screenWidth,
+                child: ShimmerLoader(height: 80, width: 80),
+              )
+                  : SizedBox(
+                height: ResponsiveSize.screenHeight * 0.11,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categoryList.length,
+                  //padding: EdgeInsets.only(left: 10),
+                  itemBuilder: (ctx, index) {
+                    return Card(
+                      color: kshade2,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5.0),
+                        child: CategoryItemforhomescreen(
+                          widthSize: getScreeWidth(100),
+                          item: categoryList[index],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            getVerticalSpace(20),
             Container(
               height: 60,
+              decoration: BoxDecoration(
+                //color: const Color.fromARGB(255, 230, 234, 183),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 6,
+                    offset: const Offset(6, 8),
+                  ),
+                ],
+              ),
               width: MediaQuery.of(context).size.width * 0.95,
               margin: const EdgeInsets.symmetric(horizontal: 12),
               child: ElevatedButton(
@@ -696,10 +724,91 @@ class HomeContent extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+            Container(
+              height: 60,
+              decoration: BoxDecoration(
+                //color: const Color.fromARGB(255, 230, 234, 183),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 6,
+                    offset: const Offset(6, 8),
+                  ),
+                ],
+              ),
+              width: MediaQuery.of(context).size.width * 0.95,
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SearchwithID()),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 63, 105, 65),
+                  ),
+                ), // background
+                child: Text(
+                  "ID द्वारा प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile using ID)",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ),
+            ),
+            getVerticalSpace(20),
+            Container(
+              height: 60,
+              decoration: BoxDecoration(
+                //color: const Color.fromARGB(255, 230, 234, 183),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 6,
+                    offset: const Offset(6, 8),
+                  ),
+                ],
+              ),
+              width: MediaQuery.of(context).size.width * 0.95,
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UpdateScreen()),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 78, 109, 134),
+                  ),
+                ), // background
+                child: Text(
+                  "स्वयं की प्रोफाइल में परिवर्तन या अपडेट सूचित करे\n Request for change/updates in your profile ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ),
+            ),
+            getVerticalSpace(20),
             Column(
               children: [
                 Container(
                   height: 60,
+                  decoration: BoxDecoration(
+                    //color: const Color.fromARGB(255, 230, 234, 183),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 6,
+                        offset: const Offset(6, 8),
+                      ),
+                    ],
+                  ),
                   width: MediaQuery.of(context).size.width * 0.95,
                   margin: const EdgeInsets.symmetric(horizontal: 12),
                   child: ElevatedButton(
@@ -723,54 +832,7 @@ class HomeContent extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UpdateScreen()),
-                      );
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 78, 109, 134),
-                      ),
-                    ), // background
-                    child: Text(
-                      "स्वयं की प्रोफाइल में परिवर्तन या अपडेट सूचित करे\n Request for change/updates in your profile ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SearchwithID()),
-                      );
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 63, 105, 65),
-                      ),
-                    ), // background
-                    child: Text(
-                      "ID द्वारा प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile using ID)",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                  ),
-                ),
+
               ],
             ),
             getVerticalSpace(20),
