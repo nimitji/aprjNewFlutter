@@ -251,7 +251,7 @@ class _AppslisrState extends State<Appslist> {
       appBar: AppBar(
         title: Text(
           "अविवाहित प्रतिभाएं प्रस्तुति समूह ",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
       ),
       body: FutureBuilder(

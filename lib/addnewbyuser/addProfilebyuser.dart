@@ -57,6 +57,19 @@ List data = [
   "STENO",
   "SURVEYOR",
   "DIRECTOR",
+  "Architect",
+  "Beauty parlour",
+  "Govt job",
+  "CA",
+  "CS",
+  "Chef",
+  "Doctor",
+  "Central govt job",
+  "State govt job",
+  "Builder",
+  "Pilot",
+  "Airhostess",
+  "Yoga Instructor",
   "OTHER(टाइप करे)",
 ];
 
@@ -98,6 +111,11 @@ List dataq = [
   "BAMS",
   "M PHARMA",
   "B PHARMA",
+  "Certificates",
+  "Middle /higher secondary/12th",
+  "journalism and mass communication",
+  "Complete science",
+  "Hotel management",
   "Other(टाइप करे)",
 ];
 List datad = [
@@ -137,6 +155,17 @@ List datad = [
   "STENO",
   "SURVEYOR",
   "DIRECTOR",
+  "CEO",
+  "Chairperson",
+  "CEO",
+  "Vice president",
+  "Project manager",
+  "Marketing manager",
+  "HR manager",
+  "Regional manager",
+  "Branch manager",
+  "Aera Manager",
+  "Senior Manager",
   "Other(टाइप करे)",
 ];
 List dataci = [
@@ -188,6 +217,25 @@ List dataci = [
   "SHEOPUR",
   "OUT OF INDIA",
   "NOIDA",
+  "Patna",
+  "Howrah",
+  "Ratlam",
+  "Neemuch",
+  "Mandsaur",
+  "Dewas",
+  "Chennai",
+  "Banglore",
+  "Kodarma",
+  "Jodhpur",
+  "Udaipur",
+  "Saugor",
+  "Vayar (Raj.)",
+  "Navranpur, Orissa",
+  "Rannod",
+  "Vidisha",
+  "Hindon (Raj)",
+  "Bharuch",
+  "Haridwar",
   "Other(टाइप करे)",
 ];
 
@@ -223,6 +271,7 @@ class _AddprofileState extends State<AddProfileByUser> {
   String yearvalue = "YYYY";
   String ampm = "AM";
   String Manglikddvalue = "चुनिए";
+  String statedropdown = "राज्य (State)";
   String citydropdownvalue = "City";
   String professionddvalue = "व्यवसाय (Profession)";
   String designddvalue = "पद (Designation)";
@@ -680,6 +729,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                                     }).toList()
                                     : data.map((list) {
                                       return DropdownMenuItem(
+                                        value: list,
                                         child: TextField(
                                           style: TextStyle(
                                             color: Colors.black,
@@ -697,7 +747,6 @@ class _AddprofileState extends State<AddProfileByUser> {
                                           ),
                                           controller: _otherprof,
                                         ),
-                                        value: list,
                                       );
                                     }).toList(),
 
@@ -1262,22 +1311,6 @@ class _AddprofileState extends State<AddProfileByUser> {
                         TextField(
                           keyboardType: TextInputType.text,
                           textCapitalization: TextCapitalization.characters,
-                          controller: _state,
-                          decoration: InputDecoration(
-                            labelText: 'राज्य (State)',
-                            labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10.0),
-                        TextField(
-                          keyboardType: TextInputType.text,
-                          textCapitalization: TextCapitalization.characters,
                           controller: _country,
                           decoration: InputDecoration(
                             labelText: 'देश (Country)',
@@ -1290,6 +1323,83 @@ class _AddprofileState extends State<AddProfileByUser> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 10.0),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: kPrimaryColor),
+                          ),
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            value: statedropdown,
+                            icon: Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 10,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                statedropdown = newValue!;
+                              });
+                            },
+                            items:
+                            <String>[
+                              "राज्य (State)",
+                              "आंध्र प्रदेश",
+                              "अरुणाचल प्रदेश",
+                              "असम",
+                              "बिहार",
+                              "छत्तीसगढ़",
+                              "गोवा",
+                              "गुजरात",
+                              "हरियाणा",
+                              "हिमाचल प्रदेश",
+                              "झारखंड",
+                              "कर्नाटक",
+                              "केरल",
+                              "मध्य प्रदेश",
+                              "महाराष्ट्र",
+                              "मणिपुर",
+                              "मेघालय",
+                              "मिज़ोरम",
+                              "नागालैंड",
+                              "ओडिशा",
+                              "पंजाब",
+                              "राजस्थान",
+                              "सिक्किम",
+                              "तमिलनाडु",
+                              "तेलंगाना",
+                              "त्रिपुरा",
+                              "उत्तर प्रदेश",
+                              "उत्तराखंड",
+                              "पश्चिम बंगाल"
+
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        // TextField(
+                        //   keyboardType: TextInputType.text,
+                        //   textCapitalization: TextCapitalization.characters,
+                        //   controller: _state,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'राज्य (State)',
+                        //     labelStyle: TextStyle(
+                        //       color: Colors.black,
+                        //       fontSize: 14,
+                        //     ),
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(12),
+                        //     ),
+                        //   ),
+                        // ),
+
                         SizedBox(height: 10.0),
 
                         TextField(
@@ -1367,7 +1477,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                   Street: gettextvalue(_street.text),
                   City: citydropdownvalue,
                   VillageLocality: gettextvalue(_village.text),
-                  State: gettextvalue(_state.text),
+                  State: gettextvalue(statedropdown.toString()),
                   Country: gettextvalue(_country.text),
                   Pincode: "NA",
                   NameOfCP: gettextvalue(_namepfcp.text),
@@ -1404,7 +1514,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                   ContactInfoobj: newcontact,
                   Verified: 0,
                   Married: '0',
-                  Income: int.parse(_income.text),
+                  Income: int.parse(_income.text == "" ? "0" : _income.text),
                   Special: 0,
                   Quality: gettextvalue(_special.text),
                 );
@@ -1690,7 +1800,10 @@ class _AddprofileState extends State<AddProfileByUser> {
       return calculateAge(outputDate);
     } catch (err) {
       print(err);
-      DialogHelper.instance.showErrorDialog();
+      DialogHelper.instance.showErrorDialog(
+        title: "Date Error",
+        description: "Select vaild date...",
+      );
     }
   }
 

@@ -4,185 +4,190 @@ import 'package:aprjnew/addnewbyuser/uploader.dart';
 import 'package:aprjnew/classes/PersonalProfilewithcontact.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../Constants/app_color.dart';
 import '../Constants/routedart.dart';
-import '../classes/PersonalProfilewithcontact.dart';
 
-
-class Addimage extends StatefulWidget{
+class Addimage extends StatefulWidget {
   final PersonalProfilewithc newprofile;
-  Addimage(this.newprofile);
-  @override
-  _addnewimagestate createState()=>_addnewimagestate(newprofile);
+  const Addimage(this.newprofile, {Key? key}) : super(key: key);
 
+  @override
+  State<Addimage> createState() => _AddimageState();
 }
 
+class _AddimageState extends State<Addimage> {
+  XFile? pickedFile;
+  CroppedFile? croppedFileNew;
+  Uint8List? imageBytes;
+  final ImagePicker picker = ImagePicker();
 
-
-class _addnewimagestate extends State<Addimage> {
-
-  final PersonalProfilewithc newprofile;
-  XFile? pickedfile;
-  var croppedfilenew;
-  Uint8List? imagebyte;
-  //var croppedFile=CroppedFile("");
-  final picker=ImagePicker();
-
-  _addnewimagestate(this.newprofile);
-
-  Future _pickImage(ImageSource source)async{
-    print("pick image");
-    print(newprofile);
-    pickedfile=await picker.pickImage(source: source,imageQuality: 25,maxHeight: 2000,maxWidth: 2000);
-    _cropImage();
-
-
-
-  }
-
-  Future<Null> _cropImage() async {
-    if (pickedfile != null) {
-      final croppedFile = await ImageCropper().cropImage(
-        sourcePath: pickedfile!.path,
-        compressFormat: ImageCompressFormat.jpg,
-        compressQuality: 100,
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: 'Crop Image',
-              toolbarColor: kPrimaryColor,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-        ],
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      pickedFile = await picker.pickImage(
+        source: source,
+        imageQuality: 25,
+        maxHeight: 2000,
+        maxWidth: 2000,
       );
-      if (croppedFile != null) {
-        croppedfilenew = croppedFile;
-        setState(() {
-          croppedfilenew = croppedFile;
-        });
-        uploadFile(0);
+
+      if (pickedFile != null) {
+        await _cropImage();
       }
+    } catch (e) {
+      print("Error picking image: $e");
     }
-
   }
 
-  Future<void> uploadFile(int num) async {//0 for top, 1 for bottom, 2 for left,3 for right,4 for front 5 for back
-    print("uploadfile $num");
-    switch(num){
-      case 0 :
-      //print(image.value);
-        await croppedfilenew.readAsBytes().then((value)=>{
-          imagebyte =value
+  Future<void> _cropImage() async {
+    if (pickedFile == null) return;
+
+    try {
+      // final cropped = await ImageCropper().cropImage(
+      //   sourcePath: pickedFile!.path,
+      //   compressFormat: ImageCompressFormat.jpg,
+      //   compressQuality: 100,
+      //   uiSettings: [
+      //     AndroidUiSettings(
+      //       toolbarTitle: 'Crop Image',
+      //       toolbarColor: kPrimaryColor,
+      //       toolbarWidgetColor: Colors.white,
+      //       initAspectRatio: CropAspectRatioPreset.original,
+      //       lockAspectRatio: false,
+      //     ),
+      //   ],
+      // );
+
+      CroppedFile? cropped = await ImageCropper().cropImage(
+        sourcePath: pickedFile!.path,
+      );
+
+      if (cropped != null) {
+        setState(() {
+          croppedFileNew = cropped;
         });
-    break;
+        await uploadFile(0);
+      }
+    } catch (e) {
+      print("Error cropping image: $e");
     }
-
   }
 
+  Future<void> uploadFile(int num) async {
+    try {
+      if (croppedFileNew == null) return;
 
-  /*Future<void> _pickImage(ImageSource source) async{
-    File selected=await ImagePicker.pickImage(source: source,maxHeight: 500,maxWidth: 500);
+      File file = File(croppedFileNew!.path); // ✅ Convert CroppedFile to File
+      Uint8List bytes = await file.readAsBytes();
 
-       setState(() {
-      _imagefile=selected;
-    });
-  }*/
+      setState(() {
+        imageBytes = bytes;
+      });
+    } catch (e) {
+      print("Error uploading file: $e");
+    }
+  }
 
-@override
+  @override
   void initState() {
-    print(widget.newprofile.Name);
     super.initState();
+    print("Profile Name: ${widget.newprofile.Name}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:Text("फोटो अपलोड"),
-
-      ),
+      appBar: AppBar(title: const Text("फोटो अपलोड")),
       body: ListView(
         children: <Widget>[
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
+
+          /// Camera + Gallery buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-
               ElevatedButton(
-                onPressed:()=> _pickImage(ImageSource.camera),
-                child: Text('कैमरा शुरू करे '),
+                onPressed: () => _pickImage(ImageSource.camera),
+                child: const Text('कैमरा शुरू करे'),
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               ElevatedButton(
-                onPressed:()=> _pickImage(ImageSource.gallery),
-                child: Text('गैलरी से चुने '),
-              )
+                onPressed: () => _pickImage(ImageSource.gallery),
+                child: const Text('गैलरी से चुने'),
+              ),
             ],
           ),
-          imagebyte == null
-              ? Container(height:300, width: 200,child:Center(child:Text('No Image Selected')))
-              :Container(
-              height:500,
-              width: 300,
-              child:
-                  Column(
-                    children:[
-                      Container(height: 400,width: 300,
-                        child:Center(child:Image.memory(imagebyte!)),
 
-                      ),
+          const SizedBox(height: 20.0),
 
-
-                      ElevatedButton(
-                        onPressed:(){_cropImage();}, /*_cropImage()*/
-                        child: Icon(Icons.crop),
-                      )
-                    ])),
-
-          Column(
-            children: [
-              SizedBox(height: 20.0),
-              Container(height: 20,
-                  child: Text("डाटा अपलोड करने का मतलब आप हमारे सभी ",
-                    style: TextStyle(color: Colors.black,fontSize: 14),)),
-              Container(
-                child:InkWell( child: Text("नियम, शर्ते व प्राइवेसी पालिसी",
-                  style: TextStyle(color: Colors.indigoAccent,fontSize: 14),),
-                  onTap:(){
-                    Get.toNamed(AppRoute.privacypolicy);
-                  },
-
+          /// Show Selected Image
+          imageBytes == null
+              ? Container(
+                height: 300,
+                width: 200,
+                alignment: Alignment.center,
+                child: const Text('No Image Selected'),
+              )
+              : Container(
+                height: 500,
+                width: 300,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 400,
+                      width: 300,
+                      child: Image.memory(imageBytes!, fit: BoxFit.cover),
+                    ),
+                    ElevatedButton(
+                      onPressed: _cropImage,
+                      child: const Icon(Icons.crop),
+                    ),
+                  ],
                 ),
               ),
-              Container(
-                  child: Text("मानते है ",
-                    style: TextStyle(color: Colors.black,fontSize: 14),)),
+
+          const SizedBox(height: 20.0),
+
+          /// Privacy policy section
+          Column(
+            children: [
+              const Text(
+                "डाटा अपलोड करने का मतलब आप हमारे सभी ",
+                style: TextStyle(color: Colors.black, fontSize: 14),
+              ),
+              InkWell(
+                child: const Text(
+                  "नियम, शर्ते व प्राइवेसी पालिसी",
+                  style: TextStyle(color: Colors.indigoAccent, fontSize: 14),
+                ),
+                onTap: () {
+                  Get.toNamed(AppRoute.privacypolicy);
+                },
+              ),
+              const Text(
+                "मानते है ",
+                style: TextStyle(color: Colors.black, fontSize: 14),
+              ),
             ],
           ),
+
+          const SizedBox(height: 20.0),
+
+          /// Uploader Widget
           Container(
-              padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 40.0),
-              child:
-              imagebyte==null?
-              Text("Select A photo"):
-              Uploader(imagebyte!,newprofile)),
+            padding: const EdgeInsets.symmetric(
+              vertical: 5.0,
+              horizontal: 40.0,
+            ),
+            child:
+                imageBytes == null
+                    ? const Text("Select A photo")
+                    : Uploader(imageBytes!, widget.newprofile),
+          ),
         ],
       ),
-
     );
   }
-
-  /*void printit(PersonalProfilewithc newprofile) {
-    print("Manglik "+newprofile.Manglik);
-    print("Name "+newprofile.Name);
-    print("Age "+newprofile.Age);
-    print("GM "+newprofile.GotraMother);
-    print("GF "+newprofile.GotraFather);
-    print("Profession "+newprofile.Profession);
-  }*/
 }
-
