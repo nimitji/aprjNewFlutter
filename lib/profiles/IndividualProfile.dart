@@ -26,7 +26,7 @@ class IndividualProfile extends StatelessWidget {
           () =>
               _profile.isLoading.value
                   ? Text("loading")
-                  : Text(_profile.individual.value.Name! + ' Profile'),
+                  : Text(_profile.individual.value.Name!),
         ),
       ),
       body: Obx(
@@ -79,6 +79,13 @@ class IndividualProfile extends StatelessWidget {
                             _profile.individual.value.Manglik,
                           ),
                           icon: Icons.auto_awesome_rounded,
+                        ),
+                        const SizedBox(width: 8),
+                        _Pill(
+                          label: getmanglikstatus(
+                            _profile.individual.value.BirthPlace,
+                          ),
+                          icon: Icons.location_on_outlined,
                         ),
                       ],
                     ),
@@ -170,7 +177,7 @@ class IndividualProfile extends StatelessWidget {
                             _InfoRow(
                               label: 'आय',
                               value:
-                                  '₹ ${format.format(_profile.individual.value.Income!)}',
+                                  '${format.format(_profile.individual.value.Income!)}',
                             ),
                           ],
                         ),
@@ -228,6 +235,7 @@ class IndividualProfile extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     Card(
+                      //color: kshade1,
                       elevation: 0.8,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -240,6 +248,7 @@ class IndividualProfile extends StatelessWidget {
                             color: kPrimaryColor,
                           ),
                           style: ElevatedButton.styleFrom(
+                            backgroundColor: kshade2,
                             minimumSize: const Size.fromHeight(48),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -467,11 +476,11 @@ class _InfoRow extends StatelessWidget {
             width: 110,
             child: Text(
               '$label :',
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
             ),
           ),
           const SizedBox(width: 8),
-          Expanded(child: Text(value, style: const TextStyle(fontSize: 12))),
+          Expanded(child: Text(value, style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w600))),
         ],
       ),
     );
@@ -492,11 +501,11 @@ class _KeyValue extends StatelessWidget {
           width: 140,
           child: Text(
             k,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
         const SizedBox(width: 12),
-        Expanded(child: Text(v, style: const TextStyle(fontSize: 12))),
+        Expanded(child: Text(v, style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w600))),
       ],
     );
   }

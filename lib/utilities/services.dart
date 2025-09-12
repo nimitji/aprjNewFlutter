@@ -12,7 +12,7 @@ import 'package:http/http.dart'as http;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-var url="boreal-gravity-308613.el.r.appspot.com";
+var url="aprjbackend.nprservices.in";
 String? urlend;
 Future <List<Users>> fetchUser(http.Client client)async{
 var urls=Uri.https(url,'home/getuser');
