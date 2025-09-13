@@ -4,6 +4,7 @@ import 'package:aprjnew/Information/information.dart';
 import 'package:aprjnew/home/components/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../profiles/Profiles.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -137,24 +138,24 @@ class MyDrawer extends StatelessWidget {
                     },
                   ),
                   Divider(thickness: 1.5),
-                  ListTile(
-                    leading: Icon(Icons.info_outline),
-                    title: Text(
-                      "सहायता (Help)",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Appslist()),
-                      );
-                    },
-                  ),
-                  Divider(thickness: 1.5),
+                  // ListTile(
+                  //   leading: Icon(Icons.info_outline),
+                  //   title: Text(
+                  //     "सहायता (Help)",
+                  //     style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: 20,
+                  //     ),
+                  //   ),
+                  //   onTap: () {
+                  //     Navigator.pop(context);
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => Appslist()),
+                  //     );
+                  //   },
+                  // ),
+                 // Divider(thickness: 1.5),
                   ListTile(
                     leading: Icon(Icons.info_outline),
                     title: Text(
@@ -243,7 +244,7 @@ class MyDrawer extends StatelessWidget {
                       );
                     },
                   ),
-                  Divider(thickness: 1.5),
+                  //Divider(thickness: 1.5),
 
                   /*ListTile(
                     leading: Icon(Icons.info_outline),
@@ -265,7 +266,7 @@ class MyDrawer extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            "अविवाहित प्रतिभाए प्रस्तुति समूह",
+                            "अविवाहित प्रतिभाए प्रस्तुति समूह (APPS)",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -281,14 +282,14 @@ class MyDrawer extends StatelessWidget {
 
                   AdBannerPanel(),
                   SizedBox(height: 30),
-                  Text("version 2.1.0/2022"),
+                  Text("version 3.0.5/2025"),
                   SizedBox(
                     height: 50,
                     child: Column(
                       children: [
                         Center(
                           child: Text(
-                            "Designed, developed and maintained by",
+                            "Designed, Developed and Maintained by",
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
@@ -302,7 +303,9 @@ class MyDrawer extends StatelessWidget {
                                   fontSize: 14,
                                 ),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                launchUrl(Uri.parse("www.nprservices.in"));
+                              },
                             ),
                           ),
                         ),

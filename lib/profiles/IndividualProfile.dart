@@ -82,9 +82,7 @@ class IndividualProfile extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         _Pill(
-                          label: getmanglikstatus(
-                            _profile.individual.value.BirthPlace,
-                          ),
+                          label:  _profile.individual.value.BirthPlace!,
                           icon: Icons.location_on_outlined,
                         ),
                       ],
@@ -134,6 +132,14 @@ class IndividualProfile extends StatelessWidget {
                               value: _profile.individual.value.Mother ?? '',
                             ),
                             _InfoRow(
+                              label: 'बहनें',
+                              value: _profile.individual.value.Sister ?? 'NA',
+                            ),
+                            _InfoRow(
+                              label: 'भाई',
+                              value: _profile.individual.value.Brother ?? 'NA',
+                            ),
+                            _InfoRow(
                               label: 'आयु',
                               value: getageondate(_profile.individual.value),
                             ),
@@ -177,7 +183,7 @@ class IndividualProfile extends StatelessWidget {
                             _InfoRow(
                               label: 'आय',
                               value:
-                                  '${format.format(_profile.individual.value.Income!)}',
+                                  '₹${_profile.individual.value.Income!.toInt()}',
                             ),
                           ],
                         ),
@@ -287,7 +293,7 @@ class IndividualProfile extends StatelessWidget {
                                               const SizedBox(width: 8),
                                               const Expanded(
                                                 child: Text(
-                                                  'जानकारी प्राप्त करने के लिए',
+                                                  'जानकारी प्राप्त करने के लिए Whatsapp करें!',
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
@@ -528,7 +534,7 @@ class _ContactRow extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
       title: Text(
         title,
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -560,8 +566,8 @@ void _launchURL(txt) async =>
 
 String? getmultitext(text) {
   int length = text.length;
-  if (length > 18) {
-    return text.substring(0, 18) + "\n-" + text.substring(18, length);
+  if (length > 30) {
+    return text.substring(0, 25) + "\n-" + text.substring(25, length);
   } else
     return text;
 }

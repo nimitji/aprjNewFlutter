@@ -560,7 +560,39 @@ class HomeContent extends StatelessWidget {
               ),
             ),*/
             getVerticalSpace(10),
+
             Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "आपके द्वारा जोड़ी गई प्रोफाइल (Your Profiles)",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Divider(),
+            Obx(
+                  () =>
+              _profile.isLoading.value
+                  ? SizedBox(
+                height: 300,
+                width: ResponsiveSize.screenWidth,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (ctx, index) {
+                    return const ListTile(
+                      contentPadding: EdgeInsets.all(10),
+                      leading: ShimmerLoader(height: 80, width: 80),
+                      title: ShimmerLoader(height: 20),
+                      subtitle: ShimmerLoader(height: 10, width: 50),
+                    );
+                  },
+                ),
+              )
+                  : _profile.myaddedprofile.length>0?
+              HotProducts(_profile.myaddedprofile.length, "special"):Container(),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -568,6 +600,7 @@ class HomeContent extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
+            Divider(),
             Divider(),
             Obx(
               () =>
@@ -717,7 +750,7 @@ class HomeContent extends StatelessWidget {
                   ),
                 ), // background
                 child: Text(
-                  "नई प्रोफाइल\n(Add New Profile)",
+                  "नई प्रोफाइल जोड़े \n(Add New Profile)",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
@@ -752,7 +785,7 @@ class HomeContent extends StatelessWidget {
                   ),
                 ), // background
                 child: Text(
-                  "ID द्वारा प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile using ID)",
+                  "प्रोफाइल सर्च करने के लिए यहाँ दबाएं \n(Search Profile)",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),

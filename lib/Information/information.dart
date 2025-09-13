@@ -2,6 +2,7 @@ import 'package:aprjnew/classes/APPS.dart';
 import 'package:aprjnew/utilities/services.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utilities/Helpers/dialog_helper.dart';
 
@@ -142,62 +143,56 @@ class AppsList extends StatelessWidget {
           children: [
             Container(
               child: InkWell(
-                child: Container(
-                  height: 150,
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 20.0,
-                  ),
-                  child: Card(
+                child:Card(
+                  child:   Container(
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 5.0,
-                                horizontal: 5.0,
-                              ),
-                              height: 70,
-                              width: 70,
-                              child: Image(
-                                image: NetworkImage(
-                                  fetchImage(appsprofiles[index].Photolink),
-                                ),
-                                //height: 150,
-                                fit: BoxFit.fill,
-                              ),
+                        SizedBox(height: 20),
+                        Text(
+                          appsprofiles[index].Photolink!,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color:Colors.blueAccent
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Center(
+                          child: Text(
+                            formatname(appsprofiles[index].Name!),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                              fontSize: 18,
                             ),
-                            SizedBox(width: 18),
-                            Container(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 20),
-                                  Center(
-                                    child: Text(
-                                      formatname(appsprofiles[index].Name!),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    appsprofiles[index].City!,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                ],
-                              ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        appsprofiles[index].City!=null?
+                        Text(
+                          appsprofiles[index].City!,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ):Container(),
+                        appsprofiles[index].Phone!=null?
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            InkWell(
+                              onTap: () => launchUrl(Uri.parse("whatsapp://send?phone=+91${appsprofiles[index].Phone}&text=जय जिनेंद्र जी, मुझे कुछ सहायता चाहिए एप्लीकेशन से जुड़ी!")),
+                              child: Image.asset('image/icons/whatsapp.png', height: 28),
+                            ),
+                            const SizedBox(width: 8),
+                            IconButton(
+                              onPressed: () => launchUrl(Uri.parse("tel://+91${appsprofiles[index].Phone}")),
+                              icon: const Icon(Icons.call),
+                              color: Colors.black,
                             ),
                           ],
-                        ),
+                        ) :Container(),
+                        SizedBox(height: 10),
                       ],
                     ),
                   ),
@@ -230,10 +225,10 @@ class AppsList extends StatelessWidget {
   }
 
   String formatname(String name) {
-    if (name.length < 17) {
+    if (name.length < 40) {
       return name;
     } else {
-      return name.substring(0, 17) + '\n' + name.substring(17, name.length);
+      return name.substring(0, 40) + '\n' + name.substring(40, name.length);
     }
   }
 }
@@ -282,183 +277,134 @@ class _AdminListState extends State<AdminList> {
   getlist() {
     return Column(
       children: [
-        Container(
-          child: InkWell(
-            child: Container(
-              height: 150,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Center(
-                            child: Text(
-                              "1. रूपेश जैन",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "उत्तम नगर, दिल्ली",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "99999-77-294",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                        ],
+        InkWell(
+          child: Container(
+            height: 160,
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            child: Card(
+              child:Column(
+                children: [
+                  SizedBox(height: 20),
+                  Center(
+                    child: Text(
+                      "1. रूपेश जैन",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                        fontSize: 18,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "उत्तम नगर, दिल्ली",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "99999-77-294",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                ],
               ),
             ),
           ),
         ),
-        Container(
-          child: InkWell(
-            child: Container(
-              height: 150,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Center(
-                            child: Text(
-                              "2. श्री अजय जैन",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "शिवपुरी",
+        InkWell(
+          child: Container(
+            height: 160,
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            child: Card(
+              child: Column(
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            "2. श्री अजय जैन",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 17,
+                              color: Colors.red,
+                              fontSize: 18,
                             ),
                           ),
-                          SizedBox(height: 10),
-                          Text(
-                            "94257-64033",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "शिवपुरी",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
                           ),
-                          SizedBox(height: 10),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "94257-64033",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
-        Container(
-          child: InkWell(
-            child: Container(
-              height: 150,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Center(
-                            child: Text(
-                              "3. श्री रविन्द्र जी जैन 'जमूसर वाले'",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "भोपाल",
+        InkWell(
+          child: Container(
+            height: 160,
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            child: Card(
+              child: Column(
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            "3. श्री रविन्द्र जी जैन 'जमूसर वाले'",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 17,
+                              color: Colors.red,
+                              fontSize: 18,
                             ),
                           ),
-                          SizedBox(height: 10),
-                          Text(
-                            "98263-65877",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "भोपाल",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
                           ),
-                          SizedBox(height: 10),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "98263-65877",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          child: InkWell(
-            child: Container(
-              height: 150,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Text(
-                            "मकराना",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "94130-37563",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

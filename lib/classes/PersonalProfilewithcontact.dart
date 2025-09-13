@@ -12,6 +12,8 @@ class PersonalProfilewithc{
   String? Manglik;
   String? Gender;
   String? Father;
+  String? Sister;
+  String? Brother;
   String? Mother;
   @JsonKey(name:"DateofBirth")
   String? DateOfBirth;

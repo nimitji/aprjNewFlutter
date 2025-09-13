@@ -1,6 +1,7 @@
 import 'package:aprjnew/GlobalUtilities/Controllers/basecontroller.dart';
 import 'package:aprjnew/GlobalUtilities/services/profileservices.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/PersonalProfilewithcontact.dart';
 import '../../utilities/Helpers/dialog_helper.dart';
 
@@ -16,6 +17,7 @@ class ProfileController extends GetxController with BaseController {
   var fage = "18".obs;
   var tage = "40".obs;
   RxList<PersonalProfilewithc> selected = <PersonalProfilewithc>[].obs;
+  RxList<PersonalProfilewithc> myaddedprofile = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> profiles = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> maleprofiles = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> manglikmaleprofiles =
@@ -58,7 +60,10 @@ class ProfileController extends GetxController with BaseController {
     }
   }
 
-  void addprofile(result) {
+  void addprofile(result) async{
+
+    final prefs=await SharedPreferences.getInstance();
+    String phone= await prefs.getString('phone')!;
     profiles.value = result;
     print(profiles.length);
     print("Hello");
@@ -109,9 +114,15 @@ class ProfileController extends GetxController with BaseController {
         profiles
             .where((profile) => profile.Special!.toInt().isEqual(1))
             .toList();
+    specialProfiles.value =
+        profiles
+            .where((profile) => profile.Createdby!.phone!.startsWith(phone))
+            .toList();
   }
 
   Future getindividualprofiles({required id}) async {
+
+
     print("getindicalled");
     try {
       isLoading(true);

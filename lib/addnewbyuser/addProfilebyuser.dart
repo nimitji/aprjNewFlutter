@@ -72,7 +72,82 @@ List data = [
   "Yoga Instructor",
   "OTHER(टाइप करे)",
 ];
-
+List fdata = [
+  "पिता का व्यवसाय (Fathers Profession)",
+  "BUSINESS",
+  "SOFTWARE ENGINNER",
+  "SUPERVISOR",
+  "CONSULTANT",
+  "ASSISTANT MANAGER",
+  "CONTRACTOR",
+  "BANK MANAGER",
+  "INCHARGE",
+  "TEACHER",
+  "DISTRIBUTOR",
+  "MANAGER",
+  "ENTREPRENEUR",
+  "ACCOUNTANT",
+  "ACCOUNT OFFICER",
+  "HEAD",
+  "TEAM LEADER",
+  "AGENT",
+  "DEALER",
+  "INTERN",
+  "PROFESSOR",
+  "ENGINEER",
+  "DESIGNER",
+  "OPERATOR",
+  "BROKER",
+  "LIEUTENANT",
+  "ADVOCATE",
+  "ANALYST",
+  "PLANNER",
+  "DEVELOPER",
+  "OBSERVER",
+  "OFFICER",
+  "SCIENTIST",
+  "STENO",
+  "SURVEYOR",
+  "DIRECTOR",
+  "Architect",
+  "Beauty parlour",
+  "Govt job",
+  "CA",
+  "CS",
+  "Chef",
+  "Doctor",
+  "Central govt job",
+  "State govt job",
+  "Builder",
+  "Pilot",
+  "Airhostess",
+  "Yoga Instructor",
+  "OTHER(टाइप करे)",
+];
+List ftData=[
+  "ft"
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "Other(टाइप करे)"
+];
+List itData=[
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11"
+];
 List dataq = [
   "शिक्षा (Qualification)",
   "NOT APPLICABLE",
@@ -157,85 +232,84 @@ List datad = [
   "DIRECTOR",
   "CEO",
   "Chairperson",
-  "CEO",
   "Vice president",
   "Project manager",
   "Marketing manager",
   "HR manager",
   "Regional manager",
   "Branch manager",
-  "Aera Manager",
+  "Area Manager",
   "Senior Manager",
   "Other(टाइप करे)",
 ];
 List dataci = [
   "City",
-  "AHMEDABAD",
-  "SURAT",
-  "ASHOK NAGAR",
   "AGRA",
-  "AMBAH",
+  "AHMEDABAD",
   "AJMER",
-  "BHOPAL",
+  "AMBAH",
+  "ASHOK NAGAR",
   "BANDEL",
-  "DHOLPUR",
+  "BANGLORE",
+  "Banglore",
+  "Bharuch",
+  "BHOPAL",
+  "Chennai",
   "DABRA",
   "DELHI",
-  "ISAGARH",
-  "FIROZABAD",
-  "GUNA",
-  "INDORE",
-  "UJJAIN",
-  "JHANSI",
-  "KOTA",
-  "JAIPUR",
-  "KASBA THANA",
-  "KARERA",
-  "KOLARAS",
-  "KANKROLI",
-  "KOLKATA",
-  "MORENA",
-  "MANIYA",
-  "MAKRANA",
-  "MUMBAI",
-  "MORAR",
-  "GWALIOR",
-  "GOHAD",
-  "POHARI",
-  "NARWAR",
-  "RAJAKHEDA",
-  "SHIVPURI",
-  "VADODARA",
-  "BANGLORE",
-  "PUNE",
-  "GURUGRAM",
-  "GHAZIABAD",
-  "HYDERABAD",
-  "PRAYAGRAJ",
-  "SHAMSHABAD",
-  "FARIDABAD",
-  "SHEOPUR",
-  "OUT OF INDIA",
-  "NOIDA",
-  "Patna",
-  "Howrah",
-  "Ratlam",
-  "Neemuch",
-  "Mandsaur",
   "Dewas",
-  "Chennai",
-  "Banglore",
-  "Kodarma",
-  "Jodhpur",
-  "Udaipur",
-  "Saugor",
-  "Vayar (Raj.)",
-  "Navranpur, Orissa",
-  "Rannod",
-  "Vidisha",
-  "Hindon (Raj)",
-  "Bharuch",
+  "DHOLPUR",
+  "FARIDABAD",
+  "FIROZABAD",
+  "GHAZIABAD",
+  "GOHAD",
+  "GUNA",
+  "GURUGRAM",
+  "GWALIOR",
   "Haridwar",
+  "Hindon (Raj)",
+  "Howrah",
+  "HYDERABAD",
+  "INDORE",
+  "ISAGARH",
+  "JAIPUR",
+  "JHANSI",
+  "Jodhpur",
+  "KANKROLI",
+  "KARERA",
+  "KASBA THANA",
+  "Kodarma",
+  "KOLARAS",
+  "KOLKATA",
+  "KOTA",
+  "MAKRANA",
+  "Mandsaur",
+  "MANIYA",
+  "MORAR",
+  "MORENA",
+  "MUMBAI",
+  "NARWAR",
+  "Navranpur, Orissa",
+  "Neemuch",
+  "NOIDA",
+  "OUT OF INDIA",
+  "Patna",
+  "POHARI",
+  "PRAYAGRAJ",
+  "PUNE",
+  "RAJAKHEDA",
+  "Rannod",
+  "Ratlam",
+  "Saugor",
+  "SHAMSHABAD",
+  "SHEOPUR",
+  "SHIVPURI",
+  "SURAT",
+  "Udaipur",
+  "UJJAIN",
+  "VADODARA",
+  "Vayar (Raj.)",
+  "Vidisha",
   "Other(टाइप करे)",
 ];
 
@@ -260,6 +334,7 @@ class _AddprofileState extends State<AddProfileByUser> {
   final TextEditingController _country = TextEditingController(text: "India");
   final TextEditingController _namepfcp = TextEditingController();
   final TextEditingController _otherprof = TextEditingController();
+  final TextEditingController _fatherprof = TextEditingController();
   final TextEditingController _otherqual = TextEditingController();
   final TextEditingController _otherdesig = TextEditingController();
   final TextEditingController _income = TextEditingController();
@@ -270,10 +345,13 @@ class _AddprofileState extends State<AddProfileByUser> {
   String monthvalue = "MM";
   String yearvalue = "YYYY";
   String ampm = "AM";
+  String ft="ft";
+  String inch="Inch";
   String Manglikddvalue = "चुनिए";
   String statedropdown = "राज्य (State)";
   String citydropdownvalue = "City";
   String professionddvalue = "व्यवसाय (Profession)";
+  String fatherprofessionddvalue = "पिता का व्यवसाय (Fathers Profession)";
   String designddvalue = "पद (Designation)";
   String qualificationddval = "शिक्षा (Qualification)";
   String dropdownvalue = "स्वयं का गोत्र";
@@ -639,6 +717,66 @@ class _AddprofileState extends State<AddProfileByUser> {
                             ),
                           ),
                         ),
+                        // Container(
+                        //   padding: EdgeInsets.symmetric(
+                        //     horizontal: 12,
+                        //     vertical: 6,
+                        //   ),
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(12),
+                        //
+                        //     border: Border.all(color: kPrimaryColor),
+                        //   ),
+                        //   child: DropdownButton(
+                        //     isExpanded: true,
+                        //     icon: Icon(Icons.arrow_downward),
+                        //     iconSize: 20,
+                        //     elevation: 10,
+                        //     value: ft,
+                        //     hint: Text("Height"),
+                        //     items:
+                        //     !isenable
+                        //         ? ftData.map((list) {
+                        //       return DropdownMenuItem(
+                        //         child: Text(list),
+                        //         value: list,
+                        //       );
+                        //     }).toList()
+                        //         : ftData.map((list) {
+                        //       return DropdownMenuItem(
+                        //         value: list,
+                        //         child: TextField(
+                        //           style: TextStyle(
+                        //             color: Colors.black,
+                        //             fontSize: 25,
+                        //           ),
+                        //           showCursor: true,
+                        //           autofocus: true,
+                        //
+                        //           decoration: InputDecoration(
+                        //             labelText: 'टाइप कीजिये ',
+                        //             labelStyle: TextStyle(
+                        //               color: Colors.black,
+                        //               fontSize: 15,
+                        //             ),
+                        //           ),
+                        //           controller: _height,
+                        //         ),
+                        //       );
+                        //     }).toList(),
+                        //
+                        //     onChanged: (dynamic value) {
+                        //       setState(() {
+                        //         print(value);
+                        //         if (value == "Other(टाइप करे)") {
+                        //           isenable = true;
+                        //           ft = value;
+                        //         }
+                        //         ft = value;
+                        //       });
+                        //     },
+                        //   ),
+                        // ),
 
                         SizedBox(height: 10.0),
                         TextField(
@@ -811,6 +949,67 @@ class _AddprofileState extends State<AddProfileByUser> {
                                 );
                               }).toList(),
                             ),*/
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+
+                            border: Border.all(color: kPrimaryColor),
+                          ),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_downward),
+                            iconSize: 20,
+                            elevation: 10,
+                            value: fatherprofessionddvalue,
+                            hint: Text("पिता का व्यवसाय (Fathers Profession)"),
+                            items:
+                            !isenable
+                                ? fdata.map((list) {
+                              return DropdownMenuItem(
+                                child: Text(list),
+                                value: list,
+                              );
+                            }).toList()
+                                : fdata.map((list) {
+                              return DropdownMenuItem(
+                                value: list,
+                                child: TextField(
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 25,
+                                  ),
+                                  showCursor: true,
+                                  autofocus: true,
+
+                                  decoration: InputDecoration(
+                                    labelText: 'टाइप कीजिये ',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  controller: _fatherprof,
+                                ),
+                              );
+                            }).toList(),
+
+                            onChanged: (dynamic value) {
+                              setState(() {
+                                print(value);
+                                if (value == "Other(टाइप करे)") {
+                                  isenable = true;
+                                  professionddvalue = value;
+                                }
+                                professionddvalue = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 12,
@@ -1308,22 +1507,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                           ),
                         ),
                         SizedBox(height: 10.0),
-                        TextField(
-                          keyboardType: TextInputType.text,
-                          textCapitalization: TextCapitalization.characters,
-                          controller: _country,
-                          decoration: InputDecoration(
-                            labelText: 'देश (Country)',
-                            labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10.0),
+
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 12,
@@ -1384,6 +1568,23 @@ class _AddprofileState extends State<AddProfileByUser> {
                             }).toList(),
                           ),
                         ),
+                        SizedBox(height: 10.0),
+                        TextField(
+                          keyboardType: TextInputType.text,
+                          textCapitalization: TextCapitalization.characters,
+                          controller: _country,
+                          decoration: InputDecoration(
+                            labelText: 'देश (Country)',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
                         // TextField(
                         //   keyboardType: TextInputType.text,
                         //   textCapitalization: TextCapitalization.characters,

@@ -8,12 +8,13 @@ part of 'PersonalProfile.dart';
 
 PersonalProfile _$PersonalProfileFromJson(Map<String, dynamic> json) =>
     PersonalProfile(
-      Createdby: json['Createdby'] == null
-          ? null
-          : Users.fromJson(json['Createdby'] as Map<String, dynamic>),
+      Createdby:
+          json['Createdby'] == null
+              ? null
+              : Users.fromJson(json['Createdby'] as Map<String, dynamic>),
       id: json['_id'] as String?,
       Income: json['Income'] as String?,
-      Special: json['Special'] as int?,
+      Special: (json['Special'] as num?)?.toInt(),
       Name: json['Name'] as String?,
       Sno: json['Sno'] as String?,
       AboutMe: json['AboutMe'] as String?,

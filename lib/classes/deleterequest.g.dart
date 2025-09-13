@@ -9,9 +9,10 @@ part of 'deleterequest.dart';
 DeleteRequestClass _$DeleteRequestClassFromJson(Map<String, dynamic> json) =>
     DeleteRequestClass(
       id: json['_id'] as String?,
-      requestby: json['requestby'] == null
-          ? null
-          : Users.fromJson(json['requestby'] as Map<String, dynamic>),
+      requestby:
+          json['requestby'] == null
+              ? null
+              : Users.fromJson(json['requestby'] as Map<String, dynamic>),
       deleterequest: json['deleterequest'] as String?,
     );
 

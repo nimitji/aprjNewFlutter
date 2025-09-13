@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Constants/routedart.dart';
 import '../home/HomeScreen.dart';
 
@@ -137,6 +138,7 @@ class _Feedbackstate extends State<Feedbackbyuser> {
                 String result = await savefeedback(newfeed);
 
                 if (result == "200") {
+                  launchUrl(Uri.parse("whatsapp://send?phone=+919999977294&text=जय जिनेन्द्र जी, ${_Feedback.text} "));
                   getdialog(
                     "200",
                     "धन्यवाद",

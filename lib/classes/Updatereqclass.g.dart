@@ -7,18 +7,20 @@ part of 'Updatereqclass.dart';
 // **************************************************************************
 
 Updatereq _$UpdatereqFromJson(Map<String, dynamic> json) => Updatereq(
-      id: json['_id'] as String?,
-      RequestDetails: json['RequestDetails'] as String?,
-      profileID: json['profileID'] == null
+  id: json['_id'] as String?,
+  RequestDetails: json['RequestDetails'] as String?,
+  profileID:
+      json['profileID'] == null
           ? null
           : PersonalProfilewithc.fromJson(
-              json['profileID'] as Map<String, dynamic>),
-      Processed: json['Processed'] as int?,
-    );
+            json['profileID'] as Map<String, dynamic>,
+          ),
+  Processed: (json['Processed'] as num?)?.toInt(),
+);
 
 Map<String, dynamic> _$UpdatereqToJson(Updatereq instance) => <String, dynamic>{
-      '_id': instance.id,
-      'RequestDetails': instance.RequestDetails,
-      'profileID': instance.profileID?.toJson(),
-      'Processed': instance.Processed,
-    };
+  '_id': instance.id,
+  'RequestDetails': instance.RequestDetails,
+  'profileID': instance.profileID?.toJson(),
+  'Processed': instance.Processed,
+};

@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Constants/app_color.dart';
 import '../Constants/assets_path.dart';
 import '../Constants/routedart.dart';
@@ -258,6 +259,7 @@ class _updateinfostate extends State<UpdateInfo> {
                       String result = await saveupdatereq(newfeed);
 
                       if (result == "200") {
+                        launchUrl(Uri.parse("whatsapp://send?phone=+919826365877&text=जय जिनेन्द्र जी, कृपया प्रोफाइल आईडी : ${_Sno.text} में ${_editdetails.text} अपडेट कर दीजिए!"));
                         getdialog(
                           "200",
                           "धन्यवाद",
@@ -266,6 +268,8 @@ class _updateinfostate extends State<UpdateInfo> {
                         setState(() {
                           issaving = false;
                         });
+
+
                       } else {
                         getdialog(
                           result.toString(),
