@@ -1,3 +1,5 @@
+import 'package:aprjnew/Constants/app_color_option.dart';
+import 'package:aprjnew/GlobalUtilities/Controllers/homeScreenController.dart';
 import 'package:aprjnew/GlobalUtilities/Controllers/profileController.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProfileController _profile = Get.find();
+    HomeScreenController home = Get.find();
     final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
     return RefreshIndicator(
@@ -30,7 +33,30 @@ class HomeContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _appBar(),
-            MainBannerPanel(),
+            Obx(
+                ()=>
+                    home.isLoading.value
+                    ? SizedBox(
+                      height: 300,
+                      width: ResponsiveSize.screenWidth,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 1,
+                        itemBuilder: (ctx, index) {
+                          return const ListTile(
+                            contentPadding: EdgeInsets.all(10),
+                            leading: ShimmerLoader(height: 80, width: 80),
+                            title: ShimmerLoader(height: 20),
+                            subtitle: ShimmerLoader(height: 10, width: 50),
+                          );
+                        },
+                      ),
+                    )
+                        :MainBannerPanel(),
+
+            ),
+
 
             getVerticalSpace(20),
             Obx(
@@ -590,9 +616,10 @@ class HomeContent extends StatelessWidget {
                   },
                 ),
               )
-                  : _profile.myaddedprofile.length>0?
-              HotProducts(_profile.myaddedprofile.length, "special"):Container(),
+                  : home.homeScreeData.value.MyAddedProfile!.isNotEmpty?
+              HotProducts(home.homeScreeData.value.MyAddedProfile!.length, "myadded"):Container(),
             ),
+            Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -601,10 +628,10 @@ class HomeContent extends StatelessWidget {
               ),
             ),
             Divider(),
-            Divider(),
+
             Obx(
               () =>
-                  _profile.isLoading.value
+              _profile.isLoading.value
                       ? SizedBox(
                         height: 300,
                         width: ResponsiveSize.screenWidth,
@@ -622,7 +649,7 @@ class HomeContent extends StatelessWidget {
                           },
                         ),
                       )
-                      : HotProducts(_profile.specialProfiles.length, "special"),
+                      : HotProducts(home.homeScreeData.value.Special!.length, "special"),
             ),
             Divider(),
             Padding(
@@ -690,6 +717,15 @@ class HomeContent extends StatelessWidget {
             getVerticalSpace(20),
             BannerPanel(),
             getVerticalSpace(20),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "प्रोफाइल्स फिल्टर्स (Profiles Filters)",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Divider(),
             Obx(
                   () =>
               _profile.isLoading.value
@@ -699,26 +735,44 @@ class HomeContent extends StatelessWidget {
                 child: ShimmerLoader(height: 80, width: 80),
               )
                   : SizedBox(
-                height: ResponsiveSize.screenHeight * 0.11,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
+                height: ResponsiveSize.screenHeight * 0.30,
+                child: GridView.builder(
+                  //scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: categoryList.length,
                   //padding: EdgeInsets.only(left: 10),
                   itemBuilder: (ctx, index) {
                     return Card(
-                      color: kshade2,
+                      elevation: 4.0,
+                      color: getColor(index),
                       child: Padding(
                         padding: const EdgeInsets.only(right: 5.0),
                         child: CategoryItemforhomescreen(
                           widthSize: getScreeWidth(100),
                           item: categoryList[index],
+                          index: index,
                         ),
                       ),
                     );
                   },
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5, // Number of columns
+                  crossAxisSpacing: 3.0, // Horizontal space between items
+                  mainAxisSpacing: 10.0,  // Vertical space between items
+                  childAspectRatio: 1, // Width/height ratio of items
+                ),
                 ),
               ),
             ),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "Features",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Divider(),
             getVerticalSpace(20),
             Container(
               height: 60,
@@ -774,9 +828,14 @@ class HomeContent extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 12),
               child: ElevatedButton(
                 onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => SearchwithID()),
+                  // );
+                  _profile.getfilteredforinside("सभी प्रोफाइल्स");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchwithID()),
+                    MaterialPageRoute(builder: (context) => ProfileList()),
                   );
                 },
                 style: ButtonStyle(
@@ -931,5 +990,17 @@ class HomeContent extends StatelessWidget {
         );
       },
     );
+  }
+
+  Color? getColor(int? index) {
+    if(index! % 2!=0){
+      return kshade2;
+    }
+    else if(index! % 3!=0){
+      return kpdarkshade3;
+    }
+    else{
+      return kshade3;
+    }
   }
 }

@@ -7,6 +7,9 @@ import '../../Constants/size.dart';
 //import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import '../../GlobalUtilities/Controllers/homeScreenController.dart';
+import '../../classes/banner.dart';
+
 class AdBannerPanel extends StatefulWidget {
   @override
   _AdBannerPanelState createState() => _AdBannerPanelState();
@@ -17,6 +20,7 @@ class _AdBannerPanelState extends State<AdBannerPanel> {
   int _index = 0;
   @override
   Widget build(BuildContext context) {
+    HomeScreenController home = Get.find();
     return Container(
       //margin: const EdgeInsets.only(left: 10, right: 10.0, top: 10, bottom: 15),
       height: getScreenHeight(170),
@@ -24,7 +28,7 @@ class _AdBannerPanelState extends State<AdBannerPanel> {
         fit: StackFit.expand,
         children: [
           CarouselSlider(
-            items: bannerlist.map((item) => BannerItem(item: item)).toList(),
+            items: home.homeScreeData.value.SecondBanner!.map((item) => BannerItem(item: item)).toList(),
             //carouselController: carouselController,
             options: CarouselOptions(
               autoPlay: true,
@@ -84,6 +88,7 @@ class _BannerPanelState extends State<BannerPanel> {
   int _index = 0;
   @override
   Widget build(BuildContext context) {
+    HomeScreenController home = Get.find();
     return Container(
       //margin: const EdgeInsets.only(left: 10, right: 10.0, top: 10, bottom: 15),
       height: getScreenHeight(170),
@@ -91,7 +96,7 @@ class _BannerPanelState extends State<BannerPanel> {
         fit: StackFit.expand,
         children: [
           CarouselSlider(
-            items: bannerlist.map((item) => BannerItem(item: item)).toList(),
+            items: home.homeScreeData.value.AdBanners!.map((item) => BannerItem(item: item)).toList(),
             //carouselController: carouselController,
             options: CarouselOptions(
               autoPlay: true,
@@ -155,7 +160,7 @@ class _MainBannerPanelState extends State<MainBannerPanel> {
   @override
   Widget build(BuildContext context) {
     //AppController _app = Get.find();
-
+    HomeScreenController home = Get.find();
     return Container(
       //margin: const EdgeInsets.only(left: 10, right: 10.0, top: 10, bottom: 15),
       height: getScreenHeight(150),
@@ -163,7 +168,7 @@ class _MainBannerPanelState extends State<MainBannerPanel> {
         fit: StackFit.expand,
         children: [
           CarouselSlider(
-            items: mainbanner.map((item) => BannerItem(item: item)).toList(),
+            items:home.homeScreeData.value.MainBanner!.map((item) => BannerItem(item: item)).toList(),
             //carouselController: carouselController,
             options: CarouselOptions(
               autoPlay: true,
@@ -214,8 +219,8 @@ class _MainBannerPanelState extends State<MainBannerPanel> {
 }
 
 class BannerItem extends StatelessWidget {
-  const BannerItem({Key? key, this.item}) : super(key: key);
-  final BannerModel? item;
+  const BannerItem({Key? key, required this.item}) : super(key: key);
+  final BannerClass item;
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +241,7 @@ class BannerItem extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(item!.img!),
+                image: NetworkImage(item.ImageUrl![0]),
                 fit: BoxFit.fill,
               ),
             ),
@@ -259,6 +264,7 @@ class _SpecialProfileBannersState extends State<SpecialProfileBanners> {
   int _index = 0;
   @override
   Widget build(BuildContext context) {
+    HomeScreenController home = Get.find();
     return Container(
       //margin: const EdgeInsets.only(left: 10, right: 10.0, top: 10, bottom: 15),
       height: getScreenHeight(170),
@@ -266,7 +272,7 @@ class _SpecialProfileBannersState extends State<SpecialProfileBanners> {
         fit: StackFit.expand,
         children: [
           CarouselSlider(
-            items: mainbanner.map((item) => BannerItem(item: item)).toList(),
+            items: home.homeScreeData.value.MainBanner!.map((item) => BannerItem(item: item)).toList(),
             //carouselController: carouselController,
             options: CarouselOptions(
               autoPlay: true,

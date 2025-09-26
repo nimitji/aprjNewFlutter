@@ -49,6 +49,9 @@ List<CategoryModel> categoryList = [
   CategoryModel(title: 'Startup', discount: '50% OFF', imgUrl: engineer),
   CategoryModel(title: 'Govt. Job', discount: '50% OFF', imgUrl: engineer),
   CategoryModel(title: 'Pvt. Job', discount: '50% OFF', imgUrl: engineer),
+  CategoryModel(title: 'Architect', discount: '50% OFF', imgUrl: engineer),
+  CategoryModel(title: 'Chef', discount: '50% OFF', imgUrl: engineer),
+
 ];
 
 List<CityModel> cityModel = [

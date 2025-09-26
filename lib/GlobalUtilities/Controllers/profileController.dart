@@ -20,17 +20,16 @@ class ProfileController extends GetxController with BaseController {
   RxList<PersonalProfilewithc> myaddedprofile = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> profiles = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> maleprofiles = <PersonalProfilewithc>[].obs;
-  RxList<PersonalProfilewithc> manglikmaleprofiles =
-      <PersonalProfilewithc>[].obs;
+  RxList<PersonalProfilewithc> manglikmaleprofiles = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> femaleprofiles = <PersonalProfilewithc>[].obs;
-  RxList<PersonalProfilewithc> manglikfemaleprofiles =
-      <PersonalProfilewithc>[].obs;
+  RxList<PersonalProfilewithc> manglikfemaleprofiles = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> manglikprofiles = <PersonalProfilewithc>[].obs;
-  RxList<PersonalProfilewithc> nonmanglikprofiles =
-      <PersonalProfilewithc>[].obs;
+  RxList<PersonalProfilewithc> nonmanglikprofiles = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> specialProfiles = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> Nselected = <PersonalProfilewithc>[].obs;
   RxList<PersonalProfilewithc> nameselected = <PersonalProfilewithc>[].obs;
+  //RxList<PersonalProfilewithc> nameselected = <PersonalProfilewithc>[].obs;
+
   var individual = PersonalProfilewithc().obs;
   var searchedprofile = PersonalProfilewithc().obs;
   var filterOption = ["शहर (City)", "a"];
@@ -113,10 +112,6 @@ class ProfileController extends GetxController with BaseController {
     specialProfiles.value =
         profiles
             .where((profile) => profile.Special!.toInt().isEqual(1))
-            .toList();
-    specialProfiles.value =
-        profiles
-            .where((profile) => profile.Createdby!.phone!.startsWith(phone))
             .toList();
   }
 
@@ -594,6 +589,13 @@ class ProfileController extends GetxController with BaseController {
                   profile.Profession!.toLowerCase().startsWith("pvt") ||
                   profile.Profession!.toLowerCase().startsWith("private"),
             ).toList();
+        update();
+        break;
+      default:
+        title.value = "All Profiles";
+        showcat.value = false;
+        // _profile.selected.clear();
+        Nselected.value = profiles.value;
         update();
         break;
     }

@@ -108,12 +108,22 @@ class _AddimageState extends State<Addimage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
-                onPressed: () => _pickImage(ImageSource.camera),
-                child: const Text('कैमरा शुरू करे'),
+              Container(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(kPrimaryColor),
+                    foregroundColor: WidgetStateProperty.all(Colors.white),
+                  ),
+                  onPressed: () => _pickImage(ImageSource.camera),
+                  child: const Text('कैमरा शुरू करे'),
+                ),
               ),
               const SizedBox(width: 10.0),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(kshade2),
+                  foregroundColor: WidgetStateProperty.all(Colors.white),
+                ),
                 onPressed: () => _pickImage(ImageSource.gallery),
                 child: const Text('गैलरी से चुने'),
               ),
@@ -141,6 +151,10 @@ class _AddimageState extends State<Addimage> {
                       child: Image.memory(imageBytes!, fit: BoxFit.cover),
                     ),
                     ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(Colors.green),
+                        foregroundColor: WidgetStateProperty.all(Colors.white),
+                      ),
                       onPressed: _cropImage,
                       child: const Icon(Icons.crop),
                     ),

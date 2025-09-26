@@ -167,15 +167,13 @@ class ProfileList extends StatelessWidget {
                       onChanged: (v) {
                         _profile.Nselected.value =
                             _profile.profiles
-                                .where(
-                                  (user) => (user.Name ?? "").contains(
-                                    v.toUpperCase(),
-                                  ),
-                                )
+                                .where((user) => (user.Name ?? "").contains(v.toUpperCase()) ||
+                                (user.Sno ?? "").contains(v.toUpperCase())
+                            )
                                 .toList();
                       },
                       decoration: InputDecoration(
-                        hintText: "Search...",
+                        hintText: " नाम/ आईडी से सर्च करे Search with Name/ID",
                         prefixIcon: const Icon(Icons.search),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.filter_list_rounded),
@@ -296,14 +294,24 @@ class ProfileList extends StatelessWidget {
   getageondate(PersonalProfilewithc personalProfilewithc) {
     if (personalProfilewithc.DateOfBirth! != "NA") {
       var outputFormat = DateFormat('dd/MM/yyyy');
-      print("Hello" + personalProfilewithc.DateOfBirth!);
+      var outputDate;
+      print("Hello" + personalProfilewithc.Sno!);
       print("Hello" + personalProfilewithc.Name!);
-      print("Hello" + personalProfilewithc.Father!);
-      var outputDate = outputFormat.parse(personalProfilewithc.DateOfBirth!);
+      print("Hello" + personalProfilewithc.DateOfBirth!);
+      try {
+        outputDate = outputFormat.parse(personalProfilewithc.DateOfBirth!);
+        return Text(
+          personalProfilewithc.Name! + " (" + calculateAge(outputDate) + " वर्ष)",
+        );
+      }catch(e){
+        return Text(
+          personalProfilewithc.Name! + " (NA वर्ष)"
+        );
+      }
+      finally{
 
-      return Text(
-        personalProfilewithc.Name! + " (" + calculateAge(outputDate) + " वर्ष)",
-      );
+      }
+
     } else {
       return Text(personalProfilewithc.Name! + " (NA वर्ष)");
     }

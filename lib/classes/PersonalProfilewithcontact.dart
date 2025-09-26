@@ -22,6 +22,7 @@ class PersonalProfilewithc{
   String? BirthPlace;
   String? Height;
   String? Profession;
+  String? FatherProfession;
   String? Qualification;
   String? Designation;
   String? NameOfOrganisation;
@@ -32,7 +33,7 @@ class PersonalProfilewithc{
   String? PhotoLink2;
   String? Married;
   int? Verified;
-  int? Income;
+  String? Income;
   int? Special;
   String?Quality;
   Users? Createdby;
@@ -41,7 +42,7 @@ class PersonalProfilewithc{
   int?Listed;
 
 PersonalProfilewithc(
-  {this.Verified,this.Createdby,this.Quality,
+  {this.Verified,this.Createdby,this.Quality,this.Sister,this.Brother,this.FatherProfession,
     this.id,this.Name,this.Sno,this.Age,this.Income,this.Special,
     this.BirthPlace,this.BirthTime,this.ContactInfoobj,this.DateOfBirth,this.Designation,
     this.Father,this.GotraFather,this.GotraMother,this.Height,this.Manglik,this.Listed,

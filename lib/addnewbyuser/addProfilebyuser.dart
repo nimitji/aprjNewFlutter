@@ -22,120 +22,121 @@ class AddProfileByUser extends StatefulWidget {
 
 List data = [
   "व्यवसाय (Profession)",
-  "BUSINESS",
-  "SOFTWARE ENGINNER",
-  "SUPERVISOR",
-  "CONSULTANT",
-  "ASSISTANT MANAGER",
-  "CONTRACTOR",
-  "BANK MANAGER",
-  "INCHARGE",
-  "TEACHER",
-  "DISTRIBUTOR",
-  "MANAGER",
-  "ENTREPRENEUR",
-  "ACCOUNTANT",
   "ACCOUNT OFFICER",
-  "HEAD",
-  "TEAM LEADER",
-  "AGENT",
-  "DEALER",
-  "INTERN",
-  "PROFESSOR",
-  "ENGINEER",
-  "DESIGNER",
-  "OPERATOR",
-  "BROKER",
-  "LIEUTENANT",
+  "ACCOUNTANT",
   "ADVOCATE",
+  "AGENT",
+  "AIRHOSTESS",
   "ANALYST",
-  "PLANNER",
+  "ARCHITECT",
+  "ASSISTANT MANAGER",
+  "BANK MANAGER",
+  "BEAUTY PARLOUR",
+  "BROKER",
+  "BUILDER",
+  "BUSINESS",
+  "CA",
+  "CENTRAL GOVT JOB",
+  "CHEF",
+  "CONSULTANT",
+  "CONTRACTOR",
+  "CS",
+  "DEALER",
+  "DESIGNER",
   "DEVELOPER",
+  "DIRECTOR",
+  "DISTRIBUTOR",
+  "DOCTOR",
+  "ENGINEER",
+  "ENTREPRENEUR",
+  "GOVT JOB",
+  "HEAD",
+  "INCHARGE",
+  "INTERN",
+  "LIEUTENANT",
+  "MANAGER",
   "OBSERVER",
   "OFFICER",
+  "OPERATOR",
+  "PILOT",
+  "PLANNER",
+  "PROFESSOR",
   "SCIENTIST",
+  "SOFTWARE ENGINNER",
+  "STATE GOVT JOB",
   "STENO",
+  "SUPERVISOR",
   "SURVEYOR",
-  "DIRECTOR",
-  "Architect",
-  "Beauty parlour",
-  "Govt job",
-  "CA",
-  "CS",
-  "Chef",
-  "Doctor",
-  "Central govt job",
-  "State govt job",
-  "Builder",
-  "Pilot",
-  "Airhostess",
-  "Yoga Instructor",
+  "TEACHER",
+  "TEAM LEADER",
+  "YOGA INSTRUCTOR",
   "OTHER(टाइप करे)",
 ];
 List fdata = [
   "पिता का व्यवसाय (Fathers Profession)",
-  "BUSINESS",
-  "SOFTWARE ENGINNER",
-  "SUPERVISOR",
-  "CONSULTANT",
-  "ASSISTANT MANAGER",
-  "CONTRACTOR",
-  "BANK MANAGER",
-  "INCHARGE",
-  "TEACHER",
-  "DISTRIBUTOR",
-  "MANAGER",
-  "ENTREPRENEUR",
-  "ACCOUNTANT",
   "ACCOUNT OFFICER",
-  "HEAD",
-  "TEAM LEADER",
-  "AGENT",
-  "DEALER",
-  "INTERN",
-  "PROFESSOR",
-  "ENGINEER",
-  "DESIGNER",
-  "OPERATOR",
-  "BROKER",
-  "LIEUTENANT",
+  "ACCOUNTANT",
   "ADVOCATE",
+  "AGENT",
+  "AIRHOSTESS",
   "ANALYST",
-  "PLANNER",
+  "ARCHITECT",
+  "ASSISTANT MANAGER",
+  "BANK MANAGER",
+  "BEAUTY PARLOUR",
+  "BROKER",
+  "BUILDER",
+  "BUSINESS",
+  "CA",
+  "CENTRAL GOVT JOB",
+  "CHEF",
+  "CONSULTANT",
+  "CONTRACTOR",
+  "CS",
+  "DEALER",
+  "DESIGNER",
   "DEVELOPER",
+  "DIRECTOR",
+  "DISTRIBUTOR",
+  "DOCTOR",
+  "ENGINEER",
+  "ENTREPRENEUR",
+  "GOVT JOB",
+  "HEAD",
+  "INCHARGE",
+  "INTERN",
+  "LIEUTENANT",
+  "MANAGER",
   "OBSERVER",
   "OFFICER",
+  "OPERATOR",
+  "PILOT",
+  "PLANNER",
+  "PROFESSOR",
   "SCIENTIST",
+  "SOFTWARE ENGINNER",
+  "STATE GOVT JOB",
   "STENO",
+  "SUPERVISOR",
   "SURVEYOR",
-  "DIRECTOR",
-  "Architect",
-  "Beauty parlour",
-  "Govt job",
-  "CA",
-  "CS",
-  "Chef",
-  "Doctor",
-  "Central govt job",
-  "State govt job",
-  "Builder",
-  "Pilot",
-  "Airhostess",
-  "Yoga Instructor",
-  "OTHER(टाइप करे)",
+  "TEACHER",
+  "TEAM LEADER",
+  "YOGA INSTRUCTOR",
+  "Other(टाइप करे)",
 ];
 List ftData=[
-  "ft"
+  "ft",
   "1",
   "2",
   "3",
   "4",
   "5",
   "6",
-  "7",
-  "Other(टाइप करे)"
+  "7"
 ];
 List itData=[
+  "Inch",
+  "0",
   "1",
   "2",
   "3",
@@ -150,96 +151,96 @@ List itData=[
 ];
 List dataq = [
   "शिक्षा (Qualification)",
-  "NOT APPLICABLE",
+  "10TH",
+  "B A",
+  "B ARCH",
+  "B COM",
+  "B E",
+  "B LIB",
+  "B PHARMA",
+  "B SC",
+  "B TECH",
+  "BAMS",
+  "BBA",
+  "BCA",
+  "BHMS",
+  "CA",
+  "CERTIFICATES",
+  "COMPLETE SCIENCE",
+  "CS",
+  "DIPLOMA",
   "ENGINEER",
+  "GRADUATION",
+  "HIGHER SEC",
+  "HOTEL MANAGEMENT",
+  "JOURNALISM AND MASS COMMUNICATION",
+  "LLB",
+  "M ARCH",
+  "M COM",
+  "M LIB",
+  "M PHARMA",
+  "M PHIL",
+  "M TECH",
   "MA",
   "MBA",
-  "B Tech",
-  "B COM",
-  "M COM",
-  "B E",
-  "HIGHER SEC",
-  "B A",
   "MBBS",
-  "B SC",
-  "MIDDLE",
-  "BCA",
-  "BBA",
   "MCA",
-  "GRADUATION",
-  "POST GRADUATION",
-  "CA",
-  "LLB",
-  "DIPLOMA",
-  "BHMS",
-  "MS",
-  "B Arch",
-  "M Arch",
-  "CS",
-  "10th",
   "ME",
-  "M TECH",
-  "M Phil",
-  "PhD",
-  "B Lib",
-  "M Lib",
-  "BAMS",
-  "M PHARMA",
-  "B PHARMA",
-  "Certificates",
-  "Middle /higher secondary/12th",
-  "journalism and mass communication",
-  "Complete science",
-  "Hotel management",
+  "MIDDLE /HIGHER SECONDARY/12TH",
+  "MIDDLE",
+  "MS",
+  "NOT APPLICABLE",
+  "PHD",
+  "POST GRADUATION",
   "Other(टाइप करे)",
 ];
 List datad = [
   "पद (Designation)",
-  "NOT APPLICABLE",
-  "SOFTWARE ENGINEER",
-  "SUPERVISOR",
-  "CONSULTANT",
-  "ASSISTANT MANAGER",
-  "ACCOUNTANT",
-  "CONTRACTOR",
-  "BANK MANAGER",
-  "INCHARGE",
-  "TEACHER",
-  "DISTRIBUTOR",
-  "MANAGER",
-  "ENTREPRENEUR",
   "ACCOUNT OFFICER",
-  "HEAD",
-  "TEAM LEADER",
-  "AGENT",
-  "DEALER",
-  "INTERN",
-  "PROFESSOR",
-  "ENGINEER",
-  "DESIGNER",
-  "OPERATOR",
-  "BROKER",
-  "LIEUTENANT",
+  "ACCOUNTANT",
   "ADVOCATE",
+  "AGENT",
   "ANALYST",
-  "PLANNER",
+  "AREA MANAGER",
+  "ASSISTANT MANAGER",
+  "BANK MANAGER",
+  "BRANCH MANAGER",
+  "BROKER",
+  "CEO",
+  "CHAIRPERSON",
+  "CONSULTANT",
+  "CONTRACTOR",
+  "DEALER",
+  "DESIGNER",
   "DEVELOPER",
+  "DIRECTOR",
+  "DISTRIBUTOR",
+  "ENGINEER",
+  "ENTREPRENEUR",
+  "HEAD",
+  "HR MANAGER",
+  "INCHARGE",
+  "INTERN",
+  "LIEUTENANT",
+  "MANAGER",
+  "MARKETING MANAGER",
+  "NOT APPLICABLE",
   "OBSERVER",
   "OFFICER",
+  "OPERATOR",
+  "PLANNER",
+  "PROFESSOR",
+  "PROJECT MANAGER",
+  "REGIONAL MANAGER",
   "SCIENTIST",
+  "SENIOR MANAGER",
+  "SOFTWARE ENGINEER",
   "STENO",
+  "SUPERVISOR",
   "SURVEYOR",
-  "DIRECTOR",
-  "CEO",
-  "Chairperson",
-  "Vice president",
-  "Project manager",
-  "Marketing manager",
-  "HR manager",
-  "Regional manager",
-  "Branch manager",
-  "Area Manager",
-  "Senior Manager",
+  "TEACHER",
+  "TEAM LEADER",
+  "VICE PRESIDENT",
   "Other(टाइप करे)",
 ];
 List dataci = [
@@ -312,6 +313,35 @@ List dataci = [
   "Vidisha",
   "Other(टाइप करे)",
 ];
+List incomeData=[
+  "अनुमानित वार्षिक आय",
+  "1 लाख से 2 लाख",
+  "2 लाख से 3 लाख",
+  "3 लाख से 4 लाख",
+  "4 लाख से 5 लाख",
+  "5 लाख से 6 लाख",
+  "6 लाख से 7 लाख",
+  "7 लाख से 8 लाख",
+  "8 लाख से 9 लाख",
+  "9 लाख से 10 लाख",
+  "10 लाख से 12 लाख",
+  "12 लाख से 14 लाख",
+  "14 लाख से 16 लाख",
+  "16 लाख से 18 लाख",
+  "18 लाख से 20 लाख",
+  "20 लाख से 25 लाख",
+  "25 लाख से 30 लाख",
+  "30 लाख से 35 लाख",
+  "35 लाख से 40 लाख",
+  "40 लाख से 45 लाख",
+  "45 लाख से 50 लाख",
+  "50 लाख से 60 लाख",
+  "60 लाख से 70 लाख",
+  "70 लाख से 80 लाख",
+  "80 लाख से 90 लाख",
+  "90 लाख से 1 करोड़",
+  "1 करोड़ से अधिक "
+];
 
 class _AddprofileState extends State<AddProfileByUser> {
   final TextEditingController _name = TextEditingController();
@@ -336,6 +366,8 @@ class _AddprofileState extends State<AddProfileByUser> {
   final TextEditingController _otherprof = TextEditingController();
   final TextEditingController _fatherprof = TextEditingController();
   final TextEditingController _otherqual = TextEditingController();
+  final TextEditingController _brother = TextEditingController();
+  final TextEditingController _sister = TextEditingController();
   final TextEditingController _otherdesig = TextEditingController();
   final TextEditingController _income = TextEditingController();
   final TextEditingController _special = TextEditingController();
@@ -345,12 +377,13 @@ class _AddprofileState extends State<AddProfileByUser> {
   String monthvalue = "MM";
   String yearvalue = "YYYY";
   String ampm = "AM";
-  String ft="ft";
+  String ftddvalue="ft";
   String inch="Inch";
   String Manglikddvalue = "चुनिए";
   String statedropdown = "राज्य (State)";
   String citydropdownvalue = "City";
   String professionddvalue = "व्यवसाय (Profession)";
+  String incomeDdValue = "अनुमानित वार्षिक आय";
   String fatherprofessionddvalue = "पिता का व्यवसाय (Fathers Profession)";
   String designddvalue = "पद (Designation)";
   String qualificationddval = "शिक्षा (Qualification)";
@@ -361,6 +394,7 @@ class _AddprofileState extends State<AddProfileByUser> {
   bool isenable = false;
   bool isqenable = false;
   bool isdenable = false;
+  bool isfenable = false;
 
   @override
   void initState() {
@@ -544,6 +578,38 @@ class _AddprofileState extends State<AddProfileByUser> {
                           ),
                         ),
                         SizedBox(height: 10.0),
+                        TextField(
+                          keyboardType: TextInputType.text,
+                          textCapitalization: TextCapitalization.characters,
+                          controller: _sister,
+                          decoration: InputDecoration(
+                            labelText: 'बहनें (Sisters)',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextField(
+                          keyboardType: TextInputType.text,
+                          textCapitalization: TextCapitalization.characters,
+                          controller: _brother,
+                          decoration: InputDecoration(
+                            labelText: 'भाई (Brothers)',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
 
                         Container(
                           child: Text(
@@ -699,23 +765,99 @@ class _AddprofileState extends State<AddProfileByUser> {
                                     TextStyle(color: Colors.black, fontSize: 14)),
                               ),
                             ),*/
-                        TextField(
-                          keyboardType: TextInputType.number,
-                          textCapitalization: TextCapitalization.characters,
-                          controller: _height,
-                          decoration: InputDecoration(
-                            labelText:
-                                genderddvalue == "चुनिए"
-                                    ? 'ऊंचाई (Height, 00.00 feet)'
-                                    : '$genderddvalue की ऊंचाई (Height 00.00)',
-                            labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
+                        // TextField(
+                        //   keyboardType: TextInputType.number,
+                        //   textCapitalization: TextCapitalization.characters,
+                        //   controller: _height,
+                        //   decoration: InputDecoration(
+                        //     labelText:
+                        //         genderddvalue == "चुनिए"
+                        //             ? 'ऊंचाई (Height, 00.00 feet)'
+                        //             : '$genderddvalue की ऊंचाई (Height 00.00)',
+                        //     labelStyle: TextStyle(
+                        //       color: Colors.black,
+                        //       fontSize: 14,
+                        //     ),
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(12),
+                        //     ),
+                        //   ),
+                        // ),
+                        SizedBox(height: 10.0),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.30,
+                              child: Text(
+                                "ऊँचाई",
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                            Container( width:100,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: kPrimaryColor),
+                              ),
+                              child: DropdownButton(
+                                isExpanded: true,
+                                icon: Icon(Icons.arrow_downward),
+                                iconSize: 20,
+                                elevation: 10,
+                                value: ftddvalue,
+                                //hint: Text("ऊँचाई Height"),
+                                items:
+                                ftData.map((list) {
+                                  return DropdownMenuItem(
+                                    value: list,
+                                    child: Text(list),
+                                  );
+                                }).toList(),
+                                onChanged: (dynamic value) {
+                                  setState(() {
+                                    print(value);
+                                    ftddvalue = value;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
+
+                            Container( width:100,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: kPrimaryColor),
+                              ),
+                              child: DropdownButton(
+                                isExpanded: true,
+                                icon: Icon(Icons.arrow_downward),
+                                iconSize: 20,
+                                elevation: 10,
+                                value: inch,
+                                //hint: Text("ऊँचाई Height"),
+                                items:
+                                itData.map((list) {
+                                  return DropdownMenuItem(
+                                    value: list,
+                                    child: Text(list),
+                                  );
+                                }).toList(),
+                                onChanged: (dynamic value) {
+                                  setState(() {
+                                    print(value);
+                                    inch = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                         // Container(
                         //   padding: EdgeInsets.symmetric(
@@ -779,20 +921,83 @@ class _AddprofileState extends State<AddProfileByUser> {
                         // ),
 
                         SizedBox(height: 10.0),
-                        TextField(
-                          keyboardType: TextInputType.number,
-                          controller: _income,
-                          decoration: InputDecoration(
-                            labelText: 'अनुमानित आय (वार्षिक)',
-                            labelStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+
+                        SizedBox(height: 10.0),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
                           ),
-                        ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+
+                            border: Border.all(color: kPrimaryColor),
+                          ),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_downward),
+
+                            iconSize: 20,
+                            elevation: 10,
+                            value: incomeDdValue,
+                            hint: Text("अनुमानित वार्षिक आय"),
+                            items:
+                            !isenable
+                                ?incomeData.map((list) {
+                              return DropdownMenuItem(
+                                child: Text(list),
+                                value: list,
+                              );
+                            }).toList()
+                                : incomeData.map((list) {
+                              return DropdownMenuItem(
+                                value: list,
+                                child: TextField(
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 25,
+                                  ),
+                                  showCursor: true,
+                                  autofocus: true,
+
+                                  decoration: InputDecoration(
+                                    labelText: 'टाइप कीजिये ',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  controller: _otherprof,
+                                ),
+                              );
+                            }).toList(),
+
+                            onChanged: (dynamic value) {
+                              setState(() {
+                                print(value);
+                                if (value == "Other(टाइप करे)") {
+                                  isenable = true;
+                                  incomeDdValue = value;
+                                }
+                                incomeDdValue = value;
+                              });
+                            },
+                          ),
+                        ), //DR
+                        // TextField(
+                        //   keyboardType: TextInputType.number,
+                        //   controller: _income,
+                        //   decoration: InputDecoration(
+                        //     labelText: 'अनुमानित आय (वार्षिक)',
+                        //     labelStyle: TextStyle(
+                        //       color: Colors.black,
+                        //       fontSize: 14,
+                        //     ),
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(12),
+                        //     ),
+                        //   ),
+                        // ),
 
                         SizedBox(height: 10.0),
                         TextField(
@@ -877,7 +1082,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                                           autofocus: true,
 
                                           decoration: InputDecoration(
-                                            labelText: 'टाइप कीजिये ',
+                                            labelText: 'व्यवसाय टाइप कीजिये ',
                                             labelStyle: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15,
@@ -891,7 +1096,8 @@ class _AddprofileState extends State<AddProfileByUser> {
                             onChanged: (dynamic value) {
                               setState(() {
                                 print(value);
-                                if (value == "Other(टाइप करे)") {
+                                if (value == "OTHER(टाइप करे)") {
+                                  print("Hello");
                                   isenable = true;
                                   professionddvalue = value;
                                 }
@@ -967,7 +1173,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                             value: fatherprofessionddvalue,
                             hint: Text("पिता का व्यवसाय (Fathers Profession)"),
                             items:
-                            !isenable
+                            !isfenable
                                 ? fdata.map((list) {
                               return DropdownMenuItem(
                                 child: Text(list),
@@ -984,9 +1190,8 @@ class _AddprofileState extends State<AddProfileByUser> {
                                   ),
                                   showCursor: true,
                                   autofocus: true,
-
                                   decoration: InputDecoration(
-                                    labelText: 'टाइप कीजिये ',
+                                    labelText: 'पिता का व्यवसाय टाइप करे',
                                     labelStyle: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -1001,10 +1206,10 @@ class _AddprofileState extends State<AddProfileByUser> {
                               setState(() {
                                 print(value);
                                 if (value == "Other(टाइप करे)") {
-                                  isenable = true;
-                                  professionddvalue = value;
+                                  isfenable = true;
+                                  fatherprofessionddvalue = value;
                                 }
-                                professionddvalue = value;
+                                fatherprofessionddvalue = value;
                               });
                             },
                           ),
@@ -1046,7 +1251,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                                           autofocus: true,
 
                                           decoration: InputDecoration(
-                                            labelText: 'टाइप कीजिये ',
+                                            labelText: 'क्वालिफिकेशन टाइप कीजिये ',
                                             labelStyle: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15,
@@ -1164,7 +1369,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                                           autofocus: true,
 
                                           decoration: InputDecoration(
-                                            labelText: 'टाइप कीजिये ',
+                                            labelText: 'पद टाइप कीजिये ',
                                             labelStyle: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15,
@@ -1379,7 +1584,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                           textCapitalization: TextCapitalization.characters,
                           controller: _mobilenumber1,
                           decoration: InputDecoration(
-                            labelText: 'मोबाईल नंबर 1 (Mobile Number)',
+                            labelText: 'माताजी/पिताजी का मोबाइल नंबर',
                             labelStyle: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
@@ -1689,6 +1894,9 @@ class _AddprofileState extends State<AddProfileByUser> {
                   Sno: "APPS",
                   Name: gettextvalue(_name.text),
                   Father: gettextvalue(_father.text),
+                  FatherProfession: gettextvalue(fatherprofessionddvalue),
+                  Sister: gettextvalue(_sister.text),
+                  Brother: gettextvalue(_brother.text),
                   Mother: gettextvalue(_mother.text),
                   Age: gettextvalue(
                     getageondate(dayvalue + "/" + monthvalue + "/" + yearvalue),
@@ -1698,7 +1906,8 @@ class _AddprofileState extends State<AddProfileByUser> {
                   ),
                   BirthTime: gettextvalue(_birthTime.text) + ampm,
                   BirthPlace: gettextvalue(_birthplace.text),
-                  Height: gettextvalue(_height.text) + " Feets",
+                  Height: gettextvalue(ftddvalue)+"."+gettextvalue(inch) + " Feet",
+
                   Profession: chektextvalue(
                     professionddvalue.toString(),
                     "Prof",
@@ -1715,7 +1924,7 @@ class _AddprofileState extends State<AddProfileByUser> {
                   ContactInfoobj: newcontact,
                   Verified: 0,
                   Married: '0',
-                  Income: int.parse(_income.text == "" ? "0" : _income.text),
+                  Income: incomeDdValue,
                   Special: 0,
                   Quality: gettextvalue(_special.text),
                 );

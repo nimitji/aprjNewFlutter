@@ -183,7 +183,7 @@ class IndividualProfile extends StatelessWidget {
                             _InfoRow(
                               label: 'आय',
                               value:
-                                  '₹${_profile.individual.value.Income!.toInt()}',
+                                  '₹${_profile.individual.value.Income!}',
                             ),
                           ],
                         ),
