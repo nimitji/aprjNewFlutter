@@ -1,3 +1,4 @@
+import 'package:aprjnew/utilities/webImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -65,24 +66,7 @@ class HotItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Expanded(
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(12),
-                          ),
-                          child: FadeInImage.memoryNetwork(
-                            image: item.PhotoLink1 ?? '',
-                            fit: BoxFit.cover,
-                            placeholder: kTransparentImage,
-                            imageErrorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
-                                'image/na.jpg',
-                                fit: BoxFit.cover,
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                      Expanded(child: WebFadeInImage(item.PhotoLink1 ?? '')),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Text(

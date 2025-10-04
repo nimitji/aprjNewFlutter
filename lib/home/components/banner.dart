@@ -9,6 +9,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../GlobalUtilities/Controllers/homeScreenController.dart';
 import '../../classes/banner.dart';
+import '../../utilities/webImage.dart';
 
 class AdBannerPanel extends StatefulWidget {
   @override
@@ -236,17 +237,18 @@ class BannerItem extends StatelessWidget {
             placeholder:banner2,
           ),
         ),*/
-        ClipRRect(
-          borderRadius: BorderRadius.circular(0),
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(item.ImageUrl![0]),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ),
+        WebNetworkImage(item.ImageUrl![0])
+        // ClipRRect(
+        //   borderRadius: BorderRadius.circular(0),
+        //   child: Container(
+        //     decoration: BoxDecoration(
+        //       image: DecorationImage(
+        //         image: NetworkImage(item.ImageUrl![0]),
+        //         fit: BoxFit.fill,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

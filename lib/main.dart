@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Constants/routedart.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -9,22 +10,23 @@ import 'firebase_options.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   print('Handling a background message ${message.messageId}');
 }
+
 Future<void> subscribeToMyTopic() async {
-  await FirebaseMessaging.instance.subscribeToTopic('Allusers');
-  print('');
+  if (!kIsWeb) {
+    await FirebaseMessaging.instance.subscribeToTopic('Allusers');
+    print('');
+  }
 }
 
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(
-     options: DefaultFirebaseOptions.currentPlatform, // If using Firebase CLI setup
+    options:
+        DefaultFirebaseOptions.currentPlatform, // If using Firebase CLI setup
   );
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -38,7 +40,6 @@ void main() async{
   });
   await subscribeToMyTopic();
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -54,8 +55,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialBinding:AppBindings(),
-      initialRoute:AppRoute.splash,
+      initialBinding: AppBindings(),
+      initialRoute: AppRoute.splash,
       getPages: AppRoute.getPage,
     );
   }

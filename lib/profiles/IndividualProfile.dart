@@ -1,5 +1,6 @@
 import 'package:aprjnew/Constants/app_color.dart';
 import 'package:aprjnew/GlobalUtilities/Controllers/profileController.dart';
+import 'package:aprjnew/utilities/webImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -82,7 +83,7 @@ class IndividualProfile extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         _Pill(
-                          label:  _profile.individual.value.BirthPlace!,
+                          label: _profile.individual.value.BirthPlace!,
                           icon: Icons.location_on_outlined,
                         ),
                       ],
@@ -96,13 +97,16 @@ class IndividualProfile extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       child: AspectRatio(
                         aspectRatio: 4 / 3,
-                        child: Ink.image(
-                          image: NetworkImage(
-                            fetchImage(_profile.individual.value.PhotoLink1)!,
-                          ),
-                          fit: BoxFit.cover,
-                          child: InkWell(onTap: () {}),
+                        child: WebFadeInImage(
+                          _profile.individual.value.PhotoLink1 ?? "",
                         ),
+                        // child: Ink.image(
+                        //   image: NetworkImage(
+                        //     fetchImage(_profile.individual.value.PhotoLink1)!,
+                        //   ),
+                        //   fit: BoxFit.cover,
+                        //   child: InkWell(onTap: () {}),
+                        // ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -182,8 +186,7 @@ class IndividualProfile extends StatelessWidget {
                             ),
                             _InfoRow(
                               label: 'आय',
-                              value:
-                                  '₹${_profile.individual.value.Income!}',
+                              value: '₹${_profile.individual.value.Income!}',
                             ),
                           ],
                         ),
@@ -486,7 +489,12 @@ class _InfoRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Expanded(child: Text(value, style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w600))),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            ),
+          ),
         ],
       ),
     );
@@ -511,7 +519,12 @@ class _KeyValue extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        Expanded(child: Text(v, style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w600))),
+        Expanded(
+          child: Text(
+            v,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+        ),
       ],
     );
   }
