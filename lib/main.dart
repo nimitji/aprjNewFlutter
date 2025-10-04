@@ -14,6 +14,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   );
   print('Handling a background message ${message.messageId}');
 }
+Future<void> subscribeToMyTopic() async {
+  await FirebaseMessaging.instance.subscribeToTopic('Allusers');
+  print('');
+}
 
 void main() async{
 
@@ -32,7 +36,7 @@ void main() async{
       print('Message also contained a notification: ${message.notification}');
     }
   });
-
+  await subscribeToMyTopic();
   runApp(const MyApp());
 }
 

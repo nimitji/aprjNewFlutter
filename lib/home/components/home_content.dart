@@ -715,7 +715,30 @@ class HomeContent extends StatelessWidget {
             ),
 
             getVerticalSpace(20),
-            BannerPanel(),
+            Obx(
+                  ()=>
+              home.isLoading.value
+                  ? SizedBox(
+                height: 300,
+                width: ResponsiveSize.screenWidth,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (ctx, index) {
+                    return const ListTile(
+                      contentPadding: EdgeInsets.all(10),
+                      leading: ShimmerLoader(height: 80, width: 80),
+                      title: ShimmerLoader(height: 20),
+                      subtitle: ShimmerLoader(height: 10, width: 50),
+                    );
+                  },
+                ),
+              )
+                  :BannerPanel(),
+
+            ),
+
             getVerticalSpace(20),
             Divider(),
             Padding(
@@ -928,8 +951,30 @@ class HomeContent extends StatelessWidget {
               ],
             ),
             getVerticalSpace(20),
+            Obx(
+                  ()=>
+              home.isLoading.value
+                  ? SizedBox(
+                height: 300,
+                width: ResponsiveSize.screenWidth,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (ctx, index) {
+                    return const ListTile(
+                      contentPadding: EdgeInsets.all(10),
+                      leading: ShimmerLoader(height: 80, width: 80),
+                      title: ShimmerLoader(height: 20),
+                      subtitle: ShimmerLoader(height: 10, width: 50),
+                    );
+                  },
+                ),
+              )
+                  :AdBannerPanel(),
 
-            AdBannerPanel(),
+            ),
+
             getVerticalSpace(20),
           ],
         ),
