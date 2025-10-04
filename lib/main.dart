@@ -38,6 +38,7 @@ void main() async{
   });
   await subscribeToMyTopic();
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
