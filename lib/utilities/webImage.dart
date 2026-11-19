@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:ui_web' as ui;
-import 'dart:html' as html;
+// import 'dart:ui_web' as ui;
+// import 'dart:html' as html;
 import 'package:flutter/foundation.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -11,13 +11,13 @@ class WebImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb) {
-      ui.platformViewRegistry.registerViewFactory(
-        imageUrl,
-        (int viewId) => html.ImageElement()..src = imageUrl,
-      );
-      return HtmlElementView(viewType: imageUrl);
-    }
+    // if (kIsWeb) {
+    //   ui.platformViewRegistry.registerViewFactory(
+    //     imageUrl,
+    //     (int viewId) => html.ImageElement()..src = imageUrl,
+    //   );
+    //   return HtmlElementView(viewType: imageUrl);
+    // }
 
     return Image.network(imageUrl);
   }
@@ -29,13 +29,13 @@ class WebNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb) {
-      ui.platformViewRegistry.registerViewFactory(
-        imageUrl,
-        (int viewId) => html.ImageElement()..src = imageUrl,
-      );
-      return HtmlElementView(viewType: imageUrl);
-    }
+    // if (kIsWeb) {
+    //   ui.platformViewRegistry.registerViewFactory(
+    //     imageUrl,
+    //     (int viewId) => html.ImageElement()..src = imageUrl,
+    //   );
+    //   return HtmlElementView(viewType: imageUrl);
+    // }
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(0),
@@ -57,13 +57,13 @@ class WebFadeInImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb) {
-      ui.platformViewRegistry.registerViewFactory(
-        imageUrl,
-        (int viewId) => html.ImageElement()..src = imageUrl,
-      );
-      return HtmlElementView(viewType: imageUrl);
-    }
+    // if (kIsWeb) {
+    //   ui.platformViewRegistry.registerViewFactory(
+    //     imageUrl,
+    //     (int viewId) => html.ImageElement()..src = imageUrl,
+    //   );
+    //   return HtmlElementView(viewType: imageUrl);
+    // }
 
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
