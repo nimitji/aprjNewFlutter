@@ -1,3 +1,4 @@
+import 'package:aprjnew/GlobalUtilities/Controllers/homeScreenController.dart';
 import 'package:aprjnew/home/components/home_content.dart';
 import 'package:aprjnew/user/Login.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -30,12 +31,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     AppController appCtrl = Get.find();
     ProfileController _profile = Get.find();
+    HomeScreenController home = Get.find();
     // TODO: implement build
     return Scaffold(
       backgroundColor: kshade5,
 
       body: RefreshIndicator(
-        onRefresh: () => _profile.getprofiles(),
+        onRefresh: (){
+          home.gethomescreendata();
+          return _profile.getprofiles();},
         child: SafeArea(
           child: Obx(
             () => SingleChildScrollView(

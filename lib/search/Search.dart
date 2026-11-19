@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 
 import '../Constants/routedart.dart';
 import '../GlobalUtilities/Controllers/profileController.dart';
+import '../home/components/category.dart';
 
 class Search extends StatefulWidget {
   String mstatus = "hello";
@@ -1875,7 +1876,7 @@ class _SearchwithIDState extends State<SearchwithID> {
   Widget build(BuildContext context) {
     ProfileController _profile = Get.find();
     return Scaffold(
-      appBar: AppBar(title: Text("Search by ID")),
+      appBar: AppBar(title: Text("प्रोफाइल ढूँडे || Search Profile")),
       body: Obx(
         () => ListView(
           children: [
@@ -1894,7 +1895,7 @@ class _SearchwithIDState extends State<SearchwithID> {
                     children: [
                       Container(
                         child: Text(
-                          "प्रोफाइल की ID डाले (Profile ID)",
+                          "प्रोफाइल की ID/नाम डाले",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 20,
@@ -1903,6 +1904,44 @@ class _SearchwithIDState extends State<SearchwithID> {
                         ),
                       ),
                       SizedBox(width: 20),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextField(
+                          onChanged: (v) {
+                            _profile.Nselected.value =
+                                _profile.profiles
+                                    .where(
+                                      (user) => (user.Name ?? "").contains(
+                                    v.toUpperCase(),
+                                  ),
+                                )
+                                    .toList();
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Search...",
+                            prefixIcon: const Icon(Icons.search),
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.filter_list_rounded),
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(8),
+                                    ),
+                                  ),
+                                  builder: (context) {
+                                    return FilterModalContent();
+                                  },
+                                );
+                              },
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

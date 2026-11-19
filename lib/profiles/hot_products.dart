@@ -1,9 +1,11 @@
+import 'package:aprjnew/utilities/webImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:transparent_image/transparent_image.dart';
 import '../Constants/app_color.dart';
 import '../Constants/routedart.dart';
 import '../Constants/size.dart';
+import '../GlobalUtilities/Controllers/homeScreenController.dart';
 import '../utilities/Helpers/shimmer_effect_loader.dart';
 import '../GlobalUtilities/Controllers/profileController.dart';
 
@@ -64,24 +66,7 @@ class HotItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Expanded(
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(12),
-                          ),
-                          child: FadeInImage.memoryNetwork(
-                            image: item.PhotoLink1 ?? '',
-                            fit: BoxFit.cover,
-                            placeholder: kTransparentImage,
-                            imageErrorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
-                                'image/na.jpg',
-                                fit: BoxFit.cover,
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                      Expanded(child: WebFadeInImage(item.PhotoLink1 ?? '')),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Text(
@@ -104,13 +89,16 @@ class HotItem extends StatelessWidget {
   }
 
   dynamic getproductslist(ProfileController prod) {
+    HomeScreenController home = Get.find();
     switch (type) {
       case "male":
         return prod.maleprofiles[index];
       case "female":
         return prod.femaleprofiles[index];
       case "special":
-        return prod.specialProfiles[index];
+        return home.homeScreeData.value.Special?[index];
+      case "myadded":
+        return home.homeScreeData.value.MyAddedProfile?[index];
       default:
         return prod.profiles[index];
     }

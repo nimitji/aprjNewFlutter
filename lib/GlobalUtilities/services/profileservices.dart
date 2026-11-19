@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:aprjnew/classes/homescreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +17,7 @@ class ProfileServices {
 
   Future<Map<String, dynamic>> getprofiles() async {
     final prefs = await SharedPreferences.getInstance();
+    print("Token : "+prefs.getString('token').toString());
     var urls = Uri.https(url, '/home/getallprofiles');
     print(urls);
     final response = await http.get(
@@ -40,6 +42,32 @@ class ProfileServices {
                 (json) => PersonalProfilewithc.fromJson(json),
               )
               .toList();
+      final map = {'code': response.statusCode, 'data': dataModel};
+      return map;
+    }
+  }
+  Future<Map<String, dynamic>> getHomeScreenData() async {
+    final prefs = await SharedPreferences.getInstance();
+    print("Token : "+prefs.getString('token').toString());
+    var urls = Uri.https(url, '/home/home-screen-data');
+    print(urls);
+    final response = await http.get(
+      urls,
+      headers: <String, String>{'token': prefs.getString('token').toString()},
+    );
+
+    if (response.statusCode != 200) {
+      if (kDebugMode) {
+        print("Something went wrong with ${response.statusCode}");
+      }
+      final map = {'code': response.statusCode, 'data': response.body};
+      return map;
+    } else {
+      final responseData =
+      json.decode(response.body);
+      print(responseData);
+      //final responseData = json.decode(response.body);
+      final dataModel = HomeScreenModel.fromjson(responseData);
       final map = {'code': response.statusCode, 'data': dataModel};
       return map;
     }

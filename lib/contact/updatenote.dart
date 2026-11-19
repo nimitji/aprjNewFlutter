@@ -9,11 +9,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:transparent_image/transparent_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Constants/app_color.dart';
 import '../Constants/assets_path.dart';
 import '../Constants/routedart.dart';
+import '../Constants/size.dart';
+import '../GlobalUtilities/Controllers/profileController.dart';
 import '../home/HomeScreen.dart';
+import '../home/components/category.dart';
+import '../profiles/IndividualProfile.dart';
 
 class UpdateInfo extends StatefulWidget {
   @override
@@ -33,6 +39,7 @@ class _updateinfostate extends State<UpdateInfo> {
 
   @override
   Widget build(BuildContext context) {
+    ProfileController _profile = Get.find();
     // TODO: implement build
     return SafeArea(
       child: SingleChildScrollView(
@@ -73,86 +80,252 @@ class _updateinfostate extends State<UpdateInfo> {
                   Divider(thickness: 1.0),
 
                   Padding(padding: EdgeInsets.only(top: 10)),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 5.0,
-                      horizontal: 10.0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            "आपकी प्रोफाइल की ID डाले (Profile ID)",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                  // Container(
+                  //   padding: EdgeInsets.symmetric(
+                  //     vertical: 5.0,
+                  //     horizontal: 10.0,
+                  //   ),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Container(
+                  //         child: Text(
+                  //           "आपकी प्रोफाइल की ID डाले (Profile ID)",
+                  //           textAlign: TextAlign.center,
+                  //           style: TextStyle(
+                  //             fontSize: 20,
+                  //             fontWeight: FontWeight.bold,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       SizedBox(height: 24),
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //         children: [
+                  //           Container(
+                  //             width: MediaQuery.of(context).size.width * 0.8,
+                  //             decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(12),
+                  //               border: Border.all(color: kPrimaryColor),
+                  //             ),
+                  //             child: Padding(
+                  //               padding: const EdgeInsets.symmetric(
+                  //                 horizontal: 14,
+                  //                 vertical: 8,
+                  //               ),
+                  //               child: TextField(
+                  //                 controller: _Sno,
+                  //                 textCapitalization:
+                  //                     TextCapitalization.characters,
+                  //                 style: TextStyle(fontSize: 20),
+                  //                 decoration: InputDecoration(
+                  //                   hintText: "Profile ID",
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           Container(
+                  //             child: InkWell(
+                  //               child: Center(
+                  //                 child: Padding(
+                  //                   padding: const EdgeInsets.all(21),
+                  //                   child: Icon(Icons.search),
+                  //                 ),
+                  //               ),
+                  //               onTap: () async {
+                  //                 String Name = await getnamewithsno(_Sno.text);
+                  //                 setState(() {
+                  //                   isloading = !isloading;
+                  //
+                  //                   if (Name == "Could not fetch the data")
+                  //                     name = "इस ID से  कोई प्रोफाइल नहीं है ";
+                  //                   else {
+                  //                     name =
+                  //                         Name +
+                  //                         " की प्रोफाइल में अपडेट करना है";
+                  //                   }
+                  //                 });
+                  //               },
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       SizedBox(height: 10),
+                  //
+                  //       Align(
+                  //         alignment: Alignment.center,
+                  //         child: Container(
+                  //           child: Text(name, style: TextStyle(fontSize: 12)),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  Column(
+                    children: [
+                      Stack(
+                        children: [
+                          Obx(
+                                () =>  Transform.translate(
+                                  offset: Offset(0.0, 70),
+                                  child: SizedBox(
+                                    height: ResponsiveSize.screenHeight*0.3,
+                                    width: ResponsiveSize.screenWidth,
+                                    child: ListView.builder(
+                                      itemCount: _profile.Nselected.length,
+                                      itemBuilder: (ctx, index) {
+                                        return Container(
+                                          child: ListTile(
+                                            contentPadding: EdgeInsets.all(10),
+                                            leading: ClipRRect(
+                                              borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(6),
+                                              ),
+                                              child: FadeInImage.memoryNetwork(
+                                                image:
+                                                _profile
+                                                    .Nselected[index]
+                                                    .PhotoLink1!,
+                                                fit: BoxFit.fitHeight,
+                                                placeholder: kTransparentImage,
+                                                imageErrorBuilder: (
+                                                    context,
+                                                    error,
+                                                    stackTrace,
+                                                    ) {
+                                                  return Image.asset(
+                                                    'image/na.jpg',
+                                                    fit: BoxFit.fitHeight,
+                                                  );
+                                                },
+                                              ),
+
+                                              //  FadeInImage.memoryNetwork(
+                                              //   image:
+                                              //       ,
+                                              //   fit: BoxFit.fitHeight,
+                                              //   placeholder: kTransparentImage,
+                                              //   imageErrorBuilder: (
+                                              //     context,
+                                              //     error,
+                                              //     stackTrace,
+                                              //   ) {
+                                              //     return Image.asset(
+                                              //       'image/na.jpg',
+                                              //       fit: BoxFit.fitHeight,
+                                              //     );
+                                              //   },
+                                              // ),
+                                            ),
+
+                                            title: getageondate(_profile.Nselected[index],),
+                                            subtitle: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                _profile.Nselected[index].Gender == "M"
+                                                    ? Text(
+                                                  "(सुपुत्र " +
+                                                      _profile
+                                                          .Nselected[index]
+                                                          .Mother! +
+                                                      " एवं " +
+                                                      _profile
+                                                          .Nselected[index]
+                                                          .Father! +
+                                                      ")",
+                                                )
+                                                    : Text(
+                                                  "(सुपुत्री " +
+                                                      _profile
+                                                          .Nselected[index]
+                                                          .Mother! +
+                                                      " एवं " +
+                                                      _profile
+                                                          .Nselected[index]
+                                                          .Father! +
+                                                      ")",
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      _profile
+                                                          .Nselected[index]
+                                                          .BirthPlace!,
+                                                    ),
+                                                    Text("/"),
+                                                    _profile
+                                                        .Nselected[index]
+                                                        .ContactInfoobj !=
+                                                        null
+                                                        ? Text(
+                                                      _profile
+                                                          .Nselected[index]
+                                                          .ContactInfoobj!
+                                                          .City!,
+                                                    )
+                                                        : Text("NA"),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            trailing: Icon(Icons.navigate_next),
+                                            onTap: () async {
+                                              _editdetails.text="";
+                                              _Sno.text="";
+                                              _Sno.text=_profile.Nselected[index].Sno!;
+                                              _editdetails.text="प्रोफाइल आईडी: ${_profile.Nselected[index].Sno}, नाम : ${_profile.Nselected[index].Name} पिता का नाम : ${_profile.Nselected[index].Father} शहर : ${_profile.Nselected[index].BirthPlace! } में ";
+
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                )
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: TextField(
+                              onChanged: (v) {
+                                _profile.Nselected.value =
+                                    _profile.profiles
+                                        .where((user) => (user.Name ?? "").contains(v.toUpperCase()) ||
+                                        (user.Sno ?? "").contains(v.toUpperCase())
+                                    )
+                                        .toList();
+                              },
+                              decoration: InputDecoration(
+                                hintText: " नाम/ आईडी से सर्च करे Search with Name/ID",
+                                prefixIcon: const Icon(Icons.search),
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.filter_list_rounded),
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(8),
+                                        ),
+                                      ),
+                                      builder: (context) {
+                                        return FilterModalContent();
+                                      },
+                                    );
+                                  },
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 24),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: kPrimaryColor),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                  vertical: 8,
-                                ),
-                                child: TextField(
-                                  controller: _Sno,
-                                  textCapitalization:
-                                      TextCapitalization.characters,
-                                  style: TextStyle(fontSize: 20),
-                                  decoration: InputDecoration(
-                                    hintText: "Profile ID",
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              child: InkWell(
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(21),
-                                    child: Icon(Icons.search),
-                                  ),
-                                ),
-                                onTap: () async {
-                                  String Name = await getnamewithsno(_Sno.text);
-                                  setState(() {
-                                    isloading = !isloading;
 
-                                    if (Name == "Could not fetch the data")
-                                      name = "इस ID से  कोई प्रोफाइल नहीं है ";
-                                    else {
-                                      name =
-                                          Name +
-                                          " की प्रोफाइल में अपडेट करना है";
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10),
-
-                        Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            child: Text(name, style: TextStyle(fontSize: 12)),
-                          ),
-                        ),
-                      ],
-                    ),
+                          //_profile.showcat.value?Category():Container(),
+                        ],
+                      ),
+                      SizedBox(height: 100),
+                    ],
                   ),
                   Divider(thickness: 1.0),
                   SizedBox(height: 10),
@@ -259,7 +432,7 @@ class _updateinfostate extends State<UpdateInfo> {
                       String result = await saveupdatereq(newfeed);
 
                       if (result == "200") {
-                        launchUrl(Uri.parse("whatsapp://send?phone=+919826365877&text=जय जिनेन्द्र जी, कृपया प्रोफाइल आईडी : ${_Sno.text} में ${_editdetails.text} अपडेट कर दीजिए!"));
+                        launchUrl(Uri.parse("whatsapp://send?phone=+919999977294&text=जय जिनेन्द्र जी, कृपया प्रोफाइल ${_editdetails.text} अपडेट कर दीजिए!"));
                         getdialog(
                           "200",
                           "धन्यवाद",
@@ -291,7 +464,48 @@ class _updateinfostate extends State<UpdateInfo> {
       ),
     );
   }
+  getageondate(PersonalProfilewithc personalProfilewithc) {
+    if (personalProfilewithc.DateOfBirth! != "NA") {
+      var outputFormat = DateFormat('dd/MM/yyyy');
+      var outputDate;
+      print("Hello" + personalProfilewithc.Sno!);
+      print("Hello" + personalProfilewithc.Name!);
+      print("Hello" + personalProfilewithc.DateOfBirth!);
+      try {
+        outputDate = outputFormat.parse(personalProfilewithc.DateOfBirth!);
+        return Text(
+          personalProfilewithc.Name! + " (" + calculateAge(outputDate) + " वर्ष)",
+        );
+      }catch(e){
+        return Text(
+            personalProfilewithc.Name! + " (NA वर्ष)"
+        );
+      }
+      finally{
 
+      }
+
+    } else {
+      return Text(personalProfilewithc.Name! + " (NA वर्ष)");
+    }
+  }
+
+  calculateAge(DateTime birthDate) {
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+    int month1 = currentDate.month;
+    int month2 = birthDate.month;
+    if (month2 > month1) {
+      age--;
+    } else if (month1 == month2) {
+      int day1 = currentDate.day;
+      int day2 = birthDate.day;
+      if (day2 > day1) {
+        age--;
+      }
+    }
+    return age.toString();
+  }
   void getdialog(String s, String t, String u) {
     showDialog(
       context: context,

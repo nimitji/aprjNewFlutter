@@ -1070,10 +1070,12 @@ class CategoryItemforhomescreen extends StatelessWidget {
     this.item,
     this.widthSize,
     this.isCat,
+    this.index
   }) : super(key: key);
   final CategoryModel? item;
   final double? widthSize;
   final bool? isCat;
+  final int?index;
 
   @override
   Widget build(BuildContext context) {
@@ -1118,6 +1120,8 @@ class CategoryItemforhomescreen extends StatelessWidget {
       ),
     );
   }
+
+
 }
 
 class FilterModalContent extends StatefulWidget {

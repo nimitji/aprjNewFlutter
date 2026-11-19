@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:aprjnew/Constants/app_color.dart';
 import 'package:aprjnew/classes/PersonalProfilewithcontact.dart';
 import 'package:aprjnew/home/HomeScreen.dart';
 import 'package:aprjnew/utilities/services.dart';
@@ -31,7 +32,7 @@ class _UploaderState extends State<Uploader> {
     String _upimage =base64Encode(widget.file);
 
     setState(() {
-      buttontitle="डाटा अपलोड किया जा रहा है";
+      buttontitle="डाटा अपलोड किया जा रहा है...";
     });
     await Firebase.initializeApp();
     String filepath = 'images/p-${DateTime.now()}.png';
@@ -118,7 +119,12 @@ String buttontitle="डाटा अपलोड करे";
       return Container(
           width: 10,
           child:
-            ElevatedButton(child:Text(buttontitle),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(kPrimaryColor),
+                foregroundColor: WidgetStateProperty.all(Colors.white),
+              ),
+              child:Text(buttontitle),
             onPressed: _startUpload,
           ));
     }
